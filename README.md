@@ -714,7 +714,7 @@ Public License instead of this License.  But first, please read
 
 </details>
 
-## Check "pyenv" Dependencies
+## Check Dependencies
 
 > WARNING: Do not ignore this unit and read it carefully. There is no room for incompleteness. Otherwise, the dependencies are not completely fulfilled and you could fail.
 
