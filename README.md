@@ -1,5 +1,7 @@
 # pyenv-virtualenv-windows
 
+> IMPORTANT NOTE: This repository is currently under construction. Please wait using this information until this message will diappear soon.
+
 "pyenv-virtualenv" for Windows. A “pyenv” plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
 
 # License
