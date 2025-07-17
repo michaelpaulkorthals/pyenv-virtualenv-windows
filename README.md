@@ -4,7 +4,7 @@
 
 'pyenv-virtualenv' for Windows. A 'pyenv' plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
 
-# License
+## License
 
 <details>
 <summary>Contents of <code>src/pyenv-virtualenv-windows/LICENSE.txt</code></summary>
