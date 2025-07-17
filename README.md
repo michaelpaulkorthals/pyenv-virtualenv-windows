@@ -1,8 +1,8 @@
 # pyenv-virtualenv-windows
 
-IMPORTANT NOTICE: This repository is currently under construction. Please wait until this message disappears before using this information.
+> IMPORTANT NOTICE: This repository is currently under construction. Please wait until this message disappears before using this information.
 
-'pyenv-virtualenv' for Windows. A 'pyenv' plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
+"pyenv-virtualenv" for Windows. A “pyenv” plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
 
 ## License
 
@@ -714,11 +714,11 @@ Public License instead of this License.  But first, please read
 
 </details>
 
-## Check Dependencies
+## Check "pyenv" Dependencies
 
 > WARNING: Do not ignore this unit and read it carefully. There is no room for incompleteness. Otherwise, the dependencies are not completely fulfilled and you could fail.
 
-Use the instructions on the <a href="https://github.com/pyenv-win/pyenv-win/" rel="noopener noreferrer" target="_blank">'pyenv' for Windows home page on GitHub</a> to completely install and configure 'pyenv'.
+Use the instructions on the <a href="https://github.com/pyenv-win/pyenv-win/" rel="noopener noreferrer" target="_blank">"pyenv" for Windows home page on GitHub</a> to completely install and configure 'pyenv'.
 
 Afterward, perform this manual test, to completely check the truth:
 ~~~{.cmd}
