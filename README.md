@@ -801,7 +801,7 @@ C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\python.exe
 
 If everything is crystal-clear fine, then step forward to the next unit.
 
-# Installation
+## Installation
 
 This plug in depends on 'pyenv' with globally installed Python version '3.6' or higher.
 
