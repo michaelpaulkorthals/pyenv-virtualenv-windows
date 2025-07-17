@@ -803,7 +803,7 @@ If everything is crystal-clear fine, then step forward to the next unit.
 
 ## Installation
 
-This plug in depends on 'pyenv' with globally installed Python version '3.6' or higher.
+This plugin depends on 'pyenv' with globally installed Python version '3.6' or higher.
 
 This plugin will be installed with Python 'pip' via the PyPi Cloud Application:
 ~~~{.cmd}
