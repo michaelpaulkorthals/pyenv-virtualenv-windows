@@ -11,8 +11,7 @@ REM For legal details see documentation.
 REM
 REM 2025-07-14
 REM
-REM This script is located in the subfolder "bin"
-REM in the project main directory.
+REM This script is located in the project main directory.
 REM
 REM Simply open it in Windows Explorer or call it by path
 REM in the Windows CMD terminal.
