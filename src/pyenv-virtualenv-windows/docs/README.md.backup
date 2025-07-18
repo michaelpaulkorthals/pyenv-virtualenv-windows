@@ -1,0 +1,805 @@
+@mainpage Project "pyenv-virtualenv"
+
+
+# Plugin "pyenv-virtualenv"
+
+![space-mission-control-center](./images/space-mission-control-center.png "Modern IT Environment")
+
+The purpose is to have a Windows-compatible plugin for "pyenv" to automate the handling of Python Virtual Environment like in Linux.
+
+This is not a code/platform translation. From my view it would be stupid to perform a painful code translation von .BASH to .CMD/.BAT, due to the restrictions and failure risks of the Windows .CMD/.BAT script language. 
+
+It is an adaptive reverse engineering to imitate the behavior of the Linux variant of that plugin. 
+
+# Project Description
+
+## Classification
+
+This project documentation is not classified. It can be published as you like.
+
+## License
+
+  * © 2025 Michael Paul Korthals. All rights reserved.
+
+# Operations Manual
+
+This unit describes the operation of this plugin.
+
+Knowledge about administration of Windows operating systems, Windows command line interface (CMD and PS) and Python handling are essentially  required to understand this documentation.
+
+## Tooling
+
+The following Open Source tools are strongly recommended to fulfill the requirements of this and other software projects.
+
+### Markdown (.MD) Editor
+
+In this project, I used PyCharm to edit the project documentation main page.
+
+It deprecated and replaced the formerly used tool \"Ghostwriter\" completely.
+
+### Doxygen
+
+Doxygen is a widely-used documentation generator tool in software development. <a href="https://www.doxygen.nl" rel="noopener noreferrer" target="_blank">Download.</a>
+
+It automates the generation of documentation from source code comments, parsing information about classes, functions, and variables to produce output in formats like HTML and PDF. By simplifying and standardizing the documentation process, Doxygen enhances collaboration and maintenance across diverse programming languages and project scales.
+
+In this project, I used Doxygen to document the project and all its assets.
+
+#### Documentation
+
+<a href="https://www.doxygen.nl/manual/" rel="noopener noreferrer" target="_blank">Doxygen Documentation</a> 
+
+### Windows Command Line Script
+
+The windows command line scripting is still part of the Windows 11 Operating system since the beginning of Microsoft MS-DOS at the dawn of the information age in the 1980s.
+
+It is used by the .BAT files on the DUNE CD-ROM and I implemented some batch files to help compile the documentation and the installer of this game restoration for Windows 11.
+
+The advantage of command line script is, that it need not any dependencies to run on Windows 11.
+
+#### Documentation
+
+  * <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands" rel="noopener noreferrer" target="_blank">Windows Command Line Script Documentation</a>
+
+  * <a href="https://www.tutorialspoint.com/batch_script/" rel="noopener noreferrer" target="_blank"> Windows Command Line Script Tutorial</a>
+
+### Windows PowerShell
+
+PowerShell is the modern, powerful and object-oriented command line script language in Windows.
+
+In this project, it is used to extract .ZIP archives and to verbally output text using the Windows speech synthesizer.
+
+The advantage of PowerShell is, that it need not any dependencies to run on Windows 11.
+
+#### Documentation
+
+  * <a href="https://https://learn.microsoft.com/en-us/powershell/" rel="noopener noreferrer" target="_blank">Windows PowerShell Documentation</a>
+
+  * <a href="https://www.tutorialspoint.com/powershell/" rel="noopener noreferrer" target="_blank"> Windows PowerShell Tutorial</a>
+
+### Cygwin
+
+A large collection of GNU and Open Source tools, which provide functionality similar to a Linux distribution on Windows. <a href="https://www.cygwin.com/" rel="noopener noreferrer" target="_blank">Download.</a>
+
+In this project I used Cygwin to extend the Windows command line language:
+  * grep
+  * ls
+  * tee
+  * etc.
+
+#### Documentation
+
+<a href="https://www.cygwin.com/" rel="noopener noreferrer" target="_blank">Cygwin Documentation</a>
+
+### Python
+
+Python is a programming language that lets you work more quickly and integrate your systems more effectively. You can learn to use Python and see almost immediate gains in productivity and lower maintenance costs. <a href="https://www.python.org/downloads/" rel="noopener noreferrer" target="_blank">Download.</a>
+
+In this project, it gave the basis for the comprehensive and object-oriented script \"make.py\", which produces each new version of this game restoration.
+
+#### Documentation
+
+<a href="https://www.python.org/doc/" rel="noopener noreferrer" target="_blank">Python Documentation</a>
+
+### PyCharm Community Edition
+
+PyCharm is an integrated development environment (IDE) from the Czech company JetBrains for the Python programming language.
+
+There is a free, open source community version and a professional version. The community version can be used to create pure Python projects.  
+<a href="https://www.python.org/downloads/" rel="noopener noreferrer" target="_blank">Download.</a>
+
+In this project, PyCharm is used as IDE to edit code files not only for Python, but for other destinations too.
+
+It allows to debug Python code files and helps the developer to avoid all kinds of program errors. This rises the quality of the code and reduce the test efforts.
+
+Under Debian Linux you install this IDE using the command line interface. See:
+
+<a href="https://www.jetbrains.com/help/pycharm/installation-guide.html#f00dd51b" rel="noopener noreferrer" target="_blank">PyCharm Installation Guide</a>
+
+![pycharm_ide_python](./images/pycharm_ide.png "PyCharm IDE")
+
+PyCharm is healthy. It allows dark mode, TAB indents and soft wraps.
+
+#### Configuration
+
+1. Go to Menu / Settings / Appearance & Behavior / Appearance find the \"Theme\" item and set it to \"Dark\".
+2. Go to Menu / Settings / Editor / Code Style / Python / Tabs & Indents and set to use TAB as indent.
+3. Go to Menu / Settings / Editor / General, find "soft wraps" and set the file list for all your code file types.
+
+Recommended file types for soft wrapping in this project are:
+~~~~
+*.md; *.txt; *.rst; *.adoc; *.py; *.conf; *.json; *.yaml; *.yml; *.bat; *.cmd; *.ps1; *.js; *.html; *.htm; *.php
+~~~~
+
+#### File and Code Templates for Fram
+
+To avoid obsolete recurring workload, it is a good idea to use templates.
+
+PyCharm supports 2 kinds of templates:
+  * Code templates (Live Templates) to insert and configure recurring code snippet.
+  * File templates to create and configure the skeleton of a code file.
+
+For the Fram framework custom live templates for PyCharm are available in the project folder:
+~~~~
+# Code Templates
+'.\fram\codeTemplates\_ fram.xml'
+# File Templates
+'.\fram\fileTemplates\*.*'
+~~~~
+
+In Windows import/export that files into the settings folder of the current PyCharm version e.g.:
+~~~~
+# Code Templates
+%APPDATA%\JetBrains\PyCharmCE2025.1\templates
+# File Templates
+%APPDATA%\JetBrains\PyCharmCE2025.1\fileTemplates
+~~~~
+
+> NOTE: The Live Templates (code templates) must be enabled explicitly in \"File and Code Templates\" section of the PyCharm settings.
+
+Afterward, restart the PyCharm IDE to make the code templates available pressing Ctrl-J.
+
+The file templates are registered in PyCharm and selectable when creating a new file. 
+
+Press Ctrl-Alt-S and find \"template\" to edit the templates.
+
+#### Documentation
+
+<a href="https://www.jetbrains.com/help/pycharm/getting-started.html" rel="noopener noreferrer" target="_blank">PyCharm Documentation</a>
+
+### Notepad++
+
+The best practice open source Editor for small projects is the free community version of "Notepad++" for Windows. <a href="https://notepad-plus-plus.org/downloads/" rel="noopener noreferrer" target="_blank">Download</a>.
+
+Under Debian Linux you install this editor using the command line interface:
+~~~~{.sh}
+sudo -i
+apt update && upgrade -y
+snap install notepad-plus-plus
+exit
+~~~~
+
+Notepad++ accelerates and excels the development of web applications and scripts by these features:
+  * Healthy dark theme
+  * Project tree viewer
+  * Shell script editor
+    * Colored code 
+    * Smart and detailed text completion for Python code
+    * Spellchecker
+  * Markdown editor (for Doxygen main page, GitHub, etc.)
+    * Colored code
+    * Spellchecker
+  * Textfile editor
+  * ... and much more
+
+In this project, I used Notepad++ to analyze data files, log files, scripts and code changes.
+
+![notepad++_php](./images/notepad++_php.png "Notepad++ Editor")
+
+Notepad++ is healthy. It allows dark mode, TAB indents and soft wraps.
+
+#### Configuration
+
+1. Go to Menu / Settings / Preferences / Dark Mode and select the \"Dark mode\".
+2. Go to Menu / Settings / Style Configurator / and select e.g. the theme "Obsidian".
+3. Go to Menu / Settings / Preferences / Indentation set to use TAB as indent and \"Indent size\" to 4.
+4. Go to Menu / View / Word wrap. Toggle this menu item to switch word wrapping on or off. 
+
+#### Documentation
+
+<a href="https://notepad-plus-plus.org/online-help/" rel="noopener noreferrer" target="_blank">Notepad++ Documentation</a>
+
+### GIMP Graphic Editor
+
+GIMP is a high quality framework for scripted image manipulation, with multi-language support such as C, C++, Perl, Python, Scheme, and more. <a href="https://www.gimp.org/" rel="noopener noreferrer" target="_blank">Download</a>.
+
+In this project, I used the GIMP Graphic Editor to edit the multi-layer photo of the DUNE CD-ROM on dark background.
+
+#### Documentation
+
+<a href="https://www.gimp.org/tutorials/" rel="noopener noreferrer" target="_blank">GIMP Graphic Editor Documentation</a>
+
+
+## Installing Plugin
+
+This setup depends on \"pyenv\" to be correctly installed on the Windows development system. 
+
+In minimum, one Python version must be installed using \"pyenv\". Also set that Python version as \"global\". It must be used by the plugin to run its more complex but stable Python scripts, which are used to bypass the failure risks of the .CMD/.BAT script language. 
+
+Please read this article carefully.  
+
+Hardware and system software requirements are the same as for \"pyenv\" for Windows.
+
+This software project results in a .ZIP package, which includes the \"plugin\" folder with all components and documentation.
+
+To find all \"pyenv\" locations, execute the following command:
+~~~~{.cmd}
+set | grep "pyenv"
+~~~~
+
+Output (e.g.):
+~~~~
+path=C:\Users\Paul\.pyenv\pyenv-win\bin;C:\Users\Paul\.pyenv\pyenv-win\shims; ...
+PYENV=C:\Users\Paul\.pyenv\pyenv-win\
+PYENV_HOME=C:\Users\Paul\.pyenv\pyenv-win\
+PYENV_ROOT=C:\Users\Paul\.pyenv\pyenv-win\
+~~~~
+
+Unzip the \"plugin\" folder into the folder:
+~~~~
+%PYENV_ROOT%
+~~~~
+
+Finally, if everything is fine, open the installer script file (.BAT) to run the setup:
+~~~~{.cmd}
+"%PYENV_ROOT%plugins\pyenv-virtualenv\install.bat"
+~~~~
+
+This tree chart gives an overview about the most important sub-folders in this plugin:
+
+~~~~
+C:\Users\Paul\.pyenv\pyenv-win\plugins\pyenv-virtualenv
+├───bin
+├───docs
+│   └───images
+├───etc
+│   └───pyenv.d
+│       ├───rehash
+│       ├───uninstall
+│       └───which
+├───libexec
+├───shims
+└───test
+    ├───stubs
+    └───tmp
+~~~~
+
+## Data Backup
+
+A manual Backup job is configured in the Site Service database. It can be explicitly executed in the Site Service web application.
+
+# Development Manual
+
+In this chapter you get detailed information how to develop in this project.
+
+Knowledge about software development administration of DOS and Windows operating systems, Windows application installers (setup_*.exe), Windows and Linux command line interface, Python, Powershell and CMD scripting languages are required to understand this documentation.
+
+## Analysis of \"pyenv\" in Windows
+
+### Plugin Interface
+
+The Windows version of \"pyenv\" is locates all plugin launchers in this folder:
+~~~~
+%PYENV_ROOT%libexec
+~~~~
+
+It is easy to implement the new plug-in \"pyenv-virtualenv\" launcher, by creating this batch file in this folder:
+~~~~
+%PYENV_ROOT%libexec\pyenv-virtualenv.bat
+~~~~
+
+Code of the \"pyenv-virtualenv\" launcher:
+~~~~{.CMD}
+@echo off
+%~dp0..\plugins\pyenv-virtualenv\bin\pyenv-virtualenv.bat %*
+~~~~
+
+This forwards each \"pyenv virtualenv\" call including further arguments to the subroutines of this plugin, which are located in:
+~~~~
+%PYENV_ROOT%plugins\pyenv-virtualenv\bin
+~~~~
+
+
+## Working Techniques
+
+Programming in Windows Command Line Interface, Windows Installer Scripts and Pascal is a fast, easy and less challenging job.
+
+To realize this web application and its scripts, the following specialized working techniques have been used to reach the goal.
+
+### Security Risk Analysis
+
+In professional software development, we have to follow a few rules for the most part. Otherwise, the remaining risks must be consciously accepted.
+
+Out of the "IT-Grundschutz-Compendium" from Federal Office for Information Security (BSI) in Germany (<a href="https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Grundschutz/International/bsi_it_gs_comp_2022.pdf?__blob=publicationFile&v=2" rel="noopener noreferrer" target="_blank">Download</a>) has been selected as applicable for designing this Software Utility:
+  * CON.8.A5 Secure System Design (B)
+  * CON.8.A6 Use of External Libraries from Trusted Sources (B)
+
+This risk analysis has been done by the author on 2025-06-29 03:00:00.
+
+Result of risk analysis:
+  * Zero deviations.
+    * See details in the following 2 subunits.
+  * Additional risks had been found in the "Inno Setup Compiler 6" download features:
+    * All downloads are going into the TEMP folder on the Windows system hard disk. Downloading big data, this could cause a system hard disk overflow, which freezes Windows. Inno Setup does not provide any configuration feature to redirect the download to another drive or folder.
+    * The author bypassed this problem in developing the Python command line script "package\download_package.py" as a secure download utility, which is usable in Inno Setup installer packages.
+    * These additional risks have been successfully remediated before publishing this project.
+
+
+#### CON.8.A5 Secure System Design (B)
+
+The following basic rules of secure system design MUST be considered in the software to be developed:
+  * All input data MUST be checked and validated before further processing takes place.
+    * FULFILLED: See the Windows Installer Script and includes Windows Command Line scripts  in detail. 
+  * For client-server applications, the data MUST be validated on the server side.
+    * NOT APPLICABLE. 
+  * The software's default settings MUST be set to facilitate secure operation.
+    * NOT APPLICABLE. 
+  * In the event of errors in or failures of system components, sensitive information MUST NOT be disclosed.
+    * FULFILLED. Only directory names, file names and some technical facts are logged by this application and surrounding components. 
+  * It MUST be possible to run the software with as few privileges as possible.
+    * FULFILLED: These script are running under normal OS user privileges. 
+  * Sensitive data MUST be transmitted and stored in encrypted form according to the  specifications of the crypto concept at hand.
+    * NOT APPLICABLE.
+  * Trusted mechanisms that meet the security requirements of the application in question MUST be used for user authentication and access.
+    * FULFILLED: The installer package is protected by SHA256 hashes and in its executable by digital signature. The user is recommended to trust the publishers self-generated CA Certificate or to accept the warning before installing this package.
+  * If passwords are stored for authentication, they MUST be stored using a secure hash procedure.
+    * NOT APPLICABLE.
+  * Security-relevant events MUST be logged in such a way that they can be evaluated afterward.
+    * NOT APPLICABLE.
+  * Information that is not relevant for productive operation (e.g. comments with access data for the development environment) SHOULD be removed in delivered program code and configuration files.
+    * NOT APPLICABLE.
+  *  The system design MUST be documented. It MUST be verified that the system design meets all the relevant security requirements.
+    * FULFILLED: See this hole documentation.
+
+#### CON.8.A6 Use of External Libraries from Trusted Sources (B)
+
+  * If external libraries are used as part of the development and implementation process, they MUST be obtained from trusted sources. Before external libraries are used, their integrity MUST be ensured.
+    * FULFILLED. Cygwin, Python, PyCharm Community Edition, Notepad++ Source Editor, GIMP Graphic Editor and are Open Source and reviewed by big communities. The related contributors are trusted worldwide.
+
+### Documentation
+
+Documentation is an essential part of the software development process. 
+
+#### Advantages
+
+In documenting, you often get a first feedback about, what you are just developing. This feedback rises the efficiency of your development and reduces the amount of test efforts.
+
+Your working techniques are important to reproduce your things and methods by other persons, or by yourself if you have to rework this project after a long period of inactivity.
+
+#### Language
+
+The primary technical documentation language is English. Depending on legal requirements, other languages could be necessary e.g. if a product is sold in non-English speaking countries or cultures.
+
+If English is not your first language, be aware that any type of AI translator is not able to understand complex correlations. Avoid falling into the AI quality trap. Instead, develop your language from good literature and communicating with people.
+
+> NOTE: To rise the quality of your documentation, install and activate the Spell Check Plugin, which shows the typos by underlining it e.g. in red.
+
+
+#### Security and Legal
+
+This project includes gray zone activities
+
+So, this documentation is classified "confidential". It must not be published to the world.
+
+> NOTE: All confidential and personal information, especially those in screenshots and photos must be wiped out before parts of this documentation will be published.
+
+The content of published documentation must not either violate the rules and legal regulation applied in the context of its publication, nor, it must not uncover the gray zone activities of the author.
+
+
+#### Tooling
+
+The industry standard documentation tool is Doxygen. It is available for Linux, Mac and Windows. <a href="https://links2004.github.io/Arduino/index.html" rel="noopener noreferrer" target="_blank">Download</a>.
+
+As off 2022, Doxygen is healthy from my point of view. It produces a dark mode web interface per default. Don't use older versions anymore, which write on unhealthy white background.
+
+
+#### Other Documentation
+
+In parallel to this documentation other documentation are relevant for this project:
+
+  * <a href="https://www.doxygen.nl/manual/" rel="noopener noreferrer" target="_blank">Doxygen Manual</a> 
+  * <a href="https://www.markdownguide.org/" rel="noopener noreferrer" target="_blank">Markdown Documentation</a> 
+  * <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands" rel="noopener noreferrer" target="_blank">Windows Command Line Script Documentation</a>
+  * <a href="https://www.tutorialspoint.com/batch_script/" rel="noopener noreferrer" target="_blank"> Windows Command Line Script Tutorial</a>
+  * <a href="https://https://learn.microsoft.com/en-us/powershell/" rel="noopener noreferrer" target="_blank">Windows PowerShell Documentation</a>
+  * <a href="https://www.tutorialspoint.com/powershell/" rel="noopener noreferrer" target="_blank"> Windows PowerShell Tutorial</a>
+  * <a href="https://www.cygwin.com/" rel="noopener noreferrer" target="_blank">Cygwin Documentation</a>
+  * <a href="https://www.python.org/doc/" rel="noopener noreferrer" target="_blank">Python Documentation</a>
+  * <a href="https://www.jetbrains.com/help/pycharm/" rel="noopener noreferrer" target="_blank">PyCharm Documentation</a>
+  * <a href="https://notepad-plus-plus.org/online-help/" rel="noopener noreferrer" target="_blank">Notepad++ Documentation</a>
+  * <a href="https://www.gimp.org/tutorials/" rel="noopener noreferrer" target="_blank">GIMP Graphic Editor Documentation</a>
+
+### Doxygen
+
+To achieve excellent results in documentation, it is important to precisely set up the Doxygen in a project. Otherwise, your documentation disappears in a painful valley of tears.
+
+Once done, it can be copied as a template to other projects, which will profit from these best practice efforts too.
+
+#### Setup Doxygen
+
+Doxygen is configured by a single *.doxyfile file in the project main directory. To create that file, it is the best practice to copy it as a template from a similar project.
+
+Adopt the settings by changing the project-specific options.
+
+Be aware on the correctness of essential path settings for Doxygen:
+  * INPUT
+  * FILE_PATTERNS
+  * EXCLUDE
+  * IMAGE_PATH
+  * HTML_OUTPUT
+  * LATEX_OUTPUT
+
+All file and folder paths must be relative to the project main directory. Do not use absolute paths. Otherwise, you will be unable to use it as a template for another project.
+
+Review the commented settings step by step to control the Doxygen correctly.
+
+#### Create Main Page
+
+Create the Markdown file README.md in the \"docs\" folder.
+
+Adopt the title options for the main page of your project in the *.doxyfile settings:
+  * PROJECT_NAME
+  * PROJECT_NUMBER
+  * PROJECT_BRIEF
+  * PROJECT_LOGO
+  * USE_MDFILE_AS_MAINPAGE = docs/README.md
+  * LATEX_BATCHMODE = YES
+
+
+Write the project-specific content of your documentation on the main page file README.md.
+
+See also the *.doxyfile of this project.
+
+#### Embed Code into Main Page
+
+Any kind of text will be embedded by the "\~\~\~\~" statement at the beginning and the end of the text block.
+
+To enable the code highlighting/coloring, extend the beginning of text block statement in this way:
+  * \~\~\~\~  (No highlighting) for ASCII text, e.g. all kind of logging texts. 
+  * \~\~\~\~{.cmd}  for batch and command line code in Windows.
+  * \~\~\~\~{.py}  for configuration files in Linux and macOS.
+  * \~\~\~\~{script}  for Shell Script and Bash code in Linux and macOS.
+  * \~\~\~\~{.cpp}  for C++ code (header and body files).
+  * \~\~\~\~{.py}  for Python code.
+  * \~\~\~\~{.ps}  for PowerShell code.
+  * \~\~\~\~{.sql}  for MSSQL code.
+  * etc., as the Doxygen understands the Markdown language.
+
+Hint: To embed the content of .conf files, use "\~\~\~\~{.py}" statement to highlight its syntax.
+
+#### Compile Documentation
+
+To compile the documentation with Doxygen, create a batch file like this \".\\docs\\build_doxygen_docu.bat\":
+  * Windows.
+~~~~{.cmd}
+@echo off
+REM Change to the drive and directory of this script
+cd /d "%~dp0"
+REM Show what is going on here
+echo Updating documentation ...
+REM Find the Doxygen configuration file in the project directory
+cd ..
+FOR /F "tokens=*" %%g IN ('dir /b *.doxyfile') do (set FILE_NAME=%%g)
+echo Configuring Doxygen by file
+echo !FILE_NAME!
+echo Compiling ...
+echo.
+doxygen !FILE_NAME!
+set /a RETURNCODE=%ERRORLEVEL%
+cd docs
+REM Check the return code
+if !RETURNCODE! equ 0 (
+	REM Display success
+	echo.
+	echo [92mSUCCEEDED [RC = !RETURNCODE!].[0m
+) else (
+	REM Display failure
+	echo.
+	echo [91mFAILED [RC = !RETURNCODE!].[0m
+)
+echo.
+pause
+~~~~
+
+Executing this batch file, Doxygen produces one folder in the \"docs\" folder of the project:
+
+  * html,
+  
+Be aware on the log, which is produced by the Doxygen compiler. Reduce the remaining errors to zero.
+  
+After building the documentation with Doxygen it is possible to generate a .PDF file using the build program in the 'latex' sub folder
+
+This batch file automates this procedure:
+  * Windows.
+~~~~{.cmd}
+@echo off
+REM Change to the drive and directory of this script
+cd /D "%~dp0"
+REM Show what is going on here
+echo Updating documentation ...
+REM Find the Doxygen configuration file in the project directory
+cd ..
+FOR /F "tokens=*" %%g IN ('dir /b *.doxyfile') do (
+	set FILE_NAME=%%g
+	set "PROJECT_NAME=%%~ng"
+)
+echo Configuring Doxygen by file "!FILE_NAME!".
+echo Compiling HTML documentation into "docs\html" ...
+echo.
+doxygen !FILE_NAME!
+set /a RETURNCODE=%ERRORLEVEL%
+cd docs
+REM Check the return code
+if !RETURNCODE! equ 0 (
+	REM Display success
+	echo.
+	echo [92mSUCCEEDED [RC = !RETURNCODE!].[0m
+	REM Show what is going further on here
+	echo.
+	echo Exporting documentation to file "docs\!PROJECT_NAME!_Documentation.pdf" ...
+	cd latex
+	if exist refman.pdf (
+		del refman.pdf
+	)
+	call make.bat
+	set /a RETURNCODE=%ERRORLEVEL%
+	echo.
+	if !RETURNCODE! neq 0 (
+		echo.
+		echo [93mWARNING: Latex returned RC = !RETURNCODE!.[0m
+	)
+	REM Check if .PDF file exists
+	if exist refman.pdf (
+		REM Move the .PDF file into the \"docs\" directory
+		echo.
+		echo Moving .PDF file into the \"docs\" folder ...
+		move /Y refman.pdf ..\!PROJECT_NAME!_Documentation.pdf
+	)
+	cd ..
+	REM Check the return code
+	if !RETURNCODE! equ 0 (
+		echo.
+		echo [92mSUCCEEDED [RC = !RETURNCODE!].[0m
+	) else (
+		REM Display failure
+		echo.
+		echo [91mFAILED [RC = !RETURNCODE!].[0m
+	)
+) else (
+	REM Display failure
+	echo.
+	echo [91mFAILED [RC = !RETURNCODE!].[0m
+)
+echo.
+pause
+
+~~~~
+
+Afterward, you will find the project documentation as .PDF file in the \"docs\" Folder.
+
+#### Open Documentation
+
+To open the documentation in the browser, create a batch file like this .\\docs\\open_doxygen_docu.bat:
+ * Windows.
+~~~~{.cmd}
+@echo off
+cd /D "%~dp0"
+cd html
+echo Opening documentation:
+echo.
+index.html
+echo.
+echo DONE.
+echo.
+pause
+~~~~
+
+### Investigation
+
+Avoid the quality reducing effect of the Internet search machines by adding quality attributes to your investigation.
+
+Compare these examples:
+  1. Search without quality attributes:
+	- Google: openssl setup private certification authority
+  2. Force the Google to exclude all results, which doses not contain the quality attributes in quotes:
+	- Google: openssl setup private certification authority \"Key Usage\" \"Subject Alternative Name\" 
+
+As you see, 
+  * the 1st investigation is overcrowded by instructions, which are incomplete or cannot be trusted,
+  * the 2nd investigation moves the wanted results near to pole position and nearly does not show any trash on the first results page.
+
+This tactic increases the efficiency of the whole development.
+
+
+### Entropy Reduction
+
+Entropy is the greatest enemy of the developing process.
+
+Every disorder of the natural order of things is creating chaos, which results in malfunctions, which could resist many hours of analysis.
+
+The solution is to reduce the entropy in the code, wherever we intuitively feel to detect it.
+
+This strategy immediately results in working code and a breakthrough, which could save the whole project.
+
+To maximize the success of this strategy, it is wise to holistically focus and reduce entropy in these realms too:
+  * developer's personal lifestyle, life-long education, mental and physical health,
+  * working conditions,
+  * environmental conditions,
+  * collective constraints,
+  * economic constraints.
+
+> NOTE: Having more attitudes, compulsions, and limitations of any kind increases entropy. This is definitely counterproductive and leads into more chaos. Instead, create a space for nourished evolution of insights and feelings, and let successful things happen step by step.
+
+### Using Templates
+
+To avoid obsolete recurring workload, it is a good idea to use templates.
+
+In this project the PyCharm IDE is capable to use file and code templates. See \"Tooling\" / \"PyCharm Community Edition\".
+
+Templates are accelerating the coding process.
+
+### Frameworks
+
+To build a stable and reliable application, it is essential to use state-of-the-art development frameworks. 
+
+This reduces the known wild growth of multiple and incompatible constructional entropy, which could jeopardize the hole project.
+
+### Colored Output to Console
+
+To make console application logging more readable, it is a good idea to colorize the logging highlights.
+
+E.g. in the Python coloredlogs, customized in my own CLI framework:
+
+  * CRITICAL: bright red
+  * ERROR: red
+  * SUCCESS: bright green
+  * WARNING: yellow
+  * NOTICE: bright white
+  * INFO: bright white
+  * VERBOSE: blue
+  * DEBUG: green
+  * SPAM: dimmed green
+
+The ANSI (American National Standards Institute) color codes are a widely adopted system used to control the color output of text in terminal and console environments. 
+
+Originally designed for Unix systems, these codes allow developers and users to add color to command-line interfaces (CLIs), making output more readable and visually appealing. 
+
+ANSI codes are supported by most modern terminals, allowing for easy customization of text color, background color, and text styles (like bold or underline).
+
+The colored text output control character sequences are available Linux, macOS and Windows command line interface (CLI): 
+
+![colored_log_specification_windows](./images/colored_log_specification_windows.png "ANSI Colored Log Specification")
+
+See the <a href="https://gist.github.com/chouhan-rahul/011f69b3117734ae7dd3a8c281dde0d5" rel="noopener noreferrer" target="_blank">ANSI Color Codes: A Comprehensive Guide</a> for details.
+#### Linux BASH
+
+The ESC character is given in octal code (\\033). Example:
+
+~~~~
+\033[92mDONE (RC = 0).\033[0m"
+~~~~
+
+Code example to log a colored log to console:
+
+~~~~{.bash}
+# "echo" colored
+RC=0
+echo -e "\033[92mImport successfully completed (RC = $RC).\033[0m"
+~~~~
+
+#### Windows CMD
+
+~~~~
+echo [92mDONE (RC = 0).[0m
+~~~~
+
+Code example to log a colored log to console:
+
+~~~~{.cmd}
+REM "echo" colored
+set /a rc=0
+echo [92mImport successfully completed (RC = %RC%).[0m
+~~~~
+
+> NOTE: The '' are symbolizing the ESC characters. The ESC key on the keyboard does not work. Instead, type these by pressing Alt-027 in Notepad++ or other capable code editors.
+
+> NOTE: To view the ESC characters in the Notepad++ code editor, set \"Menu\" / \"View\" / \"Show all characters\".
+
+#### Python
+
+~~~~{.py}
+# Reinitialize console output to avoid the missing color problem
+import os
+os.system('')
+# "print" colored
+rc = 0
+print(f'\x1b[92mImport successfully completed (RC = {rc}).\x1b[0m')
+~~~~
+
+> NOTE: The '\\x1b' sub string codes are the ESC characters.
+
+> NOTE: For multi-platform code in Python, it is more efficient to use the specific objects in the e.g. the libraries \"colorama\" or \"coloredlogs\" to explicitly colorize output text or to colorize the complete logging to console.
+
+### Cross Platform Development
+
+In computing, cross-platform software (also called multi-platform software, platform-agnostic software, or platform-independent software) is computer software that is designed to work in several computing platforms. Some cross-platform software requires a separate build for each platform, but some can be directly run on any platform without special preparation, being written in an interpreted language or compiled to portable byte code for which the interpreters or run-time packages are common or standard components of all supported platforms.
+
+For example, a cross-platform application may run on Linux, macOS and Microsoft Windows. Cross-platform software may run on many platforms, or as few as two.
+
+In this project the Python scripts are coded in this way. The advantage is that the code or parts of the code could run on supported platforms Linux, macOS and Windows.
+
+### Time-Consuming Procedure Surveillance
+
+If a script is operating slow processes or time-consuming procedures, it is essential to inform the user about the progress. Otherwise, the user could think, that the program crashed.
+
+In that case a sub thread must be created to surveillance the long-running procedure or process in parallel.
+
+In this project, we use these methods to inform the user inside that thread:
+  * Continuous log text lines with information.
+  * Continous print a progress bar.
+
+E.g. a progress bar in Python could be printed in this way:
+~~~~{*.py}
+	@staticmethod
+	def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=100, fill='█', color='green', print_end="\r") -> None:
+		percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+		filled_length = math.ceil(length * iteration / total)
+		bar = fill * filled_length + '-' * (length - filled_length)
+		begin_color = eval(f'colorama.Fore.{color.upper()}')
+		end_color = colorama.Style.RESET_ALL
+		print(f'\r{prefix} |{begin_color}{bar}{end_color}| {percent} % {suffix}', end=print_end)
+
+~~~~
+
+This simple progress bar print routine can be translated into .CMD, .SH, etc. languages to use within other platforms on command line console.
+
+### Artificial Intelligence (AI)
+
+For automation of applications AI is state of the art now. 
+
+AI tremendously reduces the efforts for application surveillance and configuration.
+
+In this project, some tiny AI mechanisms are used to forecast the duration of procedures to automatically calibrate the progress bars in the console logging.
+
+For viewing details, open \"package/make.py\", search in code for \" = AI\".
+
+Each AI has its own human-readable .JSON file, which reveals the name, mission and data, which the AI is knowing. In combination with the code and this documentation, an IT/AI auditor can get a detailed overview about the functionality of the AI.
+
+The AI support for compiling and archiving the installer packages is currently in an experimental state. 
+
+In case of huge source data size differences in developing installer packages, 
+  * AI could run into warnings, 
+  * AI could refuse to register its samples,
+  * progress bars could behave not as expected due to wrong forecasts.
+
+Don't worry. This is only a display error and will not harm the compiling process.
+
+To work around this situation, remove the procedure- and package-related 'ai_*.json' file and try again. It should run as expected in the future.
+
+## Design
+
+### Scripts
+
+The whole project is automated by the implemented scripts.
+
+See details in the commented source code of the Windows Command Line scripts, Python scripts and the Inno Setup scripts:
+  * Packages
+  * Classes
+  * Files
+
+See at the bottom of the navigation panel on the left.
+
+> NOTE: For Windows Command Line scripts (.BAT) and (.PS1) there are currently no Doxygen programming language plugins available. For these files I documented the code inside using comments, which follow the common Doxygen syntax. See the comments inside the code of these files.
+
+
+--- END OF DOCUMENT ---

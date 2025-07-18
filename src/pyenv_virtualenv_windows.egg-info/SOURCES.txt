@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-delete.py
+src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-init.py
+src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-prefix.py
+src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-props.py
+src/pyenv-virtualenv-windows/bin/pyenv-virtualenv.py
+src/pyenv-virtualenv-windows/bin/pyenv-virtualenvs.py
+src/pyenv-virtualenv-windows/bin/lib/hlp.py
+src/pyenv-virtualenv-windows/bin/lib/log.py
+src/pyenv-virtualenv-windows/bin/lib/tbl.py
+src/pyenv-virtualenv-windows/bin/lib/tre.py
+src/pyenv_virtualenv_windows.egg-info/PKG-INFO
+src/pyenv_virtualenv_windows.egg-info/SOURCES.txt
+src/pyenv_virtualenv_windows.egg-info/dependency_links.txt
+src/pyenv_virtualenv_windows.egg-info/top_level.txt
