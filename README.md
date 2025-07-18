@@ -828,12 +828,423 @@ If everything is crystal-clear fine, then step forward to the next unit.
 
 ## Installation
 
+Hardware and system software requirements are the same as for 'pyenv' for Windows.
+
 This plugin depends on 'pyenv' with globally installed Python version '3.6' or higher.
 
-This plugin will be installed with Python 'pip' via the PyPi Cloud Application:
+This plugin will be installed with Python 'pip' via the PyPI Cloud Application:
+
+> IMPORTANT NOTE: Because the system PATH environment variable must be adopted, the package installer must be run with 'Administrator' privileges. Otherwise, the plugin-internal "install.bat" will show an error message and cancel.
+
 ~~~{.cmd}
 pip install pyenv-virtualenv-windows
 ~~~
 
-\-\-\- TO BE CONTINUED -------------------------------------------------
+## Location
+
+To find all 'pyenv' locations, execute the following command:
+~~~{.cmd}
+REM If Cygwin is not installed and configured:
+set 
+echo Search for "PYENV" manually.
+REM Having Cygwin on board:
+set | grep "pyenv"
+~~~
+Output (e.g.):
+~~~
+path=C:\Users\Paul\.pyenv\pyenv-win\bin;C:\Users\Paul\.pyenv\pyenv-win\shims; ...
+PYENV=C:\Users\Paul\.pyenv\pyenv-win\
+PYENV_HOME=C:\Users\Paul\.pyenv\pyenv-win\
+PYENV_ROOT=C:\Users\Paul\.pyenv\pyenv-win\
+~~~
+
+This tree chart gives an overview about the most important sub-folders in this plugin:
+~~~
+%USERPROFILE%\.pyenv\pyenv-win\plugins\pyenv-virtualenv
+├───bin
+├───docs
+│   └───images
+├───libexec
+└───shims
+~~~
+
+## Usage
+
+### Concepts
+
+For better understanding, how 'pyenv-virtualenv' for windows is working, read this unit carefully, before you start to use 'pyenv-virtualenv'. 
+
+#### Audits
+
+Each utility in 'pyenv-virtualenv' for Windows is auditing your system environment to avoid functional problems or lack of completeness in installing/configuring 'pyenv' and 'pyenv-virtualenv' for Windows. 
+
+In case of deviation, the utility logs a red-colored error message and a remediation instruction to the console. Afterward, the program will be canceled to avoid further problems.
+
+It is essential that you remediate all deviations to finally get 'pyenv-virtualenv' for Windows working well.
+
+If everything is fine, nothing will be logged about the audits.
+
+If you want to see the audit activities and its results on detail on the console terminal, execute these commands:
+~~~{.cmd}
+REM Set log level to "verbose"
+set LOG_LEVEL=15
+REM Execute a passive utility, which shows information only
+pyenv virtualenvs
+REM Reset log level to default ("info")
+set LOG_LEVEL=20
+~~~
+
+#### Commands
+
+The management of Python versions and virtual environments for Posix/Linux and Windows is implemented as a series of commands, which are executed in the CLI terminal. 
+
+In both platform ecosystems the syntax and behavior of the utilities are nearly identical. 'pyenv-virtualenv' for Windows includes some new enhancements. Use the '-h' or '--help' argument to display the details for each utility command.
+
+Using Python virtual environment, the short form 'venv' has been established within the publications of the developer community. Also, 'venv' is quicker and easier to type in opposite to 'virtualenv'.
+
+In addition, in Windows the words 'new' and 'list' are more familiar to create and to list somthing on command line. 
+
+"rm" in Cygwin, Posix/Linux operating systems and "del" on Windows are the common synonyms to delete/remove something in both ecosystems. 
+
+To round this up, 'activate' and 'deactivate' are the known commands to enable/disable the Python virtual environment.   
+
+To take these mods into account, these short and alternative command names are implemented:
+
+| Original                | Short             | Alternative     |
+|:------------------------|:------------------|:----------------|
+| pyenv virtualenv        | -                 | pyenv venv-new  |
+| pyenv virtualenvs       | -                 | pyenv venv-list |
+| pyenv virtualenv-delete | pyenv venv-del    | venv-rm         |
+| pyenv virtualenv-prefix | pyenv venv-prefix | -               |
+| pyenv virtualenv-props  | pyenv venv-props  | -               |
+| pyenv virtualenv-init   | pyenv venv-init   | -               |
+| pyenv activate          | -                 | activate        |
+| pyenv deactivate        | -                 | deactivate      |
+
+Now the best of the two worlds can coexist. Use this as you like.
+
+My favorite and more coherent command list for 'pyenv-virtualenv' for Windows is:
+
+| Command          | Description                                                |
+|:-----------------|:-----------------------------------------------------------|
+| pyenv venv-new   | Create a new virtual environment.                          |
+| pyenv venv-list  | List Python versions, environments and project properties. |
+| pyenv venv-del   | Delete a virtual environment.                              |
+| pyenv venv-props | Manage project properties.                                 |
+| pyenv venv-init  | Reconfigure after 'pyenv' version upgrade.                 |
+| activate         | Activate virtual environment.                              |
+| deactivate       | Deactivate virtual environment.                            |
+
+#### Project Properties
+
+To control, which Python version and virtual environment are in use for a specific local project, some hidden information files can be manged:
+
+| File Name       | Content                                                                                                       |
+|:----------------|:--------------------------------------------------------------------------------------------------------------|
+| .python-version | 3-Digit Python version number (e.g. 3.12.10)                                                                  |
+| .python-env     | Virtual environment short name (e.g. cinema_5)                                                                |
+| .tree-excludes  | Tuple of folder names to exclude from local project tree view.<br/>E.g.: ('docs', '\_\_pycache\_\_', '.idea') |
+
+These files automatically inherit the version, virtual environment and exclude settings along the Windows directory paths.
+
+These settings allow you to use different Python versions and virtual environments within the same project.
+
+The content of '.tree-excludes' file allows to exclude 'spam' folders from the tree view. E.g. 'docs', caches and IDE project configuration folders. The excludes prevents you from scrolling through non-relevant information. 
+
+In this example project, the setup routine and the application are using the same Python version, but different virtual environments:
+~~~
+C:\Users\Paul\eclipse\cinema_5
+│   .python-version  <-- Configured Python version  
+│   docs.doxyfile  
+├───back-end
+│   .python-env      <-- Configured virtual environment
+│   .tree-excludes   <-- Configured directory tree excludes
+│   back-end.bat     <-- Launcher to automate app call
+│   back-end.py      <-- Application script
+├───docs
+│   └───images
+└───setup
+    .python-env      <-- Configured another virtual environment
+    setup.bat        <-- Launcher to automate the setup call
+    setup.py         <-- Setup script
+~~~
+
+#### Help
+
+Each of the tool scripts includes Python argument parser 'argparse'. If you add the '-h' or '--help' option:  
+~~~{.cmd}
+pyenv virtualenv --help 
+~~~
+
+See output of this call for details:
+~~~
+Usage: pyenv virtualenv [-h] [-v] [-p | --props | --no-props ] [version] [name]
+
+Create a version-assigned and named Python virtual environment in "pyenv".
+
+Positional arguments (which can be omitted):
+  [version]             Python version, which must be already installed in 
+                        "pyenv". Default: The global Python version.
+  [name]                Short name of the new Python virtual environment.
+
+Options:
+  -h, --help            Show this help message and exit.
+  -p, --props, --no-props
+                        Add the files `.python-version` and `.python-env` 
+                        as project properties to CWD. Default: --no_props.
+  -v, --version         Display the version number of this "pyenv-virtualenv" 
+                        release and ignore all other arguments.
+~~~
+
+#### Logging
+
+Each of the 'pyenv' scripts has a colored comprehensive logging implemented. 
+
+> NOTE: No log files are implemented. The log output is written to console only:
+
+The logging is divided into to the following log levels:
+
+| Level    | Value | Color   | Description                                              |
+|:---------|------:|:--------|:---------------------------------------------------------|
+| critical |    50 | red+    | Critical error, which let the program exit immediately.  |
+| error    |    40 | red     | Normal error message, which finishes the program.        |
+| success  |    35 | green   | Success message.                                         |
+| warning  |    30 | yellow  | Warning message.                                         |
+| notice   |    25 | magenta | Notice message.                                          |
+| info     |    20 | white   | Information message (Default level).                     |
+| verbose  |    15 | blue    | Verbose message for overview in diagnosis.               |
+| debug    |    10 | green   | Debug message to trace states in running the program.    |
+| spam     |     5 | gray    | Mass messages for loop observations and deep diagnosis.  |
+
+The lower the log level is, much more colored log will appear on console terminal. 
+
+The log level can be set using the OS environment variable "LOG_LEVEL":
+~~~{.cmd}
+REM Set log level to "debug"
+set LOG_LEVEL=10
+REM Override virtual environment
+pyenv virtualenv 3.12 cinema_5 --props
+REM Reset loglevel to default
+set LOG_LEVEL=20
+~~~
+
+Output:
+
+![pyenv_virtualenv_debug_logging](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/pyenv_virtualenv_debug_logging.png "Colored Comprehensive Logging")
+
+### Create Virtual Environment
+
+To generate a virtual environment for the Python version installed in 'pyenv', call
+'pyenv virtualenv', specifying the installed Python version you want and the name
+of the virtualenv directory (e.g. the short name of your project folder). 
+
+In addition, this script configures the version and the virtual environment for your project.
+
+#### Create with Version and Name
+
+> NOTE: Be aware that this command copies 2 hidden files into your project folder. These files are your 'pyenv virtualenv' project properties, which contain the Python version number and the virtual environment name. If required, other scripts in thi sworkflow read these files to know which Python version and virtual environment is set.
+
+This example creates a virtual environment named 'cinema_5', which depends on version 'Python 3.12.10':
+~~~{.sh}
+REM Change directory to your Python project folder
+cd "%USERPROFILE%\eclipse-workspace\cinema_5"
+REM Generate the virtual environment and set project properties in CWD
+pyenv virtualenv 3.12.10 cinema_5 --props
+REM Show project property files
+dir .python*.*
+type .python-version
+type .python-env
+~~~
+
+Output:
+~~~
+INFO     Creating Python virtual environment in "pyenv":
+INFO       * Version: 3.12.10
+INFO       * Name:    cinema_5
+INFO       * Set project properties: True
+INFO     This will take some seconds ...
+SUCCESS  Virtual environment "cinema_5" is installed in "pyenv", depending on "Python 3.12.10".
+
+ Datenträger in Laufwerk C: ist SYSTEM
+ Volumeseriennummer: 38E4-3A30
+
+ Verzeichnis von C:\Users\Paul\eclipse-workspace\cinema_5
+
+Fr, 04. 07. 2025  07:46                 8 .python-env
+Fr, 04. 07. 2025  07:46                 7 .python-version
+               2 Datei(en),             15 Bytes
+               0 Verzeichnis(se), 117.726.687.232 Bytes frei
+3.12.10
+cinema_5
+~~~
+
+'pyenv virtualenv' forwards 2 positional arguments and 1 option to the underlying command that actually creates the virtual environment using 'python -m venv':
+
+This will create a virtual environment based on 'Python 3.12.10' under '%PYENV_ROOT%/versions' in a folder junction called 'cinema_5-3.12.10'.
+
+That folder junction is linked to folder:
+~~~
+%PYENV_ROOT%/versions/3.12.10/envs/cinema_5-3.12.10
+~~~
+Finally, the 'pyenv virtualenv' project property files has been written.
+
+#### Create With Name Only
+
+If there is only one positional argument given to 'pyenv virtualenv', the virtualenv will be created with the given name based on the current pyenv Python version.
+
+~~~{.cmd}
+REM Check global Python version 
+pyenv version
+3.12.10 (set by ...)
+REM Change directory to your Python project folder
+cd "%USERPROFILE%\eclipse-workspace\cinema_5"
+REM Generate the virtual environment and set project properties
+pyenv virtualenv 3.12.10 cinema_5 --props
+~~~
+
+Output:
+~~~
+3.12.10 (set by ...)
+
+INFO     Creating Python virtual environment in "pyenv":
+INFO       * Version: 3.12.10 (global)
+INFO       * Name:    cinema_5
+INFO       * Set project properties: True
+INFO     This will take some seconds ...
+SUCCESS  Virtual environment "cinema_5" is installed in "pyenv", depending on "Python 3.12.10".
+~~~
+
+### List Installed Virtual Environments
+
+The utility 'pyenv virtualenvs' displays 3 tables and a tree view:
+1. Installed Python Versions
+2. Available Virtual Environments
+3. Local Project Properties
+4. CWD tree view
+
+Output:
+
+![pyenv_virtualenvs_tables](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/pyenv_virtualenvs_tables.png "") ![pyenv_virtualenvs_tree](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/pyenv_virtualenvs_tree.png "Data Listing")
+
+If you know about Python Virtual Environment it is easy for you to interpret the data. Some stati are depending on the PWD path, the Python version numbers and the installed and globalized versions and virtual environments.
+
+There are two entries for each virtualenv, and the shorter one is just a symlink.
+
+### Activate Virtual Environment
+
+> NOTE: The behavior of the 'activate' command depends on the project property settings on CWD. See unit 'Concepts' / 'Project Properties'.
+
+Use these commands to activate and use the configured virtual environment:
+~~~{.cmd}
+REM Activate Python virtual environment
+activate
+... use and manage the virtual environment ...
+REM Deactivate Python virtual environment
+deactivate
+~~~
+
+![pyenv-virtualenv_activate](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/pyenv-virtualenv_activate.png "Activated Virtual Environment")
+
+Please notice the details in the screenshot above:
+* The 'activate' command adds information in colors to the terminal prompt:
+  - Virtual environment name (yellow) 
+  - Python version number (cyan)
+  - Path string (blue)
+* The successful activation is proved by checking the output 'sys.executable' in Python.
+* The 'deactivate' command removes virtual environment name and version from terminal prompt.
+* After finally executed the 'deactivate' command closes the subshell and returns to your main shell. The color of the path in the terminal prompt turns to white again.
+
+To ensure interoperability the equivalent Posix/Linux commands are available in Windows. Here the complete command listing with all synonyms and argument scenarios: 
+~~~{.cmd}
+pyenv activate
+pyenv activate <name>
+pyenv activate <version> <name>
+pyenv deactivate
+activate
+activate <name>
+activate <version> <name>
+deactivate
+~~~
+
+### Delete Installed Virtual Environment
+
+Manually removing the related junction (symbolic links) in the 'versions' directory and the related virtual environment in the 'envs' subfolder of that version will delete a virtual directory.
+
+See in these folders:
+~~~
+%PYENV_ROOT%versions
+%PYENV_ROOT%versions\{version}\envs
+~~~
+
+To automate this, use the 'pyenv-virtualenv' plugin to uninstall virtual environments:
+~~~{.cmd}
+pyenv virtualenv-delete {version} {name}
+pyenv virtualemv-delete 3.12.10 cinema_5a
+~~~
+
+> NOTE: This will only delete the virtual environment, so called 'cinema_5a'. The version '3.12.10' remains untouched. 
+
+Use 'pyenv' as usual to manage the Python versions and to uninstall these:
+~~~{.cmd}
+REM Unsinstall
+pyenv uninstall {version}
+pyenv uninstall 3.9.6
+REM Set version 'global'
+pyenv global {version}
+pyenv global 3.13.3
+~~~
+
+Finally, to check your results in a single view, call:
+~~~{.cmd}
+pyenv virtualenvs
+~~~
+
+### Virtual Environment Prefix
+
+Use these commands to get the path prefix for virtual environment:
+~~~{.cmd}
+REM Get prefix for the CWD
+pyenv virtualenv-prefix
+REM Get prefix for installed virtual environment
+pyenv virtualenv-prefix {name}
+pyenv virtualenv-prefix cinema_5a 
+~~~
+
+Output: 
+
+![pyenv-virtualenv-prefix](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/pyenv-virtualenv-prefix.png "Virtual Environment Prefix")
+
+### Reconfigure After 'pyenv' Upgrade
+
+After upgrading "pyenv" some path settings and the patch must be reconfigured. This ensures that the 'pyenv-virtualenv' plugin continues working without errors.
+
+> IMPORTANT NOTE: This command should be run in a console terminal, which has been opened as 'Administrator'. Otherwise, it would be not capable to alter the system PATH environment variable when managing the path priorities for 'pyenv-virtualenv' for Windows. If that is necessary, and it would run with user privileges only, it would display an error message and cancel.
+
+You should not waste your efforts on this task to do it manually. 
+
+Instead, use this command or its alias to run this job automatically within seconds:
+~~~{.cmd}
+pyenv virtualenv-init
+pyenv venv-init 
+~~~
+
+> NOTE: This command 'pyenv virtualenv-init' has in Posix/Linux a different meaning, help and description. Here in Windows, please refer to how it is documented for Windows.
+
+In addition, this command scans the PATH environment variable and displays the dead links to non-existing folders.
+
+If you have those deviations, it is your responsibility to remove the dead links from PATH.    
+
+## Python Venv
+
+There is a [venv](http://docs.python.org/3/library/venv.html) module available
+for 'Python 3.3+'.
+
+It provides an executable module 'venv', which is the successor of 'virtualenv'
+and distributed by default.
+
+'pyenv-virtualenv' uses 'python -m venv' if it is available and the 'virtualenv'
+command is not available.
+
+Each utility in 'pyenv-virtualenv' tries to import the 'virtualenv' near the beginning of the program. This let the utility programs exit immediately by error and so should avoid problems with globalized outdated Python versions. 
+
 
