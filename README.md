@@ -1,5 +1,7 @@
 # pyenv-virtualenv-windows
 
+![pyenv-virtualenv_activate](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/under_construction_256.png "Under Construction")
+
 > IMPORTANT NOTICE: This repository is currently under construction. Please wait until this message disappears before using this information.
 
 "pyenv-virtualenv" for Windows. A “pyenv” plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
