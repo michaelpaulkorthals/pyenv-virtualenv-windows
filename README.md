@@ -716,8 +716,6 @@ Public License instead of this License.  But first, please read
 
 ## Check Dependencies
 
-## Check Dependencies
-
 > WARNING: Do not ignore this unit and read it carefully. There is no room for incompleteness. Otherwise, the dependencies are not completely fulfilled and you could fail.
 
 Use the instructions on the <a href="https://github.com/pyenv-win/pyenv-win/" rel="noopener noreferrer" target="_blank">'pyenv' for Windows home page on GitHub</a> to completely install and configure 'pyenv'.   
