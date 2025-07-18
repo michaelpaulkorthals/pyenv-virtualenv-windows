@@ -714,20 +714,24 @@ Public License instead of this License.  But first, please read
 
 </details>
 
-## Check "pyenv" Dependencies
+## Check Dependencies
+
+## Check Dependencies
 
 > WARNING: Do not ignore this unit and read it carefully. There is no room for incompleteness. Otherwise, the dependencies are not completely fulfilled and you could fail.
 
-Use the instructions on the <a href="https://github.com/pyenv-win/pyenv-win/" rel="noopener noreferrer" target="_blank">"pyenv" for Windows home page on GitHub</a> to completely install and configure 'pyenv'.
+Use the instructions on the <a href="https://github.com/pyenv-win/pyenv-win/" rel="noopener noreferrer" target="_blank">'pyenv' for Windows home page on GitHub</a> to completely install and configure 'pyenv'.   
 
 Afterward, perform this manual test, to completely check the truth:
 ~~~{.cmd}
-REM 1. Check if the 2 'pyenv' executable paths are at the beginning of the PATH
+REM 1. Check if the 2 'pyenv' executable paths are at the beginning of the PATH.
 path
 REM 2. Check if the 'pyenv' Python executable is found on top of calling priority.
 where python
 REM 3. Check if the 'pyenv' global Python version is correctly set.
 python -c "import sys; print(sys.executable); quit()"
+REM 4. Ensure the actual versions of 'pip' and 'virtualenv' are installed.
+python -m pip install --upgrade pip virtualenv
 ~~~
 
 Output (e.g.):
@@ -745,6 +749,13 @@ C:\Users\Paul\AppData\Local\Microsoft\WindowsApps\python.exe
 
 C:\Users\Paul>python -c "import sys; print(sys.executable); quit()"
 C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\python.exe
+
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>python -m pip install --upgrade pip virtualenv
+Requirement already satisfied: pip in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (25.1.1)
+Requirement already satisfied: virtualenv in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (20.31.2)
+Requirement already satisfied: distlib<1,>=0.3.7 in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from virtualenv) (0.3.9)
+Requirement already satisfied: filelock<4,>=3.12.2 in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from virtualenv) (3.18.0)
+Requirement already satisfied: platformdirs<5,>=3.9.1 in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from virtualenv) (4.3.8)
 ~~~
 
 > WARNING: If there is only the slightest deviation, it is essential you reconfigure 'pyenv'. Otherwise, the plugin 'pyenv-virtualenv' installer or the plugin itself will cancel after running into error messages.
@@ -796,8 +807,22 @@ C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\python.exe
 * In case of failure/deviation:
   * Call 'pyenv install {global version number}'.
   * Call 'pyenv global {global version number}'.
-  * Call 'pyenv versions' to check, which version is "*" global.
+  * Call 'pyenv versions' to check, which version is '*' global.
   * Repeat test 3. 
+
+4. Python packages 'pip' and 'virtualenv' are up-to-date:
+~~~
+Requirement already satisfied: pip in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (25.1.1)
+Requirement already satisfied: virtualenv in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (20.31.2)
+Requirement already satisfied: distlib<1,>=0.3.7 in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from virtualenv) (0.3.9)
+Requirement already satisfied: filelock<4,>=3.12.2 in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from virtualenv) (3.18.0)
+Requirement already satisfied: platformdirs<5,>=3.9.1 in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from virtualenv) (4.3.8)
+~~~
+* In case of success:
+  * The requirements for 'pip' and 'virtualenv' and its dependencies are completely satisfied.
+* In case of failure/deviation:
+  * Ensure that the global Python version in 'pyenv' is 3.6 or higher.
+  * Repeat the whole test sequence beginning with test 1.
 
 If everything is crystal-clear fine, then step forward to the next unit.
 
