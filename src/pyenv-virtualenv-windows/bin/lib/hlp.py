@@ -869,7 +869,12 @@ def listProjectProperties() -> int:
 			fnv = ''
 		prv = f'({dtv})'
 		acv = ' '
-		if prv in os.environ['PROMPT']: acv = '*'
+		if (
+			('PROMPT' in os.environ)
+			and
+			(prv in os.environ['PROMPT'])
+		):
+			acv = '*'
 		# 2. Name property
 		fnn = '.python-env'
 		fpn = scanCwdAndAncestorsForFile(fnn)
@@ -886,7 +891,12 @@ def listProjectProperties() -> int:
 			fnn = ''
 		prn = f'({dtn})'
 		acn = ' '
-		if prn in os.environ['PROMPT']: acn = '*'
+		if (
+				('PROMPT' in os.environ)
+				and
+				(prn in os.environ['PROMPT'])
+		):
+			acn = '*'
 		# 3. TreeFolders to exclude property
 		fne = '.tree-excludes'
 		fpe = scanCwdAndAncestorsForFile(fne)
@@ -910,7 +920,7 @@ def listProjectProperties() -> int:
 			[tbl.SEPARATOR]
 		]
 		dtv_dir =  os.path.join(
-			'%PYENV_ROOT%',
+			os.environ['PYENV_ROOT'],
 			'versions',
 			dtv
 		)
@@ -923,7 +933,7 @@ def listProjectProperties() -> int:
 				dtv_dir
 			])
 		dtn_dir = os.path.join(
-			'%PYENV_ROOT%',
+			os.environ['PYENV_ROOT'],
 			'versions',
 			dtv,
 			'envs',
@@ -937,23 +947,24 @@ def listProjectProperties() -> int:
 				f'\x1b[93m{dtn}\x1b[0m',
 				dtn_dir
 			])
-		data.append([
-			tbl.DATA,
-			ace,
-			fne,
-			'\x1b[95m:tuple\x1b[0m',
-			dte
-		])
+		if len(dte) > 0:
+			data.append([
+				tbl.DATA,
+				ace,
+				fne,
+				'\x1b[95m:tuple\x1b[0m',
+				dte
+			])
 		data.append([tbl.SEPARATOR])
 		# Pass 2: Output list of project properties.
 		table = tbl.SimpleTable(
 			data,
-			headline='LOCAL PROJECT PROPERTIES:'
+			headline='LOCAL PROJECT PROPERTIES (A = active):'
 		)
 		table.run()
-		# Pass 3: Output project properties from CWD downwards
+		# Pass 3: Output CWD files and folder tree
 		log.verbose(
-			'Listing project properties in folder tree ...'
+			'Listing project properties in files and folders tree ...'
 		)
 		print('\nLOCAL FOLDER TREE:\n')
 		tre.tree(

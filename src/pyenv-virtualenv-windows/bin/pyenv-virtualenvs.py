@@ -100,14 +100,22 @@ def run() -> int:
 			pyts.append([tbl.SEPARATOR])
 			# Pass 2: Collect the virtual environments.
 			pves = [
-				[tbl.HEADER, 'Version', 'Name', '"pyenv" Location'],
+				[tbl.HEADER, 'A', 'Version', 'Name', '"pyenv" Location'],
 				[tbl.SEPARATOR]
 			]
 			for ver in vers:
 				venvs = hlp.getEnvs(ver,'*', as_paths=True)
 				for venv in venvs:
+					act = ' '
+					if (
+						('PROMPT' in os.environ)
+						and
+						(f'({os.path.basename(venv)})' in os.environ['PROMPT'])
+					):
+						act = '*'
 					pves.append([
 						tbl.DATA,
+						act,
 						os.path.basename(ver),
 						os.path.basename(venv),
 						'%PYENV_ROOT%' + os.sep + venv[len(per):]
@@ -117,13 +125,13 @@ def run() -> int:
 			# Pass 3: Output list of Python versions.
 			table_pyts = tbl.SimpleTable(
 				pyts,
-				headline='INSTALLED PYTHON VERSIONS:'
+				headline='INSTALLED PYTHON VERSIONS (G = global):'
 			)
 			table_pyts.run()
 			# Pass 4: Output list of virtual environments.
 			table_pves = tbl.SimpleTable(
 				pves,
-				headline='AVAILABLE PYTHON VIRTUAL ENVIRONMENTS:'
+				headline='AVAILABLE PYTHON VIRTUAL ENVIRONMENTS (A = active):'
 			)
 			table_pves.run()
 			# Output list of project properties (if exists)
