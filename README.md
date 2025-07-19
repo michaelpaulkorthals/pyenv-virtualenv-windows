@@ -1,12 +1,59 @@
-# pyenv-virtualenv-windows
-
 ![pyenv-virtualenv_activate](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/under_construction_256.png "Under Construction")
 
 > IMPORTANT NOTICE: This repository is currently under construction. Please wait until this message disappears before using this information.
 
-"pyenv-virtualenv" for Windows. A “pyenv” plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
+# Table of Contents
+1. [Introduction](#introduction)
+2. [License](#license)
+3. [Check Dependencies](#check_dependencies)
+4. [Installation](#installation)
+5. [Location](#location)
+6. [Usage](#usage)
+    1. [Concepts](#concepts)
+        1. [Audits](#audits)
+        2. [Commands](#commands)
+        3. [Project Properties](#project_properties)
+        4. [Help](#help)
+        5. [Logging](#logging)
+	2. [Create Virtual Environment](#create_virtual_environment)
+		1. [Create with Version and Name](#create_with_version_and_name)
+		2. [Create With Name Only](#create_with_name_only)
+	3. [List Installed Virtual Environments](#list_installed_virtual_environment)
+	4. [Activate Virtual Environment](#activate_virtual_environment)
+	5. [Delete Installed Virtual Environment](#delete_virtual_environment)
+	6. [Virtual Environment Prefix](#virtual_environment_prefix)
+	7. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)
+7. [Python Venv](#python_venv)
 
-## License
+## Introduction <a name="introduction"></a>
+
+"pyenv-virtualenv" for Windows. 
+
+A “pyenv” plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
+
+This document is an adopted extract from 'pyenv-virtualenv' for Windows 'User Manual'. 
+
+It is your tutorial to master your first steps in 'pyenv_virtualenv'.
+
+After complete and error-free installation, you will find the comprehensive Doxygen v1.13+ industry standard documentation for 'pyenv-virtualenv' for Windows on your system:
+~~~
+%USERPROFILE%\.pyenv\pyenv-win\plugins\pyenv-virtualenv\docs\html\index.html
+~~~
+
+![doxygen](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/doxygen.png "Doxygen")
+
+The Doxygen documentation includes:
+  * Project description
+  * User Manual
+  * Operations Manual
+  * Development Manual
+  * Packages (Code documentation)
+  * Classes (Code documentation)
+  * Files (Code documentation)
+  
+The Doxygen v1.13+ documentation is much easier to handle. It will displayed in healthy dark mode.
+
+## License <a name="license"></a>
 
 <details>
 <summary>Contents of <code>src/pyenv-virtualenv-windows/LICENSE.txt</code></summary>
@@ -716,7 +763,7 @@ Public License instead of this License.  But first, please read
 
 </details>
 
-## Check Dependencies
+## Check Dependencies <a name="check_dependencies"></a>
 
 > WARNING: Do not ignore this unit and read it carefully. There is no room for incompleteness. Otherwise, the dependencies are not completely fulfilled and you could fail.
 
@@ -826,7 +873,7 @@ Requirement already satisfied: platformdirs<5,>=3.9.1 in c:\users\paul\.pyenv\py
 
 If everything is crystal-clear fine, then step forward to the next unit.
 
-## Installation
+## Installation <a name="installation"></a>
 
 Hardware and system software requirements are the same as for 'pyenv' for Windows.
 
@@ -840,7 +887,7 @@ This plugin will be installed with Python 'pip' via the PyPI Cloud Application:
 pip install pyenv-virtualenv-windows
 ~~~
 
-## Location
+## Location <a name="location"></a>
 
 To find all 'pyenv' locations, execute the following command:
 ~~~{.cmd}
@@ -868,13 +915,13 @@ This tree chart gives an overview about the most important sub-folders in this p
 └───shims
 ~~~
 
-## Usage
+## Usage <a name="usage"></a>
 
-### Concepts
+### Concepts <a name="concepts"></a>
 
 For better understanding, how 'pyenv-virtualenv' for windows is working, read this unit carefully, before you start to use 'pyenv-virtualenv'. 
 
-#### Audits
+#### Audits <a name="audits"></a>
 
 Each utility in 'pyenv-virtualenv' for Windows is auditing your system environment to avoid functional problems or lack of completeness in installing/configuring 'pyenv' and 'pyenv-virtualenv' for Windows. 
 
@@ -894,7 +941,7 @@ REM Reset log level to default ("info")
 set LOG_LEVEL=20
 ~~~
 
-#### Commands
+#### Commands <a name="commands"></a>
 
 The management of Python versions and virtual environments for Posix/Linux and Windows is implemented as a series of commands, which are executed in the CLI terminal. 
 
@@ -935,7 +982,7 @@ My favorite and more coherent command list for 'pyenv-virtualenv' for Windows is
 | activate         | Activate virtual environment.                              |
 | deactivate       | Deactivate virtual environment.                            |
 
-#### Project Properties
+#### Project Properties <a name="project_properties"></a>
 
 To control, which Python version and virtual environment are in use for a specific local project, some hidden information files can be manged:
 
@@ -969,7 +1016,7 @@ C:\Users\Paul\eclipse\cinema_5
     setup.py         <-- Setup script
 ~~~
 
-#### Help
+#### Help <a name="help"></a>
 
 Each of the tool scripts includes Python argument parser 'argparse'. If you add the '-h' or '--help' option:  
 ~~~{.cmd}
@@ -996,7 +1043,7 @@ Options:
                         release and ignore all other arguments.
 ~~~
 
-#### Logging
+#### Logging <a name="logging"></a>
 
 Each of the 'pyenv' scripts has a colored comprehensive logging implemented. 
 
@@ -1032,7 +1079,7 @@ Output:
 
 ![pyenv_virtualenv_debug_logging](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/pyenv_virtualenv_debug_logging.png "Colored Comprehensive Logging")
 
-### Create Virtual Environment
+### Create Virtual Environment <a name="create_virtual_environment"></a>
 
 To generate a virtual environment for the Python version installed in 'pyenv', call
 'pyenv virtualenv', specifying the installed Python version you want and the name
@@ -1040,7 +1087,7 @@ of the virtualenv directory (e.g. the short name of your project folder).
 
 In addition, this script configures the version and the virtual environment for your project.
 
-#### Create with Version and Name
+#### Create with Version and Name <a name="create_with_version_and_name"></a>
 
 > NOTE: Be aware that this command copies 2 hidden files into your project folder. These files are your 'pyenv virtualenv' project properties, which contain the Python version number and the virtual environment name. If required, other scripts in thi sworkflow read these files to know which Python version and virtual environment is set.
 
@@ -1088,7 +1135,7 @@ That folder junction is linked to folder:
 ~~~
 Finally, the 'pyenv virtualenv' project property files has been written.
 
-#### Create With Name Only
+#### Create With Name Only <a name="create_with_name_only"></a>
 
 If there is only one positional argument given to 'pyenv virtualenv', the virtualenv will be created with the given name based on the current pyenv Python version.
 
@@ -1114,7 +1161,7 @@ INFO     This will take some seconds ...
 SUCCESS  Virtual environment "cinema_5" is installed in "pyenv", depending on "Python 3.12.10".
 ~~~
 
-### List Installed Virtual Environments
+### List Installed Virtual Environments <a name="list_installed_virtual_environments"></a>
 
 The utility 'pyenv virtualenvs' displays 3 tables and a tree view:
 1. Installed Python Versions
@@ -1130,7 +1177,7 @@ If you know about Python Virtual Environment it is easy for you to interpret the
 
 There are two entries for each virtualenv, and the shorter one is just a symlink.
 
-### Activate Virtual Environment
+### Activate Virtual Environment <a name="activate_virtual_environment"></a>
 
 > NOTE: The behavior of the 'activate' command depends on the project property settings on CWD. See unit 'Concepts' / 'Project Properties'.
 
@@ -1166,7 +1213,7 @@ activate <version> <name>
 deactivate
 ~~~
 
-### Delete Installed Virtual Environment
+### Delete Installed Virtual Environment <a name="delete_installed_virtual_environment"></a>
 
 Manually removing the related junction (symbolic links) in the 'versions' directory and the related virtual environment in the 'envs' subfolder of that version will delete a virtual directory.
 
@@ -1199,7 +1246,7 @@ Finally, to check your results in a single view, call:
 pyenv virtualenvs
 ~~~
 
-### Virtual Environment Prefix
+### Virtual Environment Prefix <a name="virtual_environment_prefix"></a>
 
 Use these commands to get the path prefix for virtual environment:
 ~~~{.cmd}
@@ -1214,7 +1261,7 @@ Output:
 
 ![pyenv-virtualenv-prefix](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/pyenv-virtualenv-prefix.png "Virtual Environment Prefix")
 
-### Reconfigure After 'pyenv' Upgrade
+### Reconfigure After 'pyenv' Upgrade <a name="reconfigure_after_pyenv_upgrade"></a>
 
 After upgrading "pyenv" some path settings and the patch must be reconfigured. This ensures that the 'pyenv-virtualenv' plugin continues working without errors.
 
@@ -1234,7 +1281,7 @@ In addition, this command scans the PATH environment variable and displays the d
 
 If you have those deviations, it is your responsibility to remove the dead links from PATH.    
 
-## Python Venv
+## Python Venv <a name="python_venv"></a>
 
 There is a [venv](http://docs.python.org/3/library/venv.html) module available
 for 'Python 3.3+'.
