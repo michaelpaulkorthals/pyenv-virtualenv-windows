@@ -40,7 +40,7 @@ After complete and error-free installation, you will find the comprehensive Doxy
 %USERPROFILE%\.pyenv\pyenv-win\plugins\pyenv-virtualenv\docs\html\index.html
 ~~~
 
-![doxygen](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/doxygen.png "Doxygen")
+![doxygen](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/doxygen_docu.png "Doxygen")
 
 The Doxygen documentation includes:
   * Project description
