@@ -1295,3 +1295,5 @@ command is not available.
 Each utility in 'pyenv-virtualenv' tries to import the 'virtualenv' near the beginning of the program. This let the utility programs exit immediately by error and so should avoid problems with globalized outdated Python versions. 
 
 
+\-\-\- END OF DOCUMENT ----------------------------------------------------
+
