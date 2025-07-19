@@ -765,6 +765,8 @@ Public License instead of this License.  But first, please read
 
 </details>
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 ## Check Dependencies <a name="check_dependencies"></a>
 
 > WARNING: Do not ignore this unit and read it carefully. There is no room for incompleteness. Otherwise, the dependencies are not completely fulfilled and you could fail.
@@ -875,6 +877,8 @@ Requirement already satisfied: platformdirs<5,>=3.9.1 in c:\users\paul\.pyenv\py
 
 If everything is crystal-clear fine, then step forward to the next unit.
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 ## Installation <a name="installation"></a>
 
 Hardware and system software requirements are the same as for 'pyenv' for Windows.
@@ -888,6 +892,8 @@ This plugin will be installed with Python 'pip' via the PyPI Cloud Application:
 ~~~{.cmd}
 pip install pyenv-virtualenv-windows
 ~~~
+
+[Back to table of contents (Menu)](#table_of_contents)
 
 ## Location <a name="location"></a>
 
@@ -917,11 +923,17 @@ This tree chart gives an overview about the most important sub-folders in this p
 └───shims
 ~~~
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 ## Usage <a name="usage"></a>
+
+[Back to table of contents (Menu)](#table_of_contents)
 
 ### Concepts <a name="concepts"></a>
 
 For better understanding, how 'pyenv-virtualenv' for windows is working, read this unit carefully, before you start to use 'pyenv-virtualenv'. 
+
+[Back to table of contents (Menu)](#table_of_contents)
 
 #### Audits <a name="audits"></a>
 
@@ -942,6 +954,8 @@ pyenv virtualenvs
 REM Reset log level to default ("info")
 set LOG_LEVEL=20
 ~~~
+
+[Back to table of contents (Menu)](#table_of_contents)
 
 #### Commands <a name="commands"></a>
 
@@ -984,6 +998,8 @@ My favorite and more coherent command list for 'pyenv-virtualenv' for Windows is
 | activate         | Activate virtual environment.                              |
 | deactivate       | Deactivate virtual environment.                            |
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 #### Project Properties <a name="project_properties"></a>
 
 To control, which Python version and virtual environment are in use for a specific local project, some hidden information files can be manged:
@@ -1018,6 +1034,8 @@ C:\Users\Paul\eclipse\cinema_5
     setup.py         <-- Setup script
 ~~~
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 #### Help <a name="help"></a>
 
 Each of the tool scripts includes Python argument parser 'argparse'. If you add the '-h' or '--help' option:  
@@ -1044,6 +1062,8 @@ Options:
   -v, --version         Display the version number of this "pyenv-virtualenv" 
                         release and ignore all other arguments.
 ~~~
+
+[Back to table of contents (Menu)](#table_of_contents)
 
 #### Logging <a name="logging"></a>
 
@@ -1081,6 +1101,8 @@ Output:
 
 ![pyenv_virtualenv_debug_logging](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/pyenv_virtualenv_debug_logging.png "Colored Comprehensive Logging")
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 ### Create Virtual Environment <a name="create_virtual_environment"></a>
 
 To generate a virtual environment for the Python version installed in 'pyenv', call
@@ -1088,6 +1110,8 @@ To generate a virtual environment for the Python version installed in 'pyenv', c
 of the virtualenv directory (e.g. the short name of your project folder). 
 
 In addition, this script configures the version and the virtual environment for your project.
+
+[Back to table of contents (Menu)](#table_of_contents)
 
 #### Create with Version and Name <a name="create_with_version_and_name"></a>
 
@@ -1137,6 +1161,8 @@ That folder junction is linked to folder:
 ~~~
 Finally, the 'pyenv virtualenv' project property files has been written.
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 #### Create With Name Only <a name="create_with_name_only"></a>
 
 If there is only one positional argument given to 'pyenv virtualenv', the virtualenv will be created with the given name based on the current pyenv Python version.
@@ -1163,6 +1189,8 @@ INFO     This will take some seconds ...
 SUCCESS  Virtual environment "cinema_5" is installed in "pyenv", depending on "Python 3.12.10".
 ~~~
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 ### List Installed Virtual Environments <a name="list_installed_virtual_environments"></a>
 
 The utility 'pyenv virtualenvs' displays 3 tables and a tree view:
@@ -1178,6 +1206,8 @@ Output:
 If you know about Python Virtual Environment it is easy for you to interpret the data. Some stati are depending on the PWD path, the Python version numbers and the installed and globalized versions and virtual environments.
 
 There are two entries for each virtualenv, and the shorter one is just a symlink.
+
+[Back to table of contents (Menu)](#table_of_contents)
 
 ### Activate Virtual Environment <a name="activate_virtual_environment"></a>
 
@@ -1215,6 +1245,8 @@ activate <version> <name>
 deactivate
 ~~~
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 ### Delete Installed Virtual Environment <a name="delete_installed_virtual_environment"></a>
 
 Manually removing the related junction (symbolic links) in the 'versions' directory and the related virtual environment in the 'envs' subfolder of that version will delete a virtual directory.
@@ -1248,6 +1280,8 @@ Finally, to check your results in a single view, call:
 pyenv virtualenvs
 ~~~
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 ### Virtual Environment Prefix <a name="virtual_environment_prefix"></a>
 
 Use these commands to get the path prefix for virtual environment:
@@ -1262,6 +1296,8 @@ pyenv virtualenv-prefix cinema_5a
 Output: 
 
 ![pyenv-virtualenv-prefix](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/pyenv-virtualenv-prefix.png "Virtual Environment Prefix")
+
+[Back to table of contents (Menu)](#table_of_contents)
 
 ### Reconfigure After 'pyenv' Upgrade <a name="reconfigure_after_pyenv_upgrade"></a>
 
@@ -1283,6 +1319,8 @@ In addition, this command scans the PATH environment variable and displays the d
 
 If you have those deviations, it is your responsibility to remove the dead links from PATH.    
 
+[Back to table of contents (Menu)](#table_of_contents)
+
 ## Python Venv <a name="python_venv"></a>
 
 There is a [venv](http://docs.python.org/3/library/venv.html) module available
@@ -1295,6 +1333,8 @@ and distributed by default.
 command is not available.
 
 Each utility in 'pyenv-virtualenv' tries to import the 'virtualenv' near the beginning of the program. This let the utility programs exit immediately by error and so should avoid problems with globalized outdated Python versions. 
+
+[Back to table of contents (Menu)](#table_of_contents)
 
 
 \-\-\- END OF DOCUMENT ----------------------------------------------------
