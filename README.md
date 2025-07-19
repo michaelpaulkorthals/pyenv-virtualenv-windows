@@ -10,7 +10,7 @@
 5. [Location](#location)</br>
 6. [Usage](#usage)</br>
     6.1. [Concepts](#concepts)</br>
-        6.1.1. [Audits](#audits)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;6.1.1. [Audits](#audits)</br>
         6.1.2. [Commands](#commands)</br>
         6.1.3. [Project Properties](#project_properties)</br>
         6.1.4. [Help](#help)</br>
