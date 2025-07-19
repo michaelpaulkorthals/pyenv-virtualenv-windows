@@ -11,13 +11,13 @@
 6. [Usage](#usage)</br>
     6.1. [Concepts](#concepts)</br>
     &nbsp;&nbsp;&nbsp;&nbsp;6.1.1. [Audits](#audits)</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.1.2. [Commands](#commands)</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.1.3. [Project Properties](#project_properties)</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.1.4. [Help](#help)</br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.1.5. [Logging](#logging)</br>
-	&nbsp;&nbsp;&nbsp;&nbsp;6.2. [Create Virtual Environment](#create_virtual_environment)</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.2.1. [Create with Version and Name](#create_with_version_and_name)</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.2.2. [Create With Name Only](#create_with_name_only)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;6.1.2. [Commands](#commands)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;6.1.3. [Project Properties](#project_properties)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;6.1.4. [Help](#help)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;6.1.5. [Logging](#logging)</br>
+	6.2. [Create Virtual Environment](#create_virtual_environment)</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;6.2.1. [Create with Version and Name](#create_with_version_and_name)</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;6.2.2. [Create With Name Only](#create_with_name_only)</br>
 	6.3. [List Installed Virtual Environments](#list_installed_virtual_environment)</br>
 	6.4. [Activate Virtual Environment](#activate_virtual_environment)</br>
 	6.5. [Delete Installed Virtual Environment](#delete_virtual_environment)</br>
