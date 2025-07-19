@@ -18,6 +18,7 @@
 
 # Python
 from itertools import islice
+import os
 from pathlib import Path
 import sys
 
@@ -101,15 +102,26 @@ def tree(
 			contents = [d for d in dir_path.iterdir() if d.is_dir()]
 		else:
 			contents = list(dir_path.iterdir())
+		# Detect file ".tree-excludes" in contents
+		excl1 = excl
+		for content in contents:
+			if os.path.basename(content) == '.tree-excludes':
+				with open(content, 'r') as f:
+					excl1 = eval(f.read())
+				break
+			# End if
+		# End for
 		pointers = [tee] * (len(contents) - 1) + [last]
 		for pointer, path in zip(pointers, contents):
 			if path.is_dir():
 				# Exclude spam folders
 				excluded = False
-				for item in excl:
+				for item in excl1:
 					if path.parts[-1] == item:
 						excluded = True
 						break
+					# End if
+				# End for
 				if excluded: continue
 				# OUTPUT: colorized directory
 				name = path.name
@@ -125,7 +137,7 @@ def tree(
 					path,
 					prefix=prefix+extension,
 					level=level - 1,
-					excl=excl
+					excl=excl1
 				)
 			elif not limit_to_directories:
 				# OUTPUT: colorized file
