@@ -2,7 +2,7 @@
 
 > IMPORTANT NOTICE: This repository is currently under construction. Please wait until this message disappears before using this information.
 
-# Table of Contents
+# Table of Contents <a name="table_of_contents"></a>
 1. [Introduction](#introduction)
 2. [License](#license)
 3. [Check Dependencies](#check_dependencies)
@@ -52,6 +52,8 @@ The Doxygen documentation includes:
   * Files (Code documentation)
   
 The Doxygen v1.13+ documentation is much easier to handle. It will displayed in healthy dark mode.
+
+[Back to table of contents (Menu)](#table_of_contents)
 
 ## License <a name="license"></a>
 
