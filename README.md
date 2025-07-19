@@ -3,27 +3,27 @@
 > IMPORTANT NOTICE: This repository is currently under construction. Please wait until this message disappears before using this information.
 
 # Table of Contents <a name="table_of_contents"></a>
-1. [Introduction](#introduction)
-2. [License](#license)
-3. [Check Dependencies](#check_dependencies)
-4. [Installation](#installation)
-5. [Location](#location)
-6. [Usage](#usage)
-    6.1. [Concepts](#concepts)
-        6.1.1. [Audits](#audits)
-        6.1.2. [Commands](#commands)
-        6.1.3. [Project Properties](#project_properties)
-        6.1.4. [Help](#help)
-        6.1.5. [Logging](#logging)
-	6.2. [Create Virtual Environment](#create_virtual_environment)
-		6.2.1. [Create with Version and Name](#create_with_version_and_name)
-		6.2.2. [Create With Name Only](#create_with_name_only)
-	6.3. [List Installed Virtual Environments](#list_installed_virtual_environment)
-	6.4. [Activate Virtual Environment](#activate_virtual_environment)
-	6.5. [Delete Installed Virtual Environment](#delete_virtual_environment)
-	6.6. [Virtual Environment Prefix](#virtual_environment_prefix)
-	6.7. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)
-7. [Python Venv](#python_venv)
+1. [Introduction](#introduction)</br>
+2. [License](#license)</br>
+3. [Check Dependencies](#check_dependencies)</br>
+4. [Installation](#installation)</br>
+5. [Location](#location)</br>
+6. [Usage](#usage)</br>
+    6.1. [Concepts](#concepts)</br>
+        6.1.1. [Audits](#audits)</br>
+        6.1.2. [Commands](#commands)</br>
+        6.1.3. [Project Properties](#project_properties)</br>
+        6.1.4. [Help](#help)</br>
+        6.1.5. [Logging](#logging)</br>
+	6.2. [Create Virtual Environment](#create_virtual_environment)</br>
+		6.2.1. [Create with Version and Name](#create_with_version_and_name)</br>
+		6.2.2. [Create With Name Only](#create_with_name_only)</br>
+	6.3. [List Installed Virtual Environments](#list_installed_virtual_environment)</br>
+	6.4. [Activate Virtual Environment](#activate_virtual_environment)</br>
+	6.5. [Delete Installed Virtual Environment](#delete_virtual_environment)</br>
+	6.6. [Virtual Environment Prefix](#virtual_environment_prefix)</br>
+	6.7. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)</br>
+7. [Python Venv](#python_venv)</br>
 
 ## Introduction <a name="introduction"></a>
 
