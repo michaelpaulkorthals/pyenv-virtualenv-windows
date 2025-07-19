@@ -131,7 +131,7 @@ def tree(
 				# OUTPUT: colorized directory
 				name = path.name
 				if path.is_junction():
-					name = f'\x1b[105m {name} \x1b[0m \x1b[95m->\x1b[0m \x1b[104m {str(path.readlink()).split(f'\\\\?\\')[-1]} \x1b[0m'
+					name = f'\x1b[105m {name} \x1b[0m \x1b[95m→\x1b[0m \x1b[104m {str(path.readlink()).split(f'\\\\?\\')[-1]} \x1b[0m'
 				else:  # Is directory
 					name = f'\x1b[104m {name} \x1b[0m'
 				yield prefix + pointer + name
@@ -168,7 +168,7 @@ def tree(
 						)
 						}\x1b[0m'
 					else:
-						name1 = f'\x1b[95m● {name} -> \x1b[37m● {str(path.readlink())}\x1b[0m'
+						name1 = f'\x1b[95m● {name} → \x1b[37m● {str(path.readlink())}\x1b[0m'
 				else:  # Is file
 					name1 = f'\x1b[37m● {name}\x1b[0m'
 					if name == '.python-version':
