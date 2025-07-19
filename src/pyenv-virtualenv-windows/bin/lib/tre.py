@@ -18,7 +18,6 @@
 
 # Python
 from itertools import islice
-import os
 from pathlib import Path
 import sys
 
@@ -98,16 +97,22 @@ def tree(
 		nonlocal files, directories
 		if not level:
 			return # 0, stop iterating
+		# Scan for files and folders Path objects
 		if limit_to_directories:
-			contents = [d for d in dir_path.iterdir() if d.is_dir()]
+			objects = dir_path.iterdir()
+			contents = [d for d in objects if d.is_dir()]
+			contents1 = list(objects)
 		else:
 			contents = list(dir_path.iterdir())
-		# Detect file ".tree-excludes" in contents
+			contents1 = contents
+		# Detect file ".tree-excludes" in files
 		excl1 = excl
-		for content in contents:
-			if os.path.basename(content) == '.tree-excludes':
+		for content in contents1:
+			if content.is_file() and (content.name == '.tree-excludes'):
 				with open(content, 'r') as f:
 					excl1 = eval(f.read())
+				if content not in contents:
+					contents.insert(0, content)
 				break
 			# End if
 		# End for
@@ -126,7 +131,7 @@ def tree(
 				# OUTPUT: colorized directory
 				name = path.name
 				if path.is_junction():
-					name = f'\x1b[105m {name} \x1b[0m'
+					name = f'\x1b[105m {name} \x1b[0m \x1b[95m->\x1b[0m \x1b[104m {str(path.readlink()).split(f'\\\\?\\')[-1]} \x1b[0m'
 				else:  # Is directory
 					name = f'\x1b[104m {name} \x1b[0m'
 				yield prefix + pointer + name
@@ -163,7 +168,7 @@ def tree(
 						)
 						}\x1b[0m'
 					else:
-						name1 = f'\x1b[95m● {name}\x1b[0m'
+						name1 = f'\x1b[95m● {name} -> \x1b[37m● {str(path.readlink())}\x1b[0m'
 				else:  # Is file
 					name1 = f'\x1b[37m● {name}\x1b[0m'
 					if name == '.python-version':
