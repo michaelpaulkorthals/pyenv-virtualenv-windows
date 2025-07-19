@@ -22,8 +22,8 @@
 	6.4. [Activate Virtual Environment](#activate_virtual_environment)</br>
 	6.5. [Delete Installed Virtual Environment](#delete_virtual_environment)</br>
 	6.6. [Virtual Environment Prefix](#virtual_environment_prefix)</br>
-	6.7. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)
-7. [Python Venv](#python_venv)
+	6.7. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)</br>
+7. [Python Venv](#python_venv)</br>
 
 ## Introduction <a name="introduction"></a>
 
