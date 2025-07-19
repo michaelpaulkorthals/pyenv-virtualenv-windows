@@ -214,7 +214,8 @@ html/
 # 'pyenv-virtualenv' Local Project Properties
 .python-version
 .python-env
-.tree-excludes
+## Don't exclude this file:
+#.tree-excludes
 
 # --- END OF DOCUMENT --------------------------------------------------
 
