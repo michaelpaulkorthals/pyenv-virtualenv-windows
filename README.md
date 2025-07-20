@@ -46,11 +46,10 @@ Completely perform these steps to fulfill the dependencies to 'pyenv' for Window
 1. Install 'pyenv'.
 2. Install Python version 3.6+. E.g. 'pyenv install 3.12.10'.
 3. Make that Python version 'global'. E.g. 'pyenv global 3.12.10'.
-4. Install package 'virtualenv'. E.g. 'pip install virtualenv'.
+4. Install package 'virtualenv'. E.g. 'pip install --upgrade virtualenv'.
 
 Afterward, install 'pyenv-virtualenv' for Windows in a console terminal with 'Administrator' privileges:
 ~~~{.cmd}
-pip install --upgrade virtualenv
 pip install pyenv-virtualenv-windows
 ~~~
 
