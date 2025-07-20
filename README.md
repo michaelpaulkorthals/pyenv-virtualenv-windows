@@ -4,7 +4,7 @@
 
 # Table of Contents <a name="table_of_contents"></a>
 1. [Introduction](#introduction)</br>
-    1.1. [Quick Reference](#quick_reference)
+    1.1. [Quick Reference](#quick_reference)</br>
 	1.2. [Description](#description)
 2. [License](#license)</br>
 3. [Check Dependencies](#check_dependencies)</br>
