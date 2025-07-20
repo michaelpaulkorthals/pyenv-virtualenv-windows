@@ -24,3 +24,4 @@ script-files = ["src/pyenv-virtualenv-windows/install.bat"]
 [project.urls]
 Homepage = "https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/"
 Issues = "https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/issues"
+
