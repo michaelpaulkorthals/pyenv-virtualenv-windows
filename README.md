@@ -43,10 +43,9 @@ It extends the command set of 'pyenv' for Windows by these commands:
 For first, use the instructions on the <a href="https://github.com/pyenv-win/pyenv-win/" rel="noopener noreferrer" target="_blank">'pyenv' for Windows home page on GitHub</a> to completely install and configure 'pyenv'.
 
 Completely perform these steps to fulfill the dependencies to 'pyenv' for Windows: 
-1. Install 'pyenv'.
-2. Install Python version 3.6+. E.g. 'pyenv install 3.12.10'.
-3. Make that Python version 'global'. E.g. 'pyenv global 3.12.10'.
-4. Install package 'virtualenv'. E.g. 'pip install --upgrade virtualenv'.
+1. Install Python version 3.6+. E.g. 'pyenv install 3.12.10'.
+2. Make that Python version 'global'. E.g. 'pyenv global 3.12.10'.
+3. Install package 'virtualenv'. E.g. 'pip install --upgrade virtualenv'.
 
 Afterward, install 'pyenv-virtualenv' for Windows in a console terminal with 'Administrator' privileges:
 ~~~{.cmd}
