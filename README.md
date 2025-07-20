@@ -35,9 +35,36 @@
 
 "pyenv-virtualenv" for Windows.
 
-“pyenv” plugin to manage Python virtual environments for your projects.
+A “pyenv” plugin to manage Python virtual environments for your projects.
 
+It extends the command set of 'pyenv' for Windows by these commands:
 
+For first, use the instructions on the <a href="https://github.com/pyenv-win/pyenv-win/" rel="noopener noreferrer" target="_blank">'pyenv' for Windows home page on GitHub</a> to completely install and configure 'pyenv'.
+
+Perform these steps to fulfill the dependencies to 'pyenv' for Windows: 
+1. Install 'pyenv'.
+2. Install and Python version 3.6+.
+3. Set that Python version global.
+
+Afterward, install 'pyenv-virtualenv' for Windows in a console terminal with 'Administrator' privileges:
+~~~{.cmd}
+pip install pyenv-virtualenv-windows
+~~~
+
+Finally, use these commands to manage virtual environments in your projects: 
+
+| Command          | Description                                                                                        |
+|:-----------------|:---------------------------------------------------------------------------------------------------|
+| pyenv venv-new   | [Create a new virtual environment.](#create_virtual_environment)                                   |
+| pyenv venv-list  | [List Python versions, environments and project properties.](#list_installed_virtual_environments) |
+| pyenv venv-del   | [Delete a virtual environment.](#delete_installed_virtual_environment)                             |
+| pyenv venv-props | [Manage project properties.](#manage_project_properties)                                           |
+| pyenv venv-init  | [Reconfigure after 'pyenv' version upgrade.](#reconfigure_after_pyenv_upgrade)                     |
+| activate         | [Activate virtual environment.](#activate_virtual_environment)                                     |
+| deactivate       | [Deactivate virtual environment.](#activate_virtual_environment)                                   |
+
+[Back to quick reference](#quick_reference)
+[Back to table of contents (Menu)](#table_of_contents)
 
 ### Description <a name="description"></a> 
 
@@ -1305,6 +1332,46 @@ pyenv global 3.13.3
 Finally, to check your results in a single view, call:
 ~~~{.cmd}
 pyenv virtualenvs
+~~~
+
+[Back to quick reference](#quick_reference)
+[Back to table of contents (Menu)](#table_of_contents)
+
+### Manage Project Properties <a name="manageproject_properties"></a>
+
+This utility manages two virtual environment-related project properties:
+1. .python-version (e.g. 3.12.10)  
+2. .python-env (cinema_5)
+
+It has 3 features:
+
+| Command                       | Description                       | Feature Aliases            |
+|:------------------------------|:----------------------------------|:---------------------------|
+| pyenv virtualenv-props set    | Set project properties in CWD.    | s                          |
+| pyenv virtualenv-props unlink | Unlink project properties in CWD. | u,d,del,delete,r,rm,remove |
+| pyenv virtualenv-props list   | List project properties in CWD.   | l,ls                       |
+
+![pyenv-virtualenv_activate](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/pyenv_virtualenv-props.png "Project Properties List")
+
+[Back to quick reference](#quick_reference)
+[Back to table of contents (Menu)](#table_of_contents)
+
+#### Exclude 'Spam' Folders 
+
+In 'pyenv-virtualenv' for Windows an additional project property '.tree-excludes' is implemented. This property will also be automatically inherited to its subfolders. 
+
+It is used to exclude 'spam' folders files and folders tree-view, which is displayed by the 'pyenv virtualenvs' and 'pyenv virtualenv-props list' commands.  
+
+It can be manually managed in CWD as follows:
+~~~{.cmd}
+REM Set the '.tree-exclude' property in CWD, e.g.:
+echo ('docs', '__pycache__', '.idea') > .tree-excludes
+REM Edit the '.tree-exclude' property in CWD, e.g.:
+notepad++ .tree-exclude 
+REM Unlink the '.tree-exclude' property from CWD, e.g.:
+del .tree-excludes
+REM List the project properties, e.g.:
+pyenv virtualenv-props list
 ~~~
 
 [Back to quick reference](#quick_reference)
