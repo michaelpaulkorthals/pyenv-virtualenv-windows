@@ -2,31 +2,34 @@
 
 > IMPORTANT NOTICE: This repository is currently under construction. Please wait until this message disappears before using this information.
 
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+
 # Table of Contents <a name="table_of_contents"></a>
 1. [Introduction](#introduction)</br>
     1.1. [Quick Reference](#quick_reference)</br>
 	1.2. [Description](#description)
 2. [License](#license)</br>
-3. [Check Dependencies](#check_dependencies)</br>
-4. [Installation](#installation)</br>
-5. [Location](#location)</br>
-6. [Usage](#usage)</br>
-    6.1. [Concepts](#concepts)</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;6.1.1. [Audits](#audits)</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;6.1.2. [Commands](#commands)</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;6.1.3. [Project Properties](#project_properties)</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;6.1.4. [Help](#help)</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;6.1.5. [Logging](#logging)</br>
-	6.2. [Create Virtual Environment](#create_virtual_environment)</br>
-	&nbsp;&nbsp;&nbsp;&nbsp;6.2.1. [Create with Version and Name](#create_with_version_and_name)</br>
-	&nbsp;&nbsp;&nbsp;&nbsp;6.2.2. [Create With Name Only](#create_with_name_only)</br>
-	6.3. [List Installed Virtual Environments](#list_installed_virtual_environments)</br>
-	6.4. [Activate Virtual Environment](#activate_virtual_environment)</br>
-	6.5. [Delete Installed Virtual Environment](#delete_virtual_environment)</br>
-	6.6. [Manage Project Properties](#manage_project_properties)</br>
-	6.7. [Virtual Environment Prefix](#virtual_environment_prefix)</br>
-	6.8. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)</br>
-7. [Python Venv](#python_venv)</br>
+3. [Code of Conduct](#code_of_conduct) 
+4. [Check Dependencies](#check_dependencies)</br>
+5. [Installation](#installation)</br>
+6. [Location](#location)</br>
+7. [Usage](#usage)</br>
+    7.1. [Concepts](#concepts)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;7.1.1. [Audits](#audits)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;7.1.2. [Commands](#commands)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;7.1.3. [Project Properties](#project_properties)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;7.1.4. [Help](#help)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;7.1.5. [Logging](#logging)</br>
+	7.2. [Create Virtual Environment](#create_virtual_environment)</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;7.2.1. [Create with Version and Name](#create_with_version_and_name)</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;7.2.2. [Create With Name Only](#create_with_name_only)</br>
+	7.3. [List Installed Virtual Environments](#list_installed_virtual_environments)</br>
+	7.4. [Activate Virtual Environment](#activate_virtual_environment)</br>
+	7.5. [Delete Installed Virtual Environment](#delete_virtual_environment)</br>
+	7.6. [Manage Project Properties](#manage_project_properties)</br>
+	7.7. [Virtual Environment Prefix](#virtual_environment_prefix)</br>
+	7.8. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)</br>
+8. [Python Venv](#python_venv)</br>
 
 ## Introduction <a name="introduction"></a>
 
@@ -806,6 +809,12 @@ Public License instead of this License.  But first, please read
 
 [Back to quick reference](#quick_reference)
 [Back to table of contents (Menu)](#table_of_contents)
+
+## Code of Conduct <a name="code_of_conduct"></a> 
+
+In case you want to discuss an 'issue', or, have an idea for a 'pull request', I ask you to read the related units in the documentation for first. In most cases, this should avoid unnecessary effort and communication. 
+
+To ensure a clear, calm and joyful working atmosphere in this project, I recommend you to be informed about our rules of engagement before you publish your contribution. See: [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md). 
 
 ## Check Dependencies <a name="check_dependencies"></a>
 
