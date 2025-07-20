@@ -1166,7 +1166,7 @@ In addition, this script configures the version and the virtual environment for 
 
 #### Create with Version and Name <a name="create_with_version_and_name"></a>
 
-> NOTE: Be aware that this command copies 2 hidden files into your project folder. These files are your 'pyenv virtualenv' project properties, which contain the Python version number and the virtual environment name. If required, other scripts in thi sworkflow read these files to know which Python version and virtual environment is set.
+> NOTE: Be aware that this command copies 2 hidden files into your project folder. These files are your 'pyenv virtualenv' project properties, which contain the Python version number and the virtual environment name. If required, other scripts in this workflow read these files to know which Python version and virtual environment is set.
 
 This example creates a virtual environment named 'cinema_5', which depends on version 'Python 3.12.10':
 ~~~{.sh}
