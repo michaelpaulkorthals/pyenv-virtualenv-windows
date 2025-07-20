@@ -498,7 +498,7 @@ def getPythonVersions(
 		venv_capable: bool=False,
 		as_paths: bool=False
 ) -> list[str]:
-	result: list[str] = []
+	result = []
 	vers_path = os.path.join(
 		os.environ['PYENV_ROOT'],
 		'versions',
@@ -519,6 +519,26 @@ def getPythonVersions(
 					else:
 						item = os.path.basename(ver)
 					result.append(item)
+		if len(result) >= 2:
+			# Sort resulting versions paths in descending order.
+			# NOTE: For a small data amount, the simple 'loop sort' algorythm is sufficient and easy to code.
+			for i1 in range(len(result)):
+				p1: str = result[i1]
+				v1: list = os.path.basename(p1).split('.')
+				t1: tuple = tuple(map(int, v1))
+				for i2 in range(i1 + 1, len(result)):
+					p2: str = result[i2]
+					v2: list = os.path.basename(p2).split('.')
+					t2: tuple = tuple(map(int, v2))
+					if t2 > t1:  # Descending order
+						# Exchange version paths
+						m: str = f'{result[i1]}' # Clone
+						result[i1] = result[i2]
+						result[i2] = m
+					# End if
+				# End for
+			# End for
+		# End if
 	return result
 
 ## Check if path is a junction, which has been created
