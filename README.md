@@ -1338,7 +1338,7 @@ pyenv virtualenvs
 [Back to quick reference](#quick_reference)
 [Back to table of contents (Menu)](#table_of_contents)
 
-### Manage Project Properties <a name="manageproject_properties"></a>
+### Manage Project Properties <a name="manage_project_properties"></a>
 
 This utility manages two virtual environment-related project properties:
 1. .python-version (e.g. 3.12.10)  
