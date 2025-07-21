@@ -2765,6 +2765,7 @@ Examples:
 [![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/#table_of_contents)
 
 [![license](https://img.shields.io/badge/License-GPL 3.0-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/LICENSE)
+
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md)
 
 ![pypi](https://img.shields.io/badge/PyPI-1.24-2040A0)
