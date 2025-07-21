@@ -820,6 +820,9 @@ Our Code of Conduct is version 2.1 of the Contributor Covenant, published with t
 
 Possible violations/incidents regarding the code of conduct in this project can be reported to me via a ['code of conduct'-labeled 'pull-request' contribution to this project](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/pulls).
 
+[Back to quick reference](#quick_reference)
+[Back to table of contents (Menu)](#table_of_contents)
+
 ## Check Dependencies <a name="check_dependencies"></a>
 
 > WARNING: Do not ignore this unit and read it carefully. There is no room for incompleteness. Otherwise, the dependencies are not completely fulfilled and you could fail.
