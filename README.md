@@ -2,7 +2,7 @@
 
 > IMPORTANT NOTICE: This repository is currently under construction. Please wait until this message disappears before using this information.
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md)
 
 # Table of Contents <a name="table_of_contents"></a>
 1. [Introduction](#introduction)</br>
@@ -812,9 +812,13 @@ Public License instead of this License.  But first, please read
 
 ## Code of Conduct <a name="code_of_conduct"></a> 
 
-In case you want to discuss an 'issue', or, have an idea for a 'pull request', I ask you to read the related units in the documentation for first. In most cases, this should avoid unnecessary effort and communication. 
+In case you want to discuss an 'issue', or, have an idea for a 'pull request', I ask you to read the related units in the README.md and Doxygen documentation for first. In most cases, this should avoid unnecessary effort and communication. 
 
-To ensure a clear, calm and joyful working atmosphere in this project, I recommend you to be informed about our rules of engagement before you publish your contribution. See: [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md). 
+To ensure a clear, calm and joyful working atmosphere in this project, I recommend you to be informed and to agree to our rules of engagement before you publish your contribution. See: [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)]((https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md). 
+
+Our Code of Conduct is version 2.1 of the Contributor Covenant, published with the courtesy of the organization of the same name [https://www.contributor-covenant.org/](https://www.contributor-covenant.org/). 
+
+Possible violations/incidents regarding the code of conduct in this project can be reported to me via a ['code of conduct'-labeled 'pull-request' contribution to this project](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/pulls).
 
 ## Check Dependencies <a name="check_dependencies"></a>
 
