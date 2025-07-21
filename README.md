@@ -69,7 +69,7 @@ Finally, use these commands to manage virtual environments in your projects:
 | activate         | [Activate virtual environment.](#activate_virtual_environment)                                     |
 | deactivate       | [Deactivate virtual environment.](#activate_virtual_environment)                                   |
 
-[![quick_reference](https://img.shields.io/badge/goto-quick%20reference-green)](#quick_reference)
+[![quick_reference](https://img.shields.io/badge/goto-quick%20reference-20C060)](#quick_reference)
 [![contents](https://img.shields.io/badge/goto-contents-blue)](#table_of_contents)
 
 ### Description <a name="description"></a> 
