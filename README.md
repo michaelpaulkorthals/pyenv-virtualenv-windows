@@ -4,8 +4,6 @@
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md)
 
-[![quick_reference](https://img.shields.io/badge/goto-quick%20reference-blue)](#quick_reference)
-
 # Table of Contents <a name="table_of_contents"></a>
 1. [Introduction](#introduction)</br>
     1.1. [Quick Reference](#quick_reference)</br>
@@ -69,8 +67,8 @@ Finally, use these commands to manage virtual environments in your projects:
 | activate         | [Activate virtual environment.](#activate_virtual_environment)                                     |
 | deactivate       | [Deactivate virtual environment.](#activate_virtual_environment)                                   |
 
-[![quick_reference](https://img.shields.io/badge/goto-quick%20reference-20C060)](#quick_reference)
-[![contents](https://img.shields.io/badge/goto-contents-blue)](#table_of_contents)
+[![quick_reference](https://img.shields.io/badge/goto-quick%20reference-20A040)](#quick_reference)
+[![contents](https://img.shields.io/badge/goto-contents-4020A0)](#table_of_contents)
 
 ### Description <a name="description"></a> 
 
