@@ -1301,6 +1301,40 @@ Finally, to check your results in a single view, call:
 pyenv virtualenvs
 ~~~
 
+### Manage Project Properties
+
+This utility manages two virtual environment-related project properties:
+1. .python-version (e.g. 3.12.10)  
+2. .python-env (cinema_5)
+
+It has 3 features:
+
+| Command                       | Description                       | Feature Aliases            |
+|:------------------------------|:----------------------------------|:---------------------------|
+| pyenv virtualenv-props set    | Set project properties in CWD.    | s                          |
+| pyenv virtualenv-props unlink | Unlink project properties in CWD. | u,d,del,delete,r,rm,remove |
+| pyenv virtualenv-props list   | List project properties in CWD.   | l,ls                       |
+
+![pyenv-virtualenv_activate](./images/pyenv_virtualenv-props.png "Project Properties List")
+
+#### Exclude 'Spam' Folders 
+
+In 'pyenv-virtualenv' for Windows an additional project property '.tree-excludes' is implemented. This property will also be automatically inherited to its subfolders. 
+
+It is used to exclude 'spam' folders files and folders tree-view, which is displayed by the 'pyenv virtualenvs' and 'pyenv virtualenv-props list' commands.  
+
+It can be manually managed in CWD as follows:
+~~~{.cmd}
+REM Set the '.tree-exclude' property in CWD, e.g.:
+echo ('docs', '__pycache__', '.idea') > .tree-excludes
+REM Edit the '.tree-exclude' property in CWD, e.g.:
+notepad++ .tree-exclude 
+REM Unlink the '.tree-exclude' property from CWD, e.g.:
+del .tree-excludes
+REM List the project properties, e.g.:
+pyenv virtualenv-props list
+~~~
+
 ### Virtual Environment Prefix
 
 Use these commands to get the path prefix for virtual environment:
@@ -1895,9 +1929,35 @@ This publication requires the identical Security measures to protect the source.
 
 The TOTP generator (e.g. Google Authenticator) must be installed on your smartphone or tablet and capable to continuously deliver the time-based OTP for GitHub. The GitHub password and the list of 2FA recovery codes must be securely stored in your password safe.
 
+### Code of Conduct
+
+This project included collaboration with people in these cases:
+* Getting 'issues' to clarify problems and situations.
+* Getting 'pull requests', which lead to improvements.
+
+Any collaboration with people must be regulated/enforced by defined rules of engagement.
+
+In this project we use version 2.1 of the Contributor Covenant, published with the courtesy of the organization of the same name 
+<a href="https://www.contributor-covenant.org/" rel="noopener noreferrer" target="_blank">https://www.contributor-covenant.org/</a>.  
+
+See the file 'CODE_OF_CONDUCT.md' in the project main folder, locally and on GitHub.
+
+Also, see the related chapter in the file 'README.md' in the project main folder, locally and on GitHub. 
+
 ### Upload
 
+> NOTE: GitHub does not accept empty folders. In addition, it is not possible to create an empty folder like in Windows Explorer.
 
+> NOTE: GitHub rejects bulk uploads of more than 100 files. It's also not a good idea to upload the Doxygen documentation with its hundreds of files, as it's not provided by GitHub anyway.
+ 
+So, to prepare the upload, temporarily remove the 'docs\\html' folder.
+
+Use the "Upload files" feature to uploads files and folders to the GitHub repository 'pyenv-virtualenv-windows'.
+
+Finally, restore the 'docs\\html' by compiling the documentation:
+~~~{.cmd}
+"%USERPROFILE%\eclipse-workspace\pyenv-virtualenv-windows\src\pyenv-virtualenv-windows\docs\build_doxygen_docs.bat"
+~~~
 
 ## Publication on PyPI
 
@@ -1964,16 +2024,17 @@ Only a few packages (pip, virtualenv) and its subpackages are installed within t
 
 #### Required Packages
 
-According to the PyPI documentation, ensure by these command that pip, setuptools, and wheel are installed and up-to-date:
+According to the PyPI documentation, ensure by these command that pip, setuptools, wheel, build, twine, readme-coverage-badger are installed and up-to-date:
 ~~~{.cmd}
 REM  1. Install/upgrade publication relevant utility packages  
-python -m pip install --upgrade pip setuptools wheel build twine
-REM 2. Check the package list.
+python -m pip install --upgrade pip setuptools wheel build twine readme-coverage-badger
+REM 2. Check/freeze the package list.
 pip list
+pip freeze > "{project main directory}\requirements.txt"
 ~~~
 Output (e.g.):
 ~~~
-C:\Users\Paul\eclipse-workspace\cinema_5>python -m pip install --upgrade pip setuptools wheel build twine
+C:\Users\Paul\eclipse-workspace\cinema_5>python -m pip install --upgrade pip setuptools wheel build twine readme-coverage-badger
 Requirement already satisfied: pip in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (25.0.1)
 Collecting pip
   Using cached pip-25.1.1-py3-none-any.whl.metadata (3.6 kB)
@@ -2075,53 +2136,62 @@ Downloading jaraco_functools-4.2.1-py3-none-any.whl (10 kB)
 Downloading more_itertools-10.7.0-py3-none-any.whl (65 kB)
 Installing collected packages: urllib3, rfc3986, pywin32-ctypes, Pygments, nh3, more-itertools, mdurl, jaraco.context, idna, docutils, charset_normalizer, certifi, requests, readme-renderer, markdown-it-py, jaraco.functools, jaraco.classes, rich, requests-toolbelt, keyring, id, twine
 Successfully installed Pygments-2.19.2 certifi-2025.7.14 charset_normalizer-3.4.2 docutils-0.21.2 id-1.5.0 idna-3.10 jaraco.classes-3.4.0 jaraco.context-6.0.1 jaraco.functools-4.2.1 keyring-25.6.0 markdown-it-py-3.0.0 mdurl-0.1.2 more-itertools-10.7.0 nh3-0.3.0 pywin32-ctypes-0.2.3 readme-renderer-44.0 requests-2.32.4 requests-toolbelt-1.0.0 rfc3986-2.0.0 rich-14.0.0 twine-6.1.0 urllib3-2.5.0
+Collecting readme-coverage-badger
+  Downloading readme_coverage_badger-1.0.1-py3-none-any.whl.metadata (29 kB)
+Requirement already satisfied: colorama in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from readme-coverage-badger) (0.4.6)
+Collecting coverage (from readme-coverage-badger)
+  Downloading coverage-7.9.2-cp312-cp312-win_amd64.whl.metadata (9.1 kB)
+Downloading readme_coverage_badger-1.0.1-py3-none-any.whl (16 kB)
+Downloading coverage-7.9.2-cp312-cp312-win_amd64.whl (215 kB)
+Installing collected packages: coverage, readme-coverage-badger
+Successfully installed coverage-7.9.2 readme-coverage-badger-1.0.1
 
 C:\Users\Paul\eclipse-workspace\cinema_5>pip list
-Package            Version
------------------- -----------
-build              1.2.2.post1
-certifi            2025.7.14
-charset-normalizer 3.4.2
-colorama           0.4.6
-distlib            0.3.9
-docutils           0.21.2
-filelock           3.18.0
-id                 1.5.0
-idna               3.10
-jaraco.classes     3.4.0
-jaraco.context     6.0.1
-jaraco.functools   4.2.1
-keyring            25.6.0
-markdown-it-py     3.0.0
-mdurl              0.1.2
-more-itertools     10.7.0
-nh3                0.3.0
-packaging          25.0
-pip                25.1.1
-platformdirs       4.3.8
-Pygments           2.19.2
-pyproject_hooks    1.2.0
-pywin32-ctypes     0.2.3
-readme_renderer    44.0
-requests           2.32.4
-requests-toolbelt  1.0.0
-rfc3986            2.0.0
-rich               14.0.0
-setuptools         80.9.0
-twine              6.1.0
-urllib3            2.5.0
-virtualenv         20.31.2
-wheel              0.45.1
+build                  1.2.2.post1
+certifi                2025.7.14
+charset-normalizer     3.4.2
+colorama               0.4.6
+coverage               7.9.2
+distlib                0.3.9
+docutils               0.21.2
+filelock               3.18.0
+id                     1.5.0
+idna                   3.10
+jaraco.classes         3.4.0
+jaraco.context         6.0.1
+jaraco.functools       4.2.1
+keyring                25.6.0
+markdown-it-py         3.0.0
+mdurl                  0.1.2
+more-itertools         10.7.0
+nh3                    0.3.0
+packaging              25.0
+pip                    25.1.1
+platformdirs           4.3.8
+Pygments               2.19.2
+pyproject_hooks        1.2.0
+pywin32-ctypes         0.2.3
+readme-coverage-badger 1.0.1
+readme_renderer        44.0
+requests               2.32.4
+requests-toolbelt      1.0.0
+rfc3986                2.0.0
+rich                   14.0.0
+setuptools             80.9.0
+twine                  6.1.0
+urllib3                2.5.0
+virtualenv             20.31.2
+wheel                  0.45.1
 ~~~
 
-#### Set-up a Test System
+#### Set up a Test System
 
 To successfully test the whole publication at the end, a Windows test system is needed.
 
 E.g.:
 * Fresh installed Windows 11 Laptop/Workstation.
 * Fresh installed Windows Server.
-* Fresh Virtual Windows 11 image on a Ubuntu Linux Virtual Stack machine.
+* Fresh Virtual Windows 11 image on an Ubuntu Linux Virtual Stack machine.
 * Fresh Virtual Windows Server image on a Linux virtual Stack machine.  
 
 > NOTE: 'Fresh' in this context means that it completely fulfills the actual Microsoft system requirements for that platform. In addition, Python and other software has never been installed.
