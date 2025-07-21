@@ -2024,10 +2024,10 @@ Only a few packages (pip, virtualenv) and its subpackages are installed within t
 
 #### Required Packages
 
-According to the PyPI documentation, ensure by these command that pip, setuptools, wheel, build, twine, readme-coverage-badger are installed and up-to-date:
+According to the PyPI documentation, ensure by these command that pip, setuptools, wheel, build, twine are installed and up-to-date:
 ~~~{.cmd}
 REM  1. Install/upgrade publication relevant utility packages  
-python -m pip install --upgrade pip setuptools wheel build twine readme-coverage-badger
+python -m pip install --upgrade pip setuptools wheel build twine
 REM 2. Check/freeze the package list.
 pip list
 pip freeze > "{project main directory}\requirements.txt"
@@ -2752,6 +2752,29 @@ Templates are accelerating the coding process.
 To build a stable and reliable application, it is essential to use state-of-the-art development frameworks. 
 
 This reduces the known wild growth of multiple and incompatible constructional entropy, which could jeopardize the hole project.
+
+### Badges
+
+A Badge represents a newly established form of a link, which has a unique modern  look and feel. 
+
+Opposite to linked text, it is easier operate on touch surfaces/interfaces e.g. on smartphones or tablets:
+
+Examples:
+
+[![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/#quick_reference)
+[![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/#table_of_contents)
+
+[![license](https://img.shields.io/badge/License-GPL 3.0-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/LICENSE)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md)
+
+![pypi](https://img.shields.io/badge/PyPI-1.24-2040A0)
+![python](https://img.shields.io/badge/Python-3.6%20|%203.8%20|%203.9%20|%203.10%20|%203.11%20|%203.12%20|%203.13-C0C040)
+
+In this project badges are used on the main README.md to ease and accelerate navigating through the document with a minimum of scrolling.
+
+Another purposes are to give short information or to link to other websites. 
+
+Many thanks to the people of the 'shields.io' organization, who give the members of the worldwide open source community the opportunity to use this service for free for their projects. 
 
 ### Colored Output to Console
 
