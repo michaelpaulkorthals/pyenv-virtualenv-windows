@@ -14,25 +14,25 @@
 	1.2. [Description](#description)
 2. [Check Dependencies](#check_dependencies)</br>
 3. [Installation](#installation)</br>
-[Location](#location)</br>
-4. [Usage](#usage)</br>
-    4.1. [Concepts](#concepts)</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Audits](#audits)</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;4.1.2. [Commands](#commands)</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;4.1.3. [Project Properties](#project_properties)</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;4.1.4. [Help](#help)</br>
-    &nbsp;&nbsp;&nbsp;&nbsp;4.1.5. [Logging](#logging)</br>
-	4.2. [Create Virtual Environment](#create_virtual_environment)</br>
-	&nbsp;&nbsp;&nbsp;&nbsp;4.2.1. [Create with Version and Name](#create_with_version_and_name)</br>
-	&nbsp;&nbsp;&nbsp;&nbsp;4.2.2. [Create With Name Only](#create_with_name_only)</br>
-	4.3. [List Installed Virtual Environments](#list_installed_virtual_environments)</br>
-	4.4. [Activate Virtual Environment](#activate_virtual_environment)</br>
-	4.5. [Delete Installed Virtual Environment](#delete_virtual_environment)</br>
-	4.6. [Manage Project Properties](#manage_project_properties)</br>
-	4.7. [Virtual Environment Prefix](#virtual_environment_prefix)</br>
-	4.8. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)</br>
-5. [Python Venv](#python_venv)</br>
-6. [How to contribute](#how_to_contribute)</br>
+4. [Location](#location)</br>
+5. [Usage](#usage)</br>
+    5.1. [Concepts](#concepts)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;5.1.1. [Audits](#audits)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;5.1.2. [Commands](#commands)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;5.1.3. [Project Properties](#project_properties)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;5.1.4. [Help](#help)</br>
+    &nbsp;&nbsp;&nbsp;&nbsp;5.1.5. [Logging](#logging)</br>
+	5.2. [Create Virtual Environment](#create_virtual_environment)</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;5.2.1. [Create with Version and Name](#create_with_version_and_name)</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;5.2.2. [Create With Name Only](#create_with_name_only)</br>
+	5.3. [List Installed Virtual Environments](#list_installed_virtual_environments)</br>
+	5.4. [Activate Virtual Environment](#activate_virtual_environment)</br>
+	5.5. [Delete Installed Virtual Environment](#delete_virtual_environment)</br>
+	5.6. [Manage Project Properties](#manage_project_properties)</br>
+	5.7. [Virtual Environment Prefix](#virtual_environment_prefix)</br>
+	5.8. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)</br>
+6. [Python Venv](#python_venv)</br>
+7. [How to contribute](#how_to_contribute)</br>
 
 ## Introduction <a name="introduction"></a>
 
