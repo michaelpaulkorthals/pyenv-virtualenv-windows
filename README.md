@@ -6,8 +6,8 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md)
 
 [![status](https://img.shields.io/badge/Status-Open%20Beta%20Test-60A020)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
-[![pypi](https://img.shields.io/badge/PyPI-pyenv_virtualenv_windows%20%7C%201.24-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
-[![github](https://img.shields.io/badge/PyPI-pyenv_virtualenv_windows%20%7C%201.24-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
+[![pypi](https://img.shields.io/badge/PyPI-pyenv_virtualenv_windows%20|%201.24-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
+[![github](https://img.shields.io/badge/GitHub-pyenv_virtualenv_windows%20|%201.24-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 [![python](https://img.shields.io/badge/Python-3.6%20|%203.8%20|%203.9%20|%203.10%20|%203.11%20|%203.12%20|%203.13-C0C040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 [![change_log](https://img.shields.io/badge/Info-Change%20Log-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/src/pyenv-virtualenv-windows/CHANGELOG.md)
 
