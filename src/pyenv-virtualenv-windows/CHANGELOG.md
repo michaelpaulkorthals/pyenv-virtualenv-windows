@@ -31,7 +31,7 @@ The version number are synchronous to the related 'pyenv-virtualenv' package for
 * Add aliases for some commands to ease the command handling.
 * Construct the workaround to redirect the 'pyenv'command to the its patch.
 * Add install script 'install.bat' to install this Windows plugin into 'pyenv' for Windows.
-* Alpha Test on all features.
+* Perform Alpha Test in laboratory on all features.
 * Set up GitHub respository.
 * Compile Doxygen documentation, finally for this version. 
 * Release this version for Open Beta Test on PyPI.
