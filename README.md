@@ -905,6 +905,8 @@ exit /b
 
 ## How to Contribute <a name="how_to_contribute"></a> 
 
+Hi, I am Paul.
+
 As supervisor for 'pyenv-virtualenv' for Windows I welcome you to this project.
 
 In case you want to discuss an 'issue', or, have a brilliant idea for a 'pull request', I ask you to read the related units in the README.md and installed Doxygen documentation for first. In most cases, this should avoid unnecessary effort and communication. 
