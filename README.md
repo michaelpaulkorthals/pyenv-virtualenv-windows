@@ -805,7 +805,7 @@ REM --------------------------------------------------------------------
 ...
 ~~~
 
-The second change enhances the plugin interface. See the new code in the 'plugin' function.
+The second change enhances the plugin interface. See the new code in the 'plugin' function:
 ~~~{.cmd}
 ...
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -901,6 +901,7 @@ set cmdline=!exe! !cmdline:~%len%!
 endlocal && endlocal && %cmdline% || goto :error
 exit /b
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+...
 ~~~
 
 [![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
