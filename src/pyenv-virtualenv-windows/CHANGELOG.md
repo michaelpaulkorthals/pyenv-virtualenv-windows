@@ -29,10 +29,12 @@ The version number are synchronous to the related 'pyenv-virtualenv' package for
 * Add 'pyenv virtualenv-prefix' to display real path prefix for virtual environment.
 * Add 'pyenv virtualenv-delete' to delete a virtual environment.
 * Add aliases for some commands to ease the command handling.
+* Construct the workaround to redirect the 'pyenv'command to the its patch.
 * Add install script 'install.bat' to install this Windows plugin into 'pyenv' for Windows.
-* Test all features.
+* Alpha Test on all features.
+* Set up GitHub respository.
 * Compile Doxygen documentation, finally for this version. 
-* Initial public release version synchronous to the actual Linux version of this plugin.
+* Release this version for Open Beta Test on PyPI.
 
 \-\-\- END OF DOCUMENT ----------------------------------------------------
 
