@@ -5,7 +5,7 @@
 [![license](https://img.shields.io/badge/License-GPL%203.0-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md)
 
-[![pypi](https://img.shields.io/badge/Status-Beta-C0E060)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
+[![pypi](https://img.shields.io/badge/Status-Beta-608020)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 [![pypi](https://img.shields.io/badge/PyPI-1.24-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 [![python](https://img.shields.io/badge/Python-3.6%20|%203.8%20|%203.9%20|%203.10%20|%203.11%20|%203.12%20|%203.13-C0C040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 
