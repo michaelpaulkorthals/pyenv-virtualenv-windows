@@ -5,6 +5,7 @@
 [![license](https://img.shields.io/badge/License-GPL%203.0-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md)
 
+[![pypi](https://img.shields.io/badge/Status-Beta-A02040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 [![pypi](https://img.shields.io/badge/PyPI-1.24-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 [![python](https://img.shields.io/badge/Python-3.6%20|%203.8%20|%203.9%20|%203.10%20|%203.11%20|%203.12%20|%203.13-C0C040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 
@@ -734,7 +735,7 @@ Each utility in 'pyenv-virtualenv' tries to import the 'virtualenv' near the beg
 
 To operate this plugin, a patch for 'pyenv' for Windows is needed. This patch touches the file '%PYENV_ROOT%\\shims\\pyenv.bat'.
 
-That patch significantly improves the 'pyenv' plugin interface with these advantages:
+That patch significantly improves the 'pyenv' plugin interface by these advantages:
 * It simplifies and stabilizes the plugin interface to dock 'pyenv-virtualenv' for Windows.
 * Installing a plugin, the following code folders and its content politely remain untouched:
   * %PYENV_ROOT%\\libexec
@@ -747,18 +748,22 @@ The current version 1.2.4 of 'pyenv-virtualenv' for Windows is including that pa
 
 This temporary workaround allows 'pyenv-virtualenv' for Windows to operate without problems for the upcoming Beta test.
 
-A pull request on GitHub for 'pyenv' for Windows is set. After the maintainer of 'pyenv' for Windows with curtesy answers this pull request with a new version, an upgrade for 'pyenv-virtualenv' for Windows is planned. That future upgrade will not include a workaround anymore.    
+A pull request on GitHub for 'pyenv' for Windows is set. After the supervisor of 'pyenv' for Windows with curtesy answers this pull request with a new version, an upgrade for 'pyenv-virtualenv' for Windows is planned. That future upgrade will not include a workaround anymore.    
 
 [![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
 [![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
 
 ### Patch Details <a name="patch_for_pyenv_details"></a>
 
+The actual workaround redirection uses the PATH environment variable to redirect the 'pyenv' command to the 'pyenv-virtualenv' for Windows 'shims' folder, file 'pyenv.bat' (patched version).  
+
+You are recommended to compare the original and patched files e.g. using Notepad++ with 'Compare' plugin to make all changes visible.
+
 The first change (near the beginning of the script), is only part of the current workaround to make 'pyenv-virtualenv' for Windows operable.
 
 It avoids problems if something could be wrong with 'pyenv' for Windows.
 
-In addition, it makes the script independent of its location in the '%PYENV_ROOT%' folder tree:
+In addition, it makes the script independent of its location within the '%PYENV_ROOT%' directory tree:
 ~~~{.cmd}
 @echo off
 setlocal
@@ -797,7 +802,7 @@ REM --------------------------------------------------------------------
 ...
 ~~~
 
-The second change enhances the plugin interface. See 'plugin' function.
+The second change enhances the plugin interface. See the new code in the 'plugin' function.
 ~~~{.cmd}
 ...
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -895,20 +900,22 @@ exit /b
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ~~~
 
-This workaround redirection uses the PATH environment variable to redirect the 'pyenv' command to the 'pyenv-virtualenv' 'shims' folder, file 'pyenv.bat' (patched version).  
-
 [![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
 [![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
 
 ## How to Contribute <a name="how_to_contribute"></a> 
 
-In case you want to discuss an 'issue', or, have an idea for a 'pull request', I ask you to read the related units in the README.md and Doxygen documentation for first. In most cases, this should avoid unnecessary effort and communication. 
+As supervisor for 'pyenv-virtualenv' for Windows I welcome you to this project.
 
-To ensure a clear, calm and joyful working atmosphere in this project, I recommend you to be informed and to agree to our rules of engagement before you publish your contribution. See: [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)]((https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md). 
+In case you want to discuss an 'issue', or, have a brilliant idea for a 'pull request', I ask you to read the related units in the README.md and installed Doxygen documentation for first. In most cases, this should avoid unnecessary effort and communication. 
+
+To ensure a clear, calm and joyful working atmosphere in this project, I recommend you to be informed and to agree to our rules of engagement before you publish your contribution. See: [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md). 
 
 Our Code of Conduct is version 2.1 of the Contributor Covenant, published with the courtesy of the organization of the same name [https://www.contributor-covenant.org/](https://www.contributor-covenant.org/). 
 
 Possible violations/incidents regarding the code of conduct in this project can be reported to me via a ['code of conduct'-labeled 'pull-request' contribution to this project](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/pulls).
+
+Let's do it this way!
 
 [![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
 [![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
