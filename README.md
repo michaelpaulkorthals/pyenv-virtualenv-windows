@@ -32,7 +32,9 @@
 	5.7. [Virtual Environment Prefix](#virtual_environment_prefix)</br>
 	5.8. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)</br>
 6. [Python Venv](#python_venv)</br>
-7. [How to contribute](#how_to_contribute)</br>
+7. [Patch for 'pyenv' for Windows](#patch_for_pyenv)</br>
+    7.1 [Patch Details](#patch_for_pyenv_details)</br>
+8. [How to contribute](#how_to_contribute)</br>
 
 ## Introduction <a name="introduction"></a>
 
@@ -726,6 +728,176 @@ command is not available.
 Each utility in 'pyenv-virtualenv' tries to import the 'virtualenv' near the beginning of the program. This let the utility programs exit immediately by error and so should avoid problems with globalized outdated Python versions. 
 
 [[![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
+[![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
+
+## Patch for 'pyenv' for Windows <a name="patch_for_pyenv"></a>
+
+To operate this plugin, a patch for 'pyenv' for Windows is needed. This patch touches the file '%PYENV_ROOT%\\shims\\pyenv.bat'.
+
+That patch significantly improves the 'pyenv' plugin interface with these advantages:
+* It simplifies and stabilizes the plugin interface to dock 'pyenv-virtualenv' for Windows.
+* Installing a plugin, the following code folders and its content politely remain untouched:
+  * %PYENV_ROOT%\\libexec
+  * %PYENV_ROOT%\\bin
+  * %PYENV_ROOT%\\shims
+* It allows to implement multiple plugins from different sources basing on a unified syntax.
+* It ensures Posix/Linux to Windows interoperability implementing the same command names e.g. like in 'pyenv-virtualenv' for Linux or macOS.  
+
+The current version 1.2.4 of 'pyenv-virtualenv' for Windows is including that patch. This patch redirects the 'pyenv' command to its patched counterpart in its own 'shims' folder. 
+
+This temporary workaround allows 'pyenv-virtualenv' for Windows to operate without problems for the upcoming Beta test.
+
+A pull request on GitHub for 'pyenv' for Windows is set. After the maintainer of 'pyenv' for Windows with curtesy answers this pull request with a new version, an upgrade for 'pyenv-virtualenv' for Windows is planned. That future upgrade will not include a workaround anymore.    
+
+[![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
+[![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
+
+### Patch Details <a name="patch_for_pyenv_details"></a>
+
+The first change (near the beginning of the script), is only part of the current workaround to make 'pyenv-virtualenv' for Windows operable.
+
+It avoids problems if something could be wrong with 'pyenv' for Windows.
+
+In addition, it makes the script independent of its location in the '%PYENV_ROOT%' folder tree:
+~~~{.cmd}
+@echo off
+setlocal
+chcp 65001 >nul 2>&1
+
+REM --------------------------------------------------------------------
+REM --- PATCH 1 FOR PYENV-VIRTUALENV 2025-07-14 ---
+REM --------------------------------------------------------------------
+
+REM Determine log level
+if not defined LOG_LEVEL goto log_level1
+  set /a LOG_LEVEL=%LOG_LEVEL% 
+  goto log_level2
+:log_level1
+  set /a LOG_LEVEL=20
+:log_level2
+
+REM Determine pyenv root folder
+if not defined PYENV_ROOT goto undefined0
+if not exist "%PYENV_ROOT%" goto nonexist0
+goto continue0
+undefined0:
+  echo [101mCRITICAL Cannot find "PYENV_ROOT" environment variable.[0m
+  echo [37mINFO     Check/install/configure "pyenv". Then try again.[0m
+  exit /b 1
+:nonexist0
+  echo [101mCRITICAL Cannot find environment "pyenv root" directory "%PYENV_ROOT%".[0m
+  echo [37mINFO     Check/repair/configure "pyenv". Then try again.[0m
+  exit /b 1
+:continue0
+
+REM NOTE: In addition all substrings "%~dp0..\" has been replaced
+REM by "%PYENV_ROOT%" to make this script independent from its location
+REM on the system hard disk.
+REM --------------------------------------------------------------------
+...
+~~~
+
+The second change enhances the plugin interface. See 'plugin' function.
+~~~{.cmd}
+...
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:plugin
+set "exe=%PYENV_ROOT%libexec\pyenv-%1"
+rem TODO needed?
+call :normalizepath %exe% exe
+
+if exist "%exe%.bat" (
+  set "exe=call "%exe%.bat""
+
+) else if exist "%exe%.cmd" (
+  set "exe=call "%exe%.cmd""
+
+) else if exist "%exe%.vbs" (
+  set "exe=cscript //nologo "%exe%.vbs""
+
+) else if exist "%exe%.lnk" (
+  set "exe=start '' "%exe%.bat""
+) else (
+  REM --------------------------------------------------------------------
+  REM --- PATCH 2 FOR PYENV-VIRTUALENV 2025-07-14 ---
+  REM --------------------------------------------------------------------
+  if %LOG_LEVEL% leq 15 echo [94mVERBOSE  Cannot find executable "%exe%.*".[0m
+  if %LOG_LEVEL% leq 15 echo [94mVERBOSE  Redirecting command "pyenv %1" to related plugin ...[0m
+  if %LOG_LEVEL% leq 15 echo [94mVERBOSE  Working around entropy caused by deviations from 'pyenv-virtualenv' common command design ...[0m
+  REM Determine the plugin name
+  REM NOTE: The "virtualenv" command will be redirected to 'pyenv-virtualenv'.
+  if "%1"=="virtualenv" goto redirect_to_virtualenv
+  REM NOTE: The "virtualenvs" command will be redirected to 'pyenv-virtualenv'.
+  if "%1"=="virtualenvs" goto redirect_to_virtualenv
+  REM NOTE: The "activate" command will be redirected to 'pyenv-virtualenv'.
+  if "%1"=="activate" goto redirect_to_virtualenv
+  REM NOTE: The "deactivate" command will be redirected to 'pyenv-virtualenv'.
+  if "%1"=="deactivate" goto redirect_to_virtualenv
+  goto endworkaround1
+  :redirect_to_virtualenv
+    set "PLUGIN_NAME=virtualenv"
+    goto continue1
+  :endworkaround1
+    if %LOG_LEVEL% leq 15 echo [94mVERBOSE  Detecting plugin name in command name "%1" ...[0m
+    for /f "tokens=1 delims=-" %%a in ("%1") do set "PLUGIN_NAME=%%a"
+	REM NOTE: All commands starting with "venv-" will be redirected to "pyenv-virtualenv".
+	if "%PLUGIN_NAME%"=="venv" goto redirect_to_virtualenv
+	REM NOTE: All other commands will be forwarded to other installed plugins if available.
+	goto continue1
+  :continue1
+  if %LOG_LEVEL% leq 15 echo [94mVERBOSE  Plugin name: "%PLUGIN_NAME%".[0m
+  if %LOG_LEVEL% leq 15 echo [94mVERBOSE  Plugin command: "%1".[0m
+  REM Forward the command to the detected plugin
+  set "exe=%PYENV_ROOT%plugins\pyenv-%PLUGIN_NAME%\libexec\pyenv-%1"
+  call :normalizepath %exe% exe
+  if %LOG_LEVEL% leq 15 echo [94mVERBOSE  Plugin call: "%exe%".[0m
+  REM Calculate path to existing executable only
+  if exist "%exe%.bat" (
+    set "exe=call "%exe%.bat""
+  ) else if exist "%exe%.cmd" (
+    set "exe=call "%exe%.cmd""
+  ) else if exist "%exe%.vbs" (
+    set "exe=cscript //nologo "%exe%.vbs""
+  ) else if exist "%exe%.lnk" (
+    set "exe=start '' "%exe%.bat""
+  ) else (
+	REM Not existing
+    if %LOG_LEVEL% leq 15 echo [94mVERBOSE  Cannot find executable "%exe%.*".[0m
+    echo pyenv: no such command '%1'
+	REM Cancel with error level 1
+    exit /b 1
+  )
+  REM The following 2 lines are obsolete now and has been commented:
+  REM echo pyenv: no such command '%1'
+  REM exit /b 1
+  
+  REM ------------------------------------------------------------------
+)
+
+:: replace first arg with %exe%
+set cmdline=%*
+set cmdline=%cmdline:^=^^%
+set cmdline=%cmdline:!=^!%
+set "arg1=%1"
+set "len=1"
+:loop_len
+set /a len=%len%+1
+set "arg1=%arg1:~1%"
+if not [%arg1%]==[] goto :loop_len
+
+setlocal enabledelayedexpansion
+set cmdline=!exe! !cmdline:~%len%!
+:: run command (no need to update PATH for plugins)
+:: endlocal needed to ensure exit will not automatically close setlocal
+:: otherwise PYTHON_VERSION will be lost
+endlocal && endlocal && %cmdline% || goto :error
+exit /b
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+~~~
+
+This workaround redirection uses the PATH environment variable to redirect the 'pyenv' command to the 'pyenv-virtualenv' 'shims' folder, file 'pyenv.bat' (patched version).  
+
+[![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
 [![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
 
 ## How to Contribute <a name="how_to_contribute"></a> 
