@@ -48,7 +48,7 @@
 
 A “pyenv” plugin to manage Python virtual environments for your projects.
 
-It extends the command set of 'pyenv' for Windows by commands, which empowers  you to clear, quickly and efficiently manage a lot of python virtual environments foe each of your Python projects. 
+It extends the command set of 'pyenv' for Windows by commands, which empowers  you to clear, quickly and efficiently manage a lot of python virtual environments for each of your Python projects. 
 
 For first, use the instructions on the <a href="https://github.com/pyenv-win/pyenv-win/" rel="noopener noreferrer" target="_blank">'pyenv' for Windows home page on GitHub</a> to completely install and configure 'pyenv'.
 
@@ -81,7 +81,7 @@ Finally, use these commands to manage virtual environments in your projects:
 
 "pyenv-virtualenv" for Windows is a “pyenv” plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
 
-It extends the command set of 'pyenv' for Windows by commands, which empowers  you to clear, quickly and efficiently manage a lot of python virtual environments foe each of your Python projects. 
+It extends the command set of 'pyenv' for Windows by commands, which empowers  you to clear, quickly and efficiently manage a lot of python virtual environments for each of your Python projects. 
 
 This unit is starting your tutorial to master your first steps in 'pyenv_virtualenv'.
 
