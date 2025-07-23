@@ -13,7 +13,7 @@
 
 # Table of Contents <a name="table_of_contents"></a>
 1. [Introduction](#introduction)</br>
-    1.1. [Architecture](#architecture)
+    1.1. [Architecture](#architecture)</br>
     1.2. [Quick Reference](#quick_reference)</br>
 	1.3. [Description](#description)
 2. [Check Dependencies](#check_dependencies)</br>
