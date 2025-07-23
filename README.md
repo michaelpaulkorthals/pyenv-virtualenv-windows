@@ -13,8 +13,9 @@
 
 # Table of Contents <a name="table_of_contents"></a>
 1. [Introduction](#introduction)</br>
-    1.1. [Quick Reference](#quick_reference)</br>
-	1.2. [Description](#description)
+    1.1. [Architecture](#architecture)
+    1.2. [Quick Reference](#quick_reference)</br>
+	1.3. [Description](#description)
 2. [Check Dependencies](#check_dependencies)</br>
 3. [Installation](#installation)</br>
 4. [Location](#location)</br>
@@ -40,6 +41,33 @@
 8. [How to contribute](#how_to_contribute)</br>
 
 ## Introduction <a name="introduction"></a>
+
+### Architecture <a name="architecture"></a>
+
+"pyenv-virtualenv" for Windows is a “pyenv” plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
+
+It extends the command set of 'pyenv' for Windows by commands, which empowers  you to clear, quickly and efficiently manage a lot of python virtual environments for each of your Python projects. 
+
+Let's have a look on the software architecture and its dependencies of 'pyenv-virtualenv' for Windows.
+
+![pyenv-virtualenv_architecture](./images/pyenv-virtualenv_architecture.png "'pyenv-virtualenv' for Windows - Architecture'")
+
+Opposite to 'pyenv', which depends on the Windows scripting languages only, the 'pyenv-virtualenv' for Windows depends on the Windows CMD/BAT scripting language (~1/3) and on the global Python version (~2/3) that is installed and configured via 'pyenv' for Windows.    
+
+To fulfill the requirements for 'pyenv-virtualenv' for Windows, the global Python version must be 3.6+. Lower Python version are not supported. In addition, the Python package 'virtualenv' must be installed by pip into the global Python version.
+
+Managed by 'pyenv-virtualenv' for Windows, for each project a single or multiple Python virtual environments can be installed and configured.
+
+Within the path tree branch of the project, the local configured project properties define Python version and virtual environment name for the specific use case inside a project. 
+
+These properties are inherited along the path tree branch. Using the 'activate' command without parameters, the specific virtual environment is automatically selected by 'pyenv-virtualenv' for Windows. 
+
+The magic of 'pyenv-virtualenv' for Windows is located in the 'pyenv-win' command redirection feature. It activates the related utility scripts, which executable folders are prioritized within the PATH environment variable. Or, it automatically starts the python.exe or pip.exe in the related Python virtual environment 'Scripts' folder.
+
+The result of this magic is an efficient and easy management of multiple projects on your development workstation, on test systems, productive servers or on the user client system in production.
+
+[![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
+[![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
 
 ### Quick Reference <a name="quick_reference"></a>
 
@@ -79,10 +107,6 @@ Finally, use these commands to manage virtual environments in your projects:
 [![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
 
 ### Description <a name="description"></a> 
-
-"pyenv-virtualenv" for Windows is a “pyenv” plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
-
-It extends the command set of 'pyenv' for Windows by commands, which empowers  you to clear, quickly and efficiently manage a lot of python virtual environments for each of your Python projects. 
 
 This unit is starting your tutorial to master your first steps in 'pyenv_virtualenv'.
 
