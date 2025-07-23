@@ -27,6 +27,26 @@ To optimize configuring each Python project with virtual environment, you are re
 
 The goal of this project is to provide the missing 'pyenv-virtualenv' for Windows. 
 
+## Architecture
+
+Let's have a look on the software architecture and its dependencies of 'pyenv-virtualenv' for Windows. 
+
+![pyenv-virtualenv_architecture](./images/pyenv-virtualenv_architecture.png "'pyenv-virtualenv' for Windows - Architecture'")
+
+Opposite to 'pyenv', which depends on the Windows scripting languages only, the 'pyenv-virtualenv' for Windows depends on the Windows CMD/BAT scripting language (~1/3) and on the global Python version (~2/3) that is installed and configured via 'pyenv' for Windows.    
+
+To fulfill the requirements for 'pyenv-virtualenv' for Windows, the global Python version must be 3.6+. Lower Python version are not supported. In addition, the Python package 'virtualenv' must be installed by pip into the global Python version.
+
+Managed by 'pyenv-virtualenv' for Windows, for each project a single or multiple Python virtual environments can be installed and configured.
+
+Within the path tree branch of the project, the local configured project properties define Python version and virtual environment name for the specific use case inside a project. 
+
+These properties are inherited along the path tree branch. Using the 'activate' command without parameters, the specific virtual environment is automatically selected by 'pyenv-virtualenv' for Windows. 
+
+The magic of 'pyenv-virtualenv' for Windows is located in the 'pyenv-win' command redirection feature. It activates the related utility scripts, which executable folders are prioritized within the PATH environment variable. Or, it automatically starts the python.exe or pip.exe in the related Python virtual environment 'Scripts' folder.
+
+The result of this magic is an efficient and easy management of multiple projects on your development workstation, on test systems, productive servers or on the user client system in production.
+
 ## Project History
 
 Up to June 2025, we have 'pyenv' for Posix (Linux, macOS, etc.) and Windows to manage the Python version for each project.
@@ -974,7 +994,7 @@ This tree chart gives an overview about the most important sub-folders in this p
 
 ### Concepts
 
-For better understanding, how 'pyenv-virtualenv' for windows is working, read this unit carefully, before you start to use 'pyenv-virtualenv'. 
+For better understanding, how 'pyenv-virtualenv' for Windows is working, read this unit carefully, before you start to use 'pyenv-virtualenv'. 
 
 #### Audits
 
