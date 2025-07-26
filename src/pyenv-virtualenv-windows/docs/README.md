@@ -1601,9 +1601,35 @@ In this project, I used the GIMP Graphic Editor to edit the multi-layer photo of
 
 <a href="https://www.gimp.org/tutorials/" rel="noopener noreferrer" target="_blank">GIMP Graphic Editor Documentation</a>
 
+### 7-ZIP Archiver
+
+7-Zip is a free Open Source file archiver with a high compression ratio. <a href="https://www.7-zip.org/download.html" rel="noopener noreferrer" target="_blank">Download</a>.
+
+Main features:
+* High compression ratio in 7z format with LZMA and LZMA2 compression
+* Supported formats:
+  * Packing / unpacking: 7z, XZ, BZIP2, GZIP, TAR, ZIP and WIM
+  * Unpacking only: APFS, AR, ARJ, CAB, CHM, CPIO, CramFS, DMG, EXT, FAT, GPT, HFS, IHEX, ISO, LZH, LZMA, MBR, MSI, NSIS, NTFS, QCOW2, RAR, RPM, SquashFS, UDF, UEFI, VDI, VHD, VHDX, VMDK, XAR and Z.
+* For ZIP and GZIP formats, 7-Zip provides a compression ratio that is 2-10 % better than the ratio provided by PKZip and WinZip
+* Strong AES-256 encryption in 7z and ZIP formats
+* Self-extracting capability for 7z format
+* Integration with Windows Shell
+* Powerful File Manager
+* Powerful command line version
+* Plugin for FAR Manager
+* Localizations for 87 languages
+
+7-Zip works in Linux, macOS, Windows 11 / 10 / 8 / 7 / Vista / XP / 2022 / 2019 / 2016 / 2012 / 2008 / 2003 / 2000.
+
+In this project I use 7-Zip on command line to compress its Doxygen Industry Standard Documentation into a ZIP file, which is further on publish on GitHub. Users can download the ZIP File, unpack it and then view the documentation in a Web Browser.
+
+### Documentation
+
+<a href="https://www.7-zip.org/" rel="noopener noreferrer" target="_blank">7-Zip Documentation</a>
+
 ## Documentation
 
-Documentation is an essential part of the software development process. 
+Documentation is an essential part of the software development process.
 
 ### Advantages
 
@@ -1650,6 +1676,7 @@ In parallel to this documentation other documentation are relevant for this proj
   * <a href="https://www.jetbrains.com/help/pycharm/" rel="noopener noreferrer" target="_blank">PyCharm Documentation</a>
   * <a href="https://notepad-plus-plus.org/online-help/" rel="noopener noreferrer" target="_blank">Notepad++ Documentation</a>
   * <a href="https://www.gimp.org/tutorials/" rel="noopener noreferrer" target="_blank">GIMP Graphic Editor Documentation</a>
+  * <a href="https://www.7-zip.org/" rel="noopener noreferrer" target="_blank">7-Zip Documentation</a>
 
 ### Doxygen
 
@@ -1945,7 +1972,7 @@ In addition, the GitHub repository holds the pictures of the README.md, which de
 
 ### Authentication
 
-This publication requires the identical Security measures to protect the source. So, Two-Factor Authentication (2FA) must be activated on GitHub and also on PiPI. 
+This publication requires strong Security measures to protect the source. So, Two-Factor Authentication (2FA) must be activated on GitHub. 
 
 The TOTP generator (e.g. Google Authenticator) must be installed on your smartphone or tablet and capable to continuously deliver the time-based OTP for GitHub. The GitHub password and the list of 2FA recovery codes must be securely stored in your password safe.
 
@@ -1983,19 +2010,25 @@ Finally, restore the 'docs\\html' by compiling the documentation:
 
 It is my declared goal to share this product to the world. I have seen the gap in 'pyenv' and from the beginning it is my intention to close it.
 
-Now, the working product of this project, the plugin 'pyenv-virtualenv' for Windows is published worldwide on the relevant cloud application PyPI.
+Now, the working product of this project, the plugin 'pyenv-virtualenv' for Windows will be published worldwide on the relevant repositories:
+* Test PyPI: to test the new package.
+* PyPI : to release the new package to the wordwide Python community.
 
-There, the plugin is published/distributed as Python package.
+> IMPORTANT NOTE: The project name 'pyenv-virtualenv-windows' on Test PyPI, PyPI and GitHub repositories must be identical.
 
-> IMPORTANT NOTE: The project/repository name 'pyenv-virtualenv-windows' on PyPI and GitHub must be identical.
+> NOTE: We are using the same README.md on PyPI and GitHub. PiPI does not allow to store images. 
 
-PiPI does not allow to store images. So, the images, which are used in the README.md are stored on GitHub.  
+So, the images, which are didactically enhancing the README.md content, are stored on GitHub. So, the image references must not be local. It must be linked to the GitHub project subfolder 'images' folder in any case.
+
+> NOTE: PyPi refuses to integrate the project's industry-standard Doxygen documentation, which is enhanced with images and provided in HTML format, into the package. 
+ 
+The Doxygen documentation must be published separately in a ZIP file on GitHub.
 
 ### Authentication
 
-This publication requires the identical Security measures to protect the source. So, Two-Factor Authentication (2FA) must be activated on GitHub and also on PiPI. 
+This publication requires strong Security measures to protect the published package and its testing counterpart. So, Two-Factor Authentication (2FA) must be activated in the user profiles on PiPI and Test PyPI. 
 
-The TOTP generator (e.g. Google Authenticator) must be installed on your smartphone or tablet and capable to continuously deliver the time-based OTP for PyPI. The PyPI password and the list of 2FA reset codes must be securely stored in your password safe.
+The TOTP generator (e.g. Google Authenticator) must be installed on your smartphone or tablet and capable to continuously deliver the time-based OTPs for PyPI and Test PyPI. For both repositories, the password and the list of 2FA reset codes must be securely stored in separate entries in your password safe.
 
 ### Preparation
 
@@ -2204,17 +2237,83 @@ virtualenv             20.31.2
 wheel                  0.45.1
 ~~~
 
-#### Set up a Test System
+#### API Token
+
+The repositories Test PyPI and PyPI are using strong measures to secure uploading packages.
+
+On each repository go to your user profile and generate the API token.
+
+Store these token strings immediately into the protected memo fields in your password safe, separately for Test PyPI and PyPi.
+
+Afterward, create the repository configuration file in your user profile on your development workstation:
+~~~
+REM On Windows:
+%USERPROFILE%\.pypirc
+# On Posix/Linux:
+~/.pypirc
+~~~
+Content Template:
+~~~
+[distutils]
+index-servers =
+    pypi
+    testpypi
+
+[pypi]
+username = __token__
+password = pypi-{Insert the cryptic API token code string for PyPI}
+
+[testpypi]
+username = __token__
+password = pypi-{Insert the cryptic API token code string for Test PyPI}
+~~~
+
+User name is the word '__token__'.
+Password is the complete API token of that repository, starting with 'pypy-'. Not starting with 'pypi-pypi-'.
+
+> SECURITY: Passwords and other confidential data must not be stored in scripts and configuration files. 
+ 
+Instead of using the 'password' field, you must save your API tokens and passwords securely using 'keyring' (which is installed by 'twine').
+
+Commands to set the API tokens into 'keyring': 
+~~~
+keyring set https://test.pypi.org/legacy/ __token__
+keyring set https://upload.pypi.org/legacy/ __token__
+~~~
+
+Commands to check if the API tokens exist on 'keyring': 
+~~~
+keyring get https://test.pypi.org/legacy/ __token__
+keyring get https://upload.pypi.org/legacy/ __token__
+~~~
+
+After the 'keyring' password storage is working perfectly, the content of the '.pypirc' file in the user profile directory can be reduced to this non-compromising variant:
+~~~
+[distutils]
+index-servers =
+    pypi
+    testpypi
+
+[pypi]
+username = __token__
+
+[testpypi]
+username = __token__
+~~~
+
+#### Setup Local Test System
 
 To successfully test the whole publication at the end, a Windows test system is needed.
 
-E.g.:
-* Fresh installed Windows 11 Laptop/Workstation.
-* Fresh installed Windows Server.
-* Fresh Virtual Windows 11 image on an Ubuntu Linux Virtual Stack machine.
-* Fresh Virtual Windows Server image on a Linux virtual Stack machine.  
+> NOTE: 'Fresh' in this context means that it completely fulfills the actual Microsoft system requirements for that platform. In addition, Python, 'pyenv' 'virtualenv', 'pyenv-virtualenv' and other software have never been installed inside that image.
 
-> NOTE: 'Fresh' in this context means that it completely fulfills the actual Microsoft system requirements for that platform. In addition, Python and other software has never been installed.
+E.g.:
+* Fresh installed Windows 11 Intel x64 Laptop/Workstation.
+* Fresh installed Windows Intel x64 Server.
+
+For more efficiency clone and activate Windows platform images e.g. on an Ubuntu Linux Kernel-based Virtual Machine (KVM): 
+* Fresh Virtual Windows 11 Intel x64 client image.
+* Fresh Virtual Windows Intel x64 server image.  
 
 ### Packaging
 
@@ -2313,9 +2412,15 @@ authors = [
 description = "A 'pyenv' plugin to manage Python virtual environments, depending on different Python versions, for various Python projects."
 readme = "README.md"
 requires-python = ">=3.6"
+dependencies = [
+  "virtualenv"
+]
 classifiers = [
+	"Development Status :: 4 - Beta",
+	"Environment :: Console",
+	"Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
-    "Operating System :: Windows",
+    "Operating System :: Microsoft :: Windows",
 ]
 license = "GPL-3.0-only"
 license-files = ["LICENSE*"]
@@ -2332,7 +2437,7 @@ See description for each of these settings and more the PyPI documentation.
 
 If everything is crystal-clear fine configured, then step forward to the next unit. 
 
-#### Build
+#### Build Package
 
 Use this command to build/compile the package:
 ~~~{.cmd}
@@ -2349,6 +2454,7 @@ C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>python -m build
 running egg_info
 writing src\pyenv_virtualenv_windows.egg-info\PKG-INFO
 writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_links.txt
+writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
 writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
 reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
 adding license file 'LICENSE'
@@ -2358,6 +2464,7 @@ running sdist
 running egg_info
 writing src\pyenv_virtualenv_windows.egg-info\PKG-INFO
 writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_links.txt
+writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
 writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
 reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
 adding license file 'LICENSE'
@@ -2384,6 +2491,7 @@ copying src\pyenv-virtualenv-windows\bin\lib\tre.py -> pyenv_virtualenv_windows-
 copying src\pyenv_virtualenv_windows.egg-info\PKG-INFO -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
 copying src\pyenv_virtualenv_windows.egg-info\SOURCES.txt -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
 copying src\pyenv_virtualenv_windows.egg-info\dependency_links.txt -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
+copying src\pyenv_virtualenv_windows.egg-info\requires.txt -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
 copying src\pyenv_virtualenv_windows.egg-info\top_level.txt -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
 copying src\pyenv_virtualenv_windows.egg-info\SOURCES.txt -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
 Writing pyenv_virtualenv_windows-1.2.4\setup.cfg
@@ -2397,6 +2505,7 @@ removing 'pyenv_virtualenv_windows-1.2.4' (and everything under it)
 running egg_info
 writing src\pyenv_virtualenv_windows.egg-info\PKG-INFO
 writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_links.txt
+writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
 writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
 reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
 adding license file 'LICENSE'
@@ -2420,6 +2529,7 @@ copying src\pyenv-virtualenv-windows\bin\lib\tre.py -> build\lib\pyenv-virtualen
 running egg_info
 writing src\pyenv_virtualenv_windows.egg-info\PKG-INFO
 writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_links.txt
+writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
 writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
 reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
 adding license file 'LICENSE'
@@ -2445,7 +2555,7 @@ running install_egg_info
 Copying src\pyenv_virtualenv_windows.egg-info to build\bdist.win-amd64\wheel\.\pyenv_virtualenv_windows-1.2.4-py3.12.egg-info
 running install_scripts
 creating build\bdist.win-amd64\wheel\pyenv_virtualenv_windows-1.2.4.dist-info\WHEEL
-creating 'C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows\dist\.tmp-3w_nsn8u\pyenv_virtualenv_windows-1.2.4-py3-none-any.whl' and adding 'build\bdist.win-amd64\wheel' to it
+creating 'C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows\dist\.tmp-g64i3xi_\pyenv_virtualenv_windows-1.2.4-py3-none-any.whl' and adding 'build\bdist.win-amd64\wheel' to it
 adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv-delete.py'
 adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv-init.py'
 adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv-prefix.py'
@@ -2464,16 +2574,35 @@ adding 'pyenv_virtualenv_windows-1.2.4.dist-info/RECORD'
 removing build\bdist.win-amd64\wheel
 Successfully built pyenv_virtualenv_windows-1.2.4.tar.gz and pyenv_virtualenv_windows-1.2.4-py3-none-any.whl
 
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>echo %errorlevel%
 0
 ~~~
 
 If the call returns 0 and not any error or warning is visible in the console log, then step forward to the next unit.
 
-### Upload
+### Check Package
 
-Use this command to Upload the package to PyPI:
+Familiarize yourself with the 'twine' application, which allows you to try out the complex upload to Test PyPI at your leisure.
+
+Afterward check the file path to the package of that version using 'twine':
 ~~~{.cmd}
-python -m twine upload --repository testpypi dist/*
+python -m twine check dist/pyenv_virtualenv_windows-1.2.4*.*
+~~~
+Output:
+~~~
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>python -m twine check dist/pyenv_virtualenv_windows-1.2.4*.*
+Checking dist\pyenv_virtualenv_windows-1.2.4-py3-none-any.whl: PASSED
+Checking dist\pyenv_virtualenv_windows-1.2.4.tar.gz: PASSED
+~~~
+
+### Upload to Test PyPI
+
+To avoid unnecessary and obsolete communication efforts in a test phase of your project, use the 'Test PyPI' repository for first to upload the new package. The essential requirements for this step see in Unit 'Preparations'.
+
+Use this command to Upload the new version package to PyPI:
+~~~{.cmd}
+python -m twine upload --repository testpypi dist/pyenv_virtualenv_windows-1.2.4*.*
+echo %errorlevel%
 ~~~
 Output:
 ~~~
@@ -2487,7 +2616,20 @@ Use the prepared Windows Test System to install, configure and perform a full te
 1. 'pyenv' for Windows
 2. 'pyenv-virtualenv' for Windows
 
-If everything is fine, the publication is successfully placed on PyPI. 
+If everything is fine, the final test performed successfully.
+
+### Upload to PyPI
+
+Use this command to Upload the new version package to PyPI:
+~~~{.cmd}
+python -m twine upload --repository testpypi dist/pyenv_virtualenv_windows-1.2.4*.*
+echo %errorlevel%
+~~~
+Output:
+~~~
+~~~
+
+If everything is fine, the publication is successfully placed on Test PyPI. Everybody can access it. Worldwide. 
 
 # Development Manual
 

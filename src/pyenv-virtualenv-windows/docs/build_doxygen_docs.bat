@@ -45,6 +45,16 @@ echo Compiling. This could take a while ...
 echo.
 doxygen %CONFIG_PATH%
 set /a RC=%ERRORLEVEL%
+if %RC% neq 0 goto finish
+REM Pack the Doxygen HTML documentation into '%~dp0\doxygen.zip'.
+for %%I in (.) do set "BASENAME=%%~nxI"
+echo.
+echo Archiving into 'doxygen_%BASENAME%.zip'. This could take a while ...
+cd /d "%~dp0"
+if exist doxygen_%BASENAME%.zip del doxygen_%BASENAME%.zip
+7z a -r doxygen_%BASENAME%.zip .\html\*.*
+set /a RC=%ERRORLEVEL%
+:finish
 REM Check an output return code
 echo.
 if %RC% neq 0 goto else1
