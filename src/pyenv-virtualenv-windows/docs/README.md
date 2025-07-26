@@ -2440,6 +2440,15 @@ Issues = "https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/issues
 
 See description for each of these settings and more the PyPI documentation.
 
+In addition, we must prevent the file 'README.md', which documents this plugin on GitHub, from being bundled into the package. So, it must be excluded from building by creating and configuring this file in the project root folder:
+~~~{.cmd}
+notepad++ MANIFEST.in
+~~~
+Content:
+~~~
+exclude README.md
+~~~
+
 If everything is crystal-clear fine configured, then step forward to the next unit. 
 
 #### Build Package
@@ -2462,6 +2471,7 @@ writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_lin
 writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
 writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
 reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
 adding license file 'LICENSE'
 writing manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
 * Building sdist...
@@ -2472,6 +2482,7 @@ writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_lin
 writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
 writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
 reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
 adding license file 'LICENSE'
 writing manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
 running check
@@ -2481,6 +2492,7 @@ creating pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin\lib
 creating pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
 copying files to pyenv_virtualenv_windows-1.2.4...
 copying LICENSE -> pyenv_virtualenv_windows-1.2.4
+copying MANIFEST.in -> pyenv_virtualenv_windows-1.2.4
 copying PYPI_README.md -> pyenv_virtualenv_windows-1.2.4
 copying pyproject.toml -> pyenv_virtualenv_windows-1.2.4
 copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-delete.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin
@@ -2513,6 +2525,8 @@ writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_lin
 writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
 writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
 reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+warning: no previously-included files found matching 'README.md'
 adding license file 'LICENSE'
 writing manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
 * Building wheel...
@@ -2537,6 +2551,8 @@ writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_lin
 writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
 writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
 reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+warning: no previously-included files found matching 'README.md'
 adding license file 'LICENSE'
 writing manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
 installing to build\bdist.win-amd64\wheel
@@ -2560,7 +2576,7 @@ running install_egg_info
 Copying src\pyenv_virtualenv_windows.egg-info to build\bdist.win-amd64\wheel\.\pyenv_virtualenv_windows-1.2.4-py3.12.egg-info
 running install_scripts
 creating build\bdist.win-amd64\wheel\pyenv_virtualenv_windows-1.2.4.dist-info\WHEEL
-creating 'C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows\dist\.tmp-g64i3xi_\pyenv_virtualenv_windows-1.2.4-py3-none-any.whl' and adding 'build\bdist.win-amd64\wheel' to it
+creating 'C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows\dist\.tmp-3do7werj\pyenv_virtualenv_windows-1.2.4-py3-none-any.whl' and adding 'build\bdist.win-amd64\wheel' to it
 adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv-delete.py'
 adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv-init.py'
 adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv-prefix.py'
