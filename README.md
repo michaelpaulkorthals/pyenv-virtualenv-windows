@@ -4,6 +4,7 @@
 
 [![license](https://img.shields.io/badge/License-GPL%203.0-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md)
+[![docs](https://img.shields.io/badge/Download-Doxygen%20Docs-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/doxygen_pyenv-virtualenv-windows.zip)
 
 [![status](https://img.shields.io/badge/Status-Open%20Beta%20Test-60A020)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 [![pypi](https://img.shields.io/badge/PyPI-Pyenv%20Virtualenv%20Windows%20|%201.24-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
@@ -104,12 +105,13 @@ Finally, use these commands to manage virtual environments in your projects:
 
 This unit is starting your tutorial to master your first steps in 'pyenv_virtualenv'.
 
-Later, after complete and error-free installation, you will find the comprehensive Doxygen v1.13+ industry standard documentation for 'pyenv-virtualenv' for Windows on your system:
-~~~
-%USERPROFILE%\.pyenv\pyenv-win\plugins\pyenv-virtualenv\docs\html\index.html
-~~~
+In addition, download the Doxygen v1.13+ industry standard documentation for 'pyenv-virtualenv' for Windows from GitHub. 
 
-![doxygen](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/doxygen_docu.png "Doxygen")
+The Doxygen HTML documentation is much easier to handle. It will be displayed in healthy dark mode.
+
+[![docs](https://img.shields.io/badge/Download-Doxygen%20Docs-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/doxygen_pyenv-virtualenv-windows.zip)
+
+![doxygen](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/images/doxygen_docu.png "Doxygen Industry Standard Documentation")
 
 The Doxygen documentation includes:
   * Project description
@@ -119,8 +121,8 @@ The Doxygen documentation includes:
   * Packages (Code documentation)
   * Classes (Code documentation)
   * Files (Code documentation)
-  
-The Doxygen v1.13+ documentation is much easier to handle. It will be displayed in healthy dark mode.
+
+Unzip the Doxygen ZIP file, find the 'index.html' file inside and simply open it with your web browser. Finally add a link to the documentation. 
 
 [![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
 [![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
@@ -930,16 +932,23 @@ exit /b
 
 Hi, I am Paul.
 
-As supervisor for 'pyenv-virtualenv' for Windows I welcome you to this project.
+As supervisor of 'pyenv-virtualenv' for Windows I welcome you to this project.
 
 Currently, this Python software project is in the state of 'Open Beta Test'.
 
+[![pypi](https://img.shields.io/badge/Status-Open%20Beta%20Test-60A020)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows) 
+
 From my point of view it is stable, but what do you think about it?
-[![pypi](https://img.shields.io/badge/Status-Open%20Beta%20Test-60A020)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 
-In case you want to discuss an 'issue', or, have a brilliant idea for a 'pull request', I ask you to read the related units in the README.md and installed Doxygen documentation for first. In most cases, this should avoid unnecessary effort and communication. 
+In case you want to discuss an 'issue', or, have a brilliant idea for a 'pull request', I ask you to read the related units in the README.md. In addition, download and study the Doxygen documentation. 
 
-To ensure a clear, calm and joyful working atmosphere in this project, I recommend you to be informed and to agree to our rules of engagement before you publish your contribution. See: [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md). 
+[![docs](https://img.shields.io/badge/Download-Doxygen%20Docs-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/doxygen_pyenv-virtualenv-windows.zip) 
+
+In most cases, this should avoid unnecessary effort and communication. 
+
+To ensure a clear, calm and joyful working atmosphere in this project, I recommend you to be informed and to agree to our rules of engagement before you publish your contribution. 
+
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md). 
 
 Our Code of Conduct is version 2.1 of the Contributor Covenant, published with the courtesy of the organization of the same name [https://www.contributor-covenant.org/](https://www.contributor-covenant.org/). 
 
