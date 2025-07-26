@@ -14,7 +14,7 @@ Please wait until this message disappears before using this information.
 [![python](https://img.shields.io/badge/Python-3.6%20|%203.7%20|%203.8%20|%203.9%20|%203.10%20|%203.11%20|%203.12%20|%203.13-C0C040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 [![change_log](https://img.shields.io/badge/Info-Change%20Log-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/src/pyenv-virtualenv-windows/CHANGELOG.md)
 
-"pyenv-virtualenv" for Windows is a “pyenv” plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
+'pyenv-virtualenv' for Windows is a 'pyenv' plugin to manage Python virtual environments, depending on different Python versions, for various Python projects.
 
 It extends the command set of 'pyenv' for Windows by commands, which empowers you to clear, quickly and efficiently manage a lot of python virtual environments for each of your Python projects. 
 
