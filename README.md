@@ -934,19 +934,23 @@ Hi, I am Paul.
 
 As supervisor of 'pyenv-virtualenv' for Windows I welcome you to this project.
 
-Currently, this Python software project is in the state of 'Open Beta Test'.
+Currently, this Python software project is in the state of 'Open Beta Test':
 
 [![pypi](https://img.shields.io/badge/Status-Open%20Beta%20Test-60A020)](https://pypi.org/project/pyenv-virtualenv-windows/1.2.4/) 
 
 From my point of view it is stable, but what do you think about it?
 
-In case you want to discuss an 'issue', or, have a brilliant idea for a 'pull request', I ask you to read the related units in the README.md. In addition, download and study the Doxygen documentation. 
+In case you want to discuss an 'issue', or, have a brilliant idea for a 'pull request', I ask you to read the related units in the README.md. 
+
+[![github](https://img.shields.io/badge/GitHub-Pyenv%20Virtualenv%20Windows%20|%201.24-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
+
+In addition, download and study the Doxygen Industry Standard Documentation: 
 
 [![doxygen](https://img.shields.io/badge/Download-Doxygen%20Docs-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/doxygen_pyenv-virtualenv-windows.zip) 
 
 In most cases, this should avoid unnecessary effort and communication. 
 
-To ensure a clear, calm and joyful working atmosphere in this project, I recommend you to be informed and to agree to our rules of engagement before you publish your contribution. 
+To ensure a clear, calm and joyful working atmosphere in this project, I recommend you to be informed and to agree to our rules of engagement before you publish your contribution: 
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md)
 
