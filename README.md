@@ -948,7 +948,7 @@ In most cases, this should avoid unnecessary effort and communication.
 
 To ensure a clear, calm and joyful working atmosphere in this project, I recommend you to be informed and to agree to our rules of engagement before you publish your contribution. 
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md). 
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/CODE_OF_CONDUCT.md)
 
 Our Code of Conduct is version 2.1 of the Contributor Covenant, published with the courtesy of the organization of the same name [https://www.contributor-covenant.org/](https://www.contributor-covenant.org/). 
 
