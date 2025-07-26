@@ -1415,7 +1415,7 @@ The following Open Source tools are strongly recommended to fulfill the requirem
 
 ### Markdown (.MD) Editor
 
-In this project, I used PyCharm to edit the project documentation main page ('README.md').
+In this project, I used PyCharm to edit the project documentation supporting documents (e.g.: 'README.md', 'PYPI_README.md).
 
 It deprecated and replaced the formerly used tool 'Ghostwriter' completely.
 
@@ -1966,7 +1966,9 @@ To share the sources of the 'pyenv-virtualenv' for Windows plugin, GitHub is the
 
 There, the plugin is published as Open Source repository.
 
-In addition, the GitHub repository holds the pictures of the README.md, which describes the plugin identical on both applications GitHub and PiPI.   
+This repository holds the pictures and its supporting document 'README.md'.
+
+In addition, the Doxygen Industry Standard Documentation is provided as ZIP file in that repository.
 
 > IMPORTANT NOTE: The project/repository name 'pyenv-virtualenv-windows' on PyPI and GitHub must be identical.
 
@@ -1989,7 +1991,7 @@ In this project we use version 2.1 of the Contributor Covenant, published with t
 
 See the file 'CODE_OF_CONDUCT.md' in the project main folder, locally and on GitHub.
 
-Also, see the related chapter in the file 'README.md' in the project main folder, locally and on GitHub. 
+Also, see the related chapter in the file 'README.md' on GitHub. 
 
 ### Upload
 
@@ -2016,13 +2018,13 @@ Now, the working product of this project, the plugin 'pyenv-virtualenv' for Wind
 
 > IMPORTANT NOTE: The project name 'pyenv-virtualenv-windows' on Test PyPI, PyPI and GitHub repositories must be identical.
 
-> NOTE: We are using the same README.md on PyPI and GitHub. PiPI does not allow to store images. 
+> NOTE: We are using the different PYPI_README.md on PyPI and README.md on GitHub. Reason: PiPI does not allow to store or redirect images. 
 
-So, the images, which are didactically enhancing the README.md content, are stored on GitHub. So, the image references must not be local. It must be linked to the GitHub project subfolder 'images' folder in any case.
+Therefore, the images, which are essential for the didactic supplementation of the supporting documents README.md, are stored exclusively on GitHub or in the downloadable Doxygen Industry Standard Documentation.
 
-> NOTE: PyPi refuses to integrate the project's industry-standard Doxygen documentation, which is enhanced with images and provided in HTML format, into the package. 
+> NOTE: PyPI refuses to integrate the project's Doxygen Industry Standard Documentation, which is enhanced with images and provided in HTML format. 
  
-The Doxygen documentation must be published separately in a ZIP file on GitHub.
+The Doxygen Industry Standard Documentation must be published separately in a ZIP file on GitHub.
 
 ### Authentication
 
@@ -2371,8 +2373,9 @@ Do, 17. 07. 2025  05:11    <DIR>          .idea
 Fr, 18. 07. 2025  13:38                32 .tree-excludes
 Do, 17. 07. 2025  09:23    <DIR>          dist
 Do, 17. 07. 2025  04:55    <SYMLINK>      LICENSE [src\pyenv-virtualenv-windows\LICENSE.txt]
+Do, 26. 07. 2025  11:25             2.867 PYPI_README.md
 Do, 17. 07. 2025  09:21               863 pyproject.toml
-Do, 17. 07. 2025  10:57            42.172 README.md
+Do, 26. 07. 2025  08:46            42.172 README.md
 Do, 17. 07. 2025  09:04    <DIR>          src
 Do, 17. 07. 2025  02:36    <DIR>          tests
                5 Datei(en),         48.298 Bytes
@@ -2389,7 +2392,9 @@ Important are these files and folders:
   * tests\
     * Folder for scrips to automate testing the package (empty, not used).  
   * README.md
-    * Short instruction to install and use the plugin. This information must be the same - on PyPI and on GitHub.
+    * Short instruction to install and use the plugin. Published on GitHub.
+  * PYPI_README.md
+    * Tiny fragment of information on PyPI, just to direct the user to read README.md on GitHub or to download and study the Doxygen Industry Standard documentation.
   * LICENSE
     * Symlink to the license document in the plugin root folder.
   * pyproject.toml
@@ -2410,7 +2415,7 @@ authors = [
   { name="Michael Paul Korthals", email="michael_paul.korthals@chello.at" },
 ]
 description = "A 'pyenv' plugin to manage Python virtual environments, depending on different Python versions, for various Python projects."
-readme = "README.md"
+readme = "PYPI_README.md"
 requires-python = ">=3.6"
 dependencies = [
   "virtualenv"
@@ -2476,7 +2481,7 @@ creating pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin\lib
 creating pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
 copying files to pyenv_virtualenv_windows-1.2.4...
 copying LICENSE -> pyenv_virtualenv_windows-1.2.4
-copying README.md -> pyenv_virtualenv_windows-1.2.4
+copying PYPI_README.md -> pyenv_virtualenv_windows-1.2.4
 copying pyproject.toml -> pyenv_virtualenv_windows-1.2.4
 copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-delete.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin
 copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-init.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin
@@ -2606,6 +2611,18 @@ echo %errorlevel%
 ~~~
 Output:
 ~~~
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>python -m twine upload --repository testpypi dist/pyenv_virtualenv_windows-1.2.4*.*
+Uploading distributions to https://test.pypi.org/legacy/
+Uploading pyenv_virtualenv_windows-1.2.4-py3-none-any.whl
+100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 112.1/112.1 kB • 00:00 • 6.0 MB/s
+Uploading pyenv_virtualenv_windows-1.2.4.tar.gz
+100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 124.5/124.5 kB • 00:00 • ?
+
+View at:
+https://test.pypi.org/project/pyenv-virtualenv-windows/1.2.4/
+
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>echo %errorlevel%
+0
 ~~~
 
 If the call returns 0 and not any error or warning is visible in the console log, then step forward to the next unit.
@@ -2622,14 +2639,26 @@ If everything is fine, the final test performed successfully.
 
 Use this command to Upload the new version package to PyPI:
 ~~~{.cmd}
-python -m twine upload --repository testpypi dist/pyenv_virtualenv_windows-1.2.4*.*
+python -m twine upload --repository pypi dist/pyenv_virtualenv_windows-1.2.4*.*
 echo %errorlevel%
 ~~~
 Output:
 ~~~
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>python -m twine upload --repository pypi dist/pyenv_virtualenv_windows-1.2.4*.*
+Uploading distributions to https://upload.pypi.org/legacy/
+Uploading pyenv_virtualenv_windows-1.2.4-py3-none-any.whl
+100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 112.1/112.1 kB • 00:00 • 678.6 kB/s
+Uploading pyenv_virtualenv_windows-1.2.4.tar.gz
+100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 124.5/124.5 kB • 00:00 • 864.7 kB/s
+
+View at:
+https://pypi.org/project/pyenv-virtualenv-windows/1.2.4/
+
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>echo %errorlevel%
+0
 ~~~
 
-If everything is fine, the publication is successfully placed on Test PyPI. Everybody can access it. Worldwide. 
+If everything is fine, the publication is successfully placed on PyPI. Everybody can access it. Worldwide. 
 
 # Development Manual
 
@@ -2932,7 +2961,7 @@ Examples:
 ![pypi](https://img.shields.io/badge/PyPI-1.24-2040A0)
 ![python](https://img.shields.io/badge/Python-3.6%20|%203.8%20|%203.9%20|%203.10%20|%203.11%20|%203.12%20|%203.13-C0C040)
 
-In this project badges are used on the main README.md to ease and accelerate navigating through the document with a minimum of scrolling.
+In this project badges are used in the main README.md on GitHub to ease and accelerate navigating through the document with a minimum of scrolling.
 
 Another purposes are to give short information or to link to other websites. 
 
