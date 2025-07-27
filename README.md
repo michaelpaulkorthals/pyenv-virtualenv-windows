@@ -81,9 +81,37 @@ Completely perform these steps to fulfill the dependencies to 'pyenv' for Window
 2. Make that Python version 'global'. E.g. 'pyenv global 3.12.10'.
 3. Install package 'virtualenv'. E.g. 'pip install --upgrade virtualenv'.
 
-Afterward, install 'pyenv-virtualenv' for Windows in a console terminal with 'Administrator' privileges:
+Install the package 'pyenv virtualenv' into the global python version:  
 ~~~{.cmd}
 pip install pyenv-virtualenv-windows
+~~~
+
+Identify the location of the package:
+Output e.g.:
+~~~
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>pip show pyenv-virtualenv-windows
+Name: pyenv-virtualenv-windows
+Version: 1.2.5
+Summary: ...
+Home-page: ...
+Author: ...
+Author-email: ...
+License-Expression: ...
+Location: C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\Lib\site-packages
+Requires: virtualenv
+Required-by:
+~~~
+
+In this example the combined {location path} is, e.g.:
+~~~
+C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\Lib\site-packages\pyenv-virtualenv-windows
+~~~
+
+Dock 'pyenv-virtualenv' for Windows as plugin into 'pyenv' for Windows. You must call the following 3 commands in a separate console terminal with 'Administrator' privileges:
+~~~{.cmd} 
+cd {location path}
+dir
+install.bat
 ~~~
 
 Finally, use these commands to manage virtual environments in your projects: 
@@ -244,15 +272,49 @@ If everything is crystal-clear fine, then step forward to the next unit.
 
 Hardware and system software requirements are the same as for 'pyenv' for Windows.
 
-This plugin depends on 'pyenv' with globally installed Python version '3.6' or higher.
+This plugin additionally depends on 'pyenv' with globally installed Python version '3.6' or higher.
 
-This plugin will be installed with Python 'pip' via the PyPI Cloud Application:
-
-> IMPORTANT NOTE: Because the system PATH environment variable must be adopted, the package installer must be run with 'Administrator' privileges. Otherwise, the plugin-internal "install.bat" will show an error message and cancel.
+This plugin will be installed with Python 'pip':
 
 ~~~{.cmd}
 pip install pyenv-virtualenv-windows
 ~~~
+
+Display the package properties:
+~~~{.cmd}
+pip show pyenv-virtualenv-windows
+~~~
+Identify the location of the package from output:
+~~~
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>pip show pyenv-virtualenv-windows
+Name: pyenv-virtualenv-windows
+Version: 1.2.5
+Summary: ...
+Home-page: ...
+Author: ...
+Author-email: ...
+License-Expression: ...
+Location: C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\Lib\site-packages
+Requires: virtualenv ...
+Required-by: ...
+~~~
+
+In this example the combined {location path} is, e.g.:
+~~~
+C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\Lib\site-packages\pyenv-virtualenv-windows
+~~~
+
+> IMPORTANT NOTE: Because the system's PATH environment variable needs to be adjusted, the internal "install.bat" script must be run with administrator privileges. Otherwise, an error message will be displayed and the process will abort.
+
+Dock "pyenv-virtualenv" for Windows as a plugin to "pyenv" for Windows. To do this, you must run the following four commands in a separate console terminal with administrator privileges:
+~~~{.cmd} 
+cd {location path}
+dir
+install.bat
+echo %ERRORLEVEL%
+~~~
+
+If the docking runs without showing error messages and returns error level zero, then the docking of this plugin has been successful.
 
 [![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
 [![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
@@ -280,10 +342,18 @@ This tree chart gives an overview about the most important sub-folders in this p
 %USERPROFILE%\.pyenv\pyenv-win\plugins\pyenv-virtualenv
 ├───bin
 ├───docs
+│   ├───html
 │   └───images
 ├───libexec
 └───shims
 ~~~
+
+> NOTE: After a successful installation and docking, the complete Doxygen Industry Standard Documentation is available in the 'docs\\html' folder.
+
+See:
+~~~~
+%PYENV_ROOT%\plugins\pyenv-virtualenv\docs\html\index.html
+~~~~
 
 [![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
 [![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)

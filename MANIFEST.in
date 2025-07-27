@@ -1,0 +1,9 @@
+exclude README.md
+include src/pyenv-virtualenv-windows/.tree-exclude
+include src/pyenv-virtualenv-windows/.version
+include src/pyenv-virtualenv-windows/docs.doxyfile
+include src/pyenv-virtualenv-windows/install.bat
+recursive-include src/pyenv-virtualenv-windows/docs/ * *.*
+recursive-exclude src/pyenv-virtualenv-windows/docs/.idea * *.*
+exclude src/pyenv-virtualenv-windows/docs/*.zip
+exclude src/pyenv-virtualenv-windows/docs/*.backup

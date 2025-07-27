@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyenv-virtualenv-windows"
-version = "1.2.4"
+version = "1.2.5"
 authors = [
   { name="Michael Paul Korthals", email="michael_paul.korthals@chello.at" },
 ]
@@ -23,9 +23,6 @@ classifiers = [
 ]
 license = "GPL-3.0-only"
 license-files = ["LICENSE*"]
-
-[projects.scripts]
-script-files = ["src/pyenv-virtualenv-windows/install.bat"]
 
 [project.urls]
 Homepage = "https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/"
