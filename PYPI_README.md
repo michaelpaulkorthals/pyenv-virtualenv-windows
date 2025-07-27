@@ -20,7 +20,7 @@ It extends the command set of 'pyenv' for Windows by commands, which empowers yo
 
 You are strongly recommended to read the relevant information in the README.md on GitHub for first: 
 
-[![github](https://img.shields.io/badge/GitHub-Pyenv%20Virtualenv%20Windows%20|%201.24-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
+[![github](https://img.shields.io/badge/GitHub-Pyenv%20Virtualenv%20Windows%20|%201.2-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 
 In addition, download and study the Doxygen Industry Standard Documentation: 
 
