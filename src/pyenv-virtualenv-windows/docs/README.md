@@ -2501,6 +2501,12 @@ recursive-include src/pyenv-virtualenv-windows/docs/ * *.*
 recursive-exclude src/pyenv-virtualenv-windows/docs/.idea * *.*
 exclude src/pyenv-virtualenv-windows/docs/*.zip
 exclude src/pyenv-virtualenv-windows/docs/*.backup
+recursive-include src/pyenv-virtualenv-windows/bin/ * *.*
+exclude src/pyenv-virtualenv-windows/bin/lib/__pycache__/*.pyc
+exclude src/pyenv-virtualenv-windows/bin/lib/__pycache__/
+precursive-include src/pyenv-virtualenv-windows/libexec/ * *.*
+recursive-include src/pyenv-virtualenv-windows/patch/ * *.*
+recursive-include src/pyenv-virtualenv-windows/shims/ * *.*
 ~~~
 
 The line 'exclude README.md' prevents 'twine' from including the GitHub project documentation 'README.md' with the broken image links in the PyPI packages.
@@ -2597,6 +2603,12 @@ recursive-include src/pyenv-virtualenv-windows/docs/ * *.*
 recursive-exclude src/pyenv-virtualenv-windows/docs/.idea * *.*
 exclude src/pyenv-virtualenv-windows/docs/*.zip
 exclude src/pyenv-virtualenv-windows/docs/*.backup
+recursive-include src/pyenv-virtualenv-windows/bin/ * *.*
+exclude src/pyenv-virtualenv-windows/bin/lib/__pycache__/*.pyc
+exclude src/pyenv-virtualenv-windows/bin/lib/__pycache__/
+precursive-include src/pyenv-virtualenv-windows/libexec/ * *.*
+recursive-include src/pyenv-virtualenv-windows/patch/ * *.*
+recursive-include src/pyenv-virtualenv-windows/shims/ * *.*
 ~~~
 
 If everything is crystal-clear and not any deviation is visible in the console log, then step forward to the next unit. Otherwise, step back, correct and try again.
