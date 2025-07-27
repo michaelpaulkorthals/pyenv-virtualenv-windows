@@ -952,15 +952,49 @@ If everything is crystal-clear fine, then step forward to the next unit.
 
 Hardware and system software requirements are the same as for 'pyenv' for Windows.
 
-This plugin depends on 'pyenv' with globally installed Python version '3.6' or higher.
+This plugin additionally depends on 'pyenv' with globally installed Python version '3.6' or higher.
 
-This plugin will be installed with Python 'pip' via the PyPI Cloud Application:
-
-> IMPORTANT NOTE: Because the system PATH environment variable must be adopted, the package installer must be run with 'Administrator' privileges. Otherwise, the plugin-internal "install.bat" will show an error message and cancel.
+This plugin will be installed with Python 'pip':
 
 ~~~{.cmd}
 pip install pyenv-virtualenv-windows
 ~~~
+
+Display the package properties:
+~~~{.cmd}
+pip show pyenv-virtualenv-windows
+~~~
+Identify the location of the package from output:
+~~~
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>pip show pyenv-virtualenv-windows
+Name: pyenv-virtualenv-windows
+Version: 1.2.5
+Summary: ...
+Home-page: ...
+Author: ...
+Author-email: ...
+License-Expression: ...
+Location: C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\Lib\site-packages
+Requires: virtualenv ...
+Required-by: ...
+~~~
+
+In this example the combined {location path} is, e.g.:
+~~~
+C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\Lib\site-packages\pyenv-virtualenv-windows
+~~~
+
+> IMPORTANT NOTE: Because the system's PATH environment variable needs to be adjusted, the internal "install.bat" script must be run with administrator privileges. Otherwise, an error message will be displayed and the process will abort.
+
+Dock "pyenv-virtualenv" for Windows as a plugin to "pyenv" for Windows. To do this, you must run the following four commands in a separate console terminal with administrator privileges:
+~~~{.cmd} 
+cd {location path}
+dir
+install.bat
+echo %ERRORLEVEL%
+~~~
+
+If the docking runs without showing error messages and returns error level zero, then the docking of this plugin has been successful.
 
 ## Location
 
@@ -985,10 +1019,18 @@ This tree chart gives an overview about the most important sub-folders in this p
 %USERPROFILE%\.pyenv\pyenv-win\plugins\pyenv-virtualenv
 ├───bin
 ├───docs
+│   ├───html
 │   └───images
 ├───libexec
 └───shims
 ~~~
+
+> NOTE: After a successful installation and docking, the complete Doxygen Industry Standard Documentation is available in the 'docs\\html' folder.
+
+See:
+~~~~
+%PYENV_ROOT%\plugins\pyenv-virtualenv\docs\html\index.html
+~~~~
 
 ## Usage
 
@@ -2366,20 +2408,24 @@ C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>dir
 
  Verzeichnis von C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows
 
-Do, 17. 07. 2025  09:23    <DIR>          .
+Sa, 26. 07. 2025  12:31    <DIR>          .
 Do, 17. 07. 2025  02:12    <DIR>          ..
-Do, 17. 07. 2025  14:51             5.231 .gitignore
+Sa, 19. 07. 2025  07:14             5.217 .gitignore
 Do, 17. 07. 2025  05:11    <DIR>          .idea
-Fr, 18. 07. 2025  13:38                32 .tree-excludes
-Do, 17. 07. 2025  09:23    <DIR>          dist
+Mo, 21. 07. 2025  02:54             5.473 CODE_OF_CONDUCT.md
+Sa, 26. 07. 2025  12:31    <DIR>          dist
 Do, 17. 07. 2025  04:55    <SYMLINK>      LICENSE [src\pyenv-virtualenv-windows\LICENSE.txt]
-Do, 26. 07. 2025  11:25             2.867 PYPI_README.md
-Do, 17. 07. 2025  09:21               863 pyproject.toml
-Do, 26. 07. 2025  08:46            42.172 README.md
+Sa, 26. 07. 2025  12:29                19 MANIFEST.in
+Sa, 26. 07. 2025  12:03             2.706 PYPI_README.md
+Sa, 26. 07. 2025  10:01             1.023 pyproject.toml
+Sa, 26. 07. 2025  12:18            50.477 README.md
+Di, 22. 07. 2025  04:23                17 requirements.txt
+Mo, 21. 07. 2025  09:28               623 requirements_author.txt
+Di, 22. 07. 2025  04:23                17 requirements_user.txt
 Do, 17. 07. 2025  09:04    <DIR>          src
 Do, 17. 07. 2025  02:36    <DIR>          tests
-               5 Datei(en),         48.298 Bytes
-               6 Verzeichnis(se), 35.393.552.352 Bytes frei
+              10 Datei(en),         65.572 Bytes
+               6 Verzeichnis(se), 71.254.540.288 Bytes frei
 ~~~
 
 Structure the folder tree according to the instructions in the tutorials. 
@@ -2392,11 +2438,13 @@ Important are these files and folders:
   * tests\
     * Folder for scrips to automate testing the package (empty, not used).  
   * README.md
-    * Short instruction to install and use the plugin. Published on GitHub.
+    * Short instruction to install and use the plugin. Published on GitHub only.
   * PYPI_README.md
     * Tiny fragment of information on PyPI, just to direct the user to read README.md on GitHub or to download and study the Doxygen Industry Standard documentation.
   * LICENSE
     * Symlink to the license document in the plugin root folder.
+  * MANIFEST.in
+    * File to configure, e.g., to exclude files from the package or to include files and folders into the Python package. 
   * pyproject.toml
     * PyPI package configuration file.
   * .gitignore
@@ -2430,9 +2478,6 @@ classifiers = [
 license = "GPL-3.0-only"
 license-files = ["LICENSE*"]
 
-[projects.scripts]
-script-files = ["src/pyenv-virtualenv-windows/install.bat"]
-
 [project.urls]
 Homepage = "https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/"
 Issues = "https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/issues"
@@ -2440,14 +2485,29 @@ Issues = "https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/issues
 
 See description for each of these settings and more the PyPI documentation.
 
-In addition, we must prevent the file 'README.md', which documents this plugin on GitHub, from being bundled into the package. So, it must be excluded from building by creating and configuring this file in the project root folder:
+In addition, we must exclude the GitHub 'README.md' from the package. Otherwise, information with image dead links will appear in the PyPI package description text. This behaviour will be enforced by this file in the project root folder:
 ~~~{.cmd}
-notepad++ MANIFEST.in
+notepad++ MANIFEST.in 
+type MANIFEST.in
 ~~~
-Content:
+Output:
 ~~~
 exclude README.md
+include src/pyenv-virtualenv-windows/.tree-exclude
+include src/pyenv-virtualenv-windows/.version
+include src/pyenv-virtualenv-windows/docs.doxyfile
+include src/pyenv-virtualenv-windows/install.bat
+recursive-include src/pyenv-virtualenv-windows/docs/ * *.*
+recursive-exclude src/pyenv-virtualenv-windows/docs/.idea * *.*
+exclude src/pyenv-virtualenv-windows/docs/*.zip
+exclude src/pyenv-virtualenv-windows/docs/*.backup
 ~~~
+
+The line 'exclude README.md' prevents 'twine' from including the GitHub project documentation 'README.md' with the broken image links in the PyPI packages.
+
+The other lines include missing files and folders into the package and also exclude further obsolete files and folders.
+
+NOTE: Don't forget to build the documentation using the related batch script in the plugin root 'docs' folder.
 
 If everything is crystal-clear fine configured, then step forward to the next unit. 
 
@@ -2465,134 +2525,8 @@ C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>python -m build
 * Installing packages in isolated environment:
   - setuptools >= 77.0.3
 * Getting build dependencies for sdist...
-running egg_info
-writing src\pyenv_virtualenv_windows.egg-info\PKG-INFO
-writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_links.txt
-writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
-writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
-reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
-reading manifest template 'MANIFEST.in'
-adding license file 'LICENSE'
-writing manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
-* Building sdist...
-running sdist
-running egg_info
-writing src\pyenv_virtualenv_windows.egg-info\PKG-INFO
-writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_links.txt
-writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
-writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
-reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
-reading manifest template 'MANIFEST.in'
-adding license file 'LICENSE'
-writing manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
-running check
-creating pyenv_virtualenv_windows-1.2.4
-creating pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin
-creating pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin\lib
-creating pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
-copying files to pyenv_virtualenv_windows-1.2.4...
-copying LICENSE -> pyenv_virtualenv_windows-1.2.4
-copying MANIFEST.in -> pyenv_virtualenv_windows-1.2.4
-copying PYPI_README.md -> pyenv_virtualenv_windows-1.2.4
-copying pyproject.toml -> pyenv_virtualenv_windows-1.2.4
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-delete.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-init.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-prefix.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-props.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenvs.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\lib\hlp.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin\lib
-copying src\pyenv-virtualenv-windows\bin\lib\log.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin\lib
-copying src\pyenv-virtualenv-windows\bin\lib\tbl.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin\lib
-copying src\pyenv-virtualenv-windows\bin\lib\tre.py -> pyenv_virtualenv_windows-1.2.4\src\pyenv-virtualenv-windows\bin\lib
-copying src\pyenv_virtualenv_windows.egg-info\PKG-INFO -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
-copying src\pyenv_virtualenv_windows.egg-info\SOURCES.txt -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
-copying src\pyenv_virtualenv_windows.egg-info\dependency_links.txt -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
-copying src\pyenv_virtualenv_windows.egg-info\requires.txt -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
-copying src\pyenv_virtualenv_windows.egg-info\top_level.txt -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
-copying src\pyenv_virtualenv_windows.egg-info\SOURCES.txt -> pyenv_virtualenv_windows-1.2.4\src\pyenv_virtualenv_windows.egg-info
-Writing pyenv_virtualenv_windows-1.2.4\setup.cfg
-Creating tar archive
-removing 'pyenv_virtualenv_windows-1.2.4' (and everything under it)
-* Building wheel from sdist
-* Creating isolated environment: venv+pip...
-* Installing packages in isolated environment:
-  - setuptools >= 77.0.3
-* Getting build dependencies for wheel...
-running egg_info
-writing src\pyenv_virtualenv_windows.egg-info\PKG-INFO
-writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_links.txt
-writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
-writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
-reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
-reading manifest template 'MANIFEST.in'
-warning: no previously-included files found matching 'README.md'
-adding license file 'LICENSE'
-writing manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
-* Building wheel...
-running bdist_wheel
-running build
-running build_py
-creating build\lib\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-delete.py -> build\lib\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-init.py -> build\lib\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-prefix.py -> build\lib\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv-props.py -> build\lib\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenv.py -> build\lib\pyenv-virtualenv-windows\bin
-copying src\pyenv-virtualenv-windows\bin\pyenv-virtualenvs.py -> build\lib\pyenv-virtualenv-windows\bin
-creating build\lib\pyenv-virtualenv-windows\bin\lib
-copying src\pyenv-virtualenv-windows\bin\lib\hlp.py -> build\lib\pyenv-virtualenv-windows\bin\lib
-copying src\pyenv-virtualenv-windows\bin\lib\log.py -> build\lib\pyenv-virtualenv-windows\bin\lib
-copying src\pyenv-virtualenv-windows\bin\lib\tbl.py -> build\lib\pyenv-virtualenv-windows\bin\lib
-copying src\pyenv-virtualenv-windows\bin\lib\tre.py -> build\lib\pyenv-virtualenv-windows\bin\lib
-running egg_info
-writing src\pyenv_virtualenv_windows.egg-info\PKG-INFO
-writing dependency_links to src\pyenv_virtualenv_windows.egg-info\dependency_links.txt
-writing requirements to src\pyenv_virtualenv_windows.egg-info\requires.txt
-writing top-level names to src\pyenv_virtualenv_windows.egg-info\top_level.txt
-reading manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
-reading manifest template 'MANIFEST.in'
-warning: no previously-included files found matching 'README.md'
-adding license file 'LICENSE'
-writing manifest file 'src\pyenv_virtualenv_windows.egg-info\SOURCES.txt'
-installing to build\bdist.win-amd64\wheel
-running install
-running install_lib
-creating build\bdist.win-amd64\wheel
-creating build\bdist.win-amd64\wheel\pyenv-virtualenv-windows
-creating build\bdist.win-amd64\wheel\pyenv-virtualenv-windows\bin
-creating build\bdist.win-amd64\wheel\pyenv-virtualenv-windows\bin\lib
-copying build\lib\pyenv-virtualenv-windows\bin\lib\hlp.py -> build\bdist.win-amd64\wheel\.\pyenv-virtualenv-windows\bin\lib
-copying build\lib\pyenv-virtualenv-windows\bin\lib\log.py -> build\bdist.win-amd64\wheel\.\pyenv-virtualenv-windows\bin\lib
-copying build\lib\pyenv-virtualenv-windows\bin\lib\tbl.py -> build\bdist.win-amd64\wheel\.\pyenv-virtualenv-windows\bin\lib
-copying build\lib\pyenv-virtualenv-windows\bin\lib\tre.py -> build\bdist.win-amd64\wheel\.\pyenv-virtualenv-windows\bin\lib
-copying build\lib\pyenv-virtualenv-windows\bin\pyenv-virtualenv-delete.py -> build\bdist.win-amd64\wheel\.\pyenv-virtualenv-windows\bin
-copying build\lib\pyenv-virtualenv-windows\bin\pyenv-virtualenv-init.py -> build\bdist.win-amd64\wheel\.\pyenv-virtualenv-windows\bin
-copying build\lib\pyenv-virtualenv-windows\bin\pyenv-virtualenv-prefix.py -> build\bdist.win-amd64\wheel\.\pyenv-virtualenv-windows\bin
-copying build\lib\pyenv-virtualenv-windows\bin\pyenv-virtualenv-props.py -> build\bdist.win-amd64\wheel\.\pyenv-virtualenv-windows\bin
-copying build\lib\pyenv-virtualenv-windows\bin\pyenv-virtualenv.py -> build\bdist.win-amd64\wheel\.\pyenv-virtualenv-windows\bin
-copying build\lib\pyenv-virtualenv-windows\bin\pyenv-virtualenvs.py -> build\bdist.win-amd64\wheel\.\pyenv-virtualenv-windows\bin
-running install_egg_info
-Copying src\pyenv_virtualenv_windows.egg-info to build\bdist.win-amd64\wheel\.\pyenv_virtualenv_windows-1.2.4-py3.12.egg-info
-running install_scripts
-creating build\bdist.win-amd64\wheel\pyenv_virtualenv_windows-1.2.4.dist-info\WHEEL
-creating 'C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows\dist\.tmp-3do7werj\pyenv_virtualenv_windows-1.2.4-py3-none-any.whl' and adding 'build\bdist.win-amd64\wheel' to it
-adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv-delete.py'
-adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv-init.py'
-adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv-prefix.py'
-adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv-props.py'
-adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenv.py'
-adding 'pyenv-virtualenv-windows/bin/pyenv-virtualenvs.py'
-adding 'pyenv-virtualenv-windows/bin/lib/hlp.py'
-adding 'pyenv-virtualenv-windows/bin/lib/log.py'
-adding 'pyenv-virtualenv-windows/bin/lib/tbl.py'
-adding 'pyenv-virtualenv-windows/bin/lib/tre.py'
-adding 'pyenv_virtualenv_windows-1.2.4.dist-info/licenses/LICENSE'
-adding 'pyenv_virtualenv_windows-1.2.4.dist-info/METADATA'
-adding 'pyenv_virtualenv_windows-1.2.4.dist-info/WHEEL'
-adding 'pyenv_virtualenv_windows-1.2.4.dist-info/top_level.txt'
-adding 'pyenv_virtualenv_windows-1.2.4.dist-info/RECORD'
-removing build\bdist.win-amd64\wheel
+...
+...
 Successfully built pyenv_virtualenv_windows-1.2.4.tar.gz and pyenv_virtualenv_windows-1.2.4-py3-none-any.whl
 
 C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>echo %errorlevel%
@@ -2605,7 +2539,7 @@ If the call returns 0 and not any error or warning is visible in the console log
 
 Familiarize yourself with the 'twine' application, which allows you to try out the complex upload to Test PyPI at your leisure.
 
-Afterward check the file path to the package of that version using 'twine':
+Afterward check the file path to the package of that specific version using 'twine':
 ~~~{.cmd}
 python -m twine check dist/pyenv_virtualenv_windows-1.2.4*.*
 ~~~
@@ -2616,16 +2550,71 @@ Checking dist\pyenv_virtualenv_windows-1.2.4-py3-none-any.whl: PASSED
 Checking dist\pyenv_virtualenv_windows-1.2.4.tar.gz: PASSED
 ~~~
 
+In addition, check if the all the files are included into the specific version of the package:
+~~~{.cmd}
+tar -tf dist/pyenv_virtualenv_windows-1.2.4*.tar.gz
+~~~
+Output with missing '.tree_excludes', '.version', 'install.bat' 'docs\\' (recursively) , e.g.:
+~~~
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>tar -tf dist/pyenv_virtualenv_windows-1.2.4*.tar.gz
+pyenv_virtualenv_windows-1.2.4/
+pyenv_virtualenv_windows-1.2.4/LICENSE
+pyenv_virtualenv_windows-1.2.4/MANIFEST.in
+pyenv_virtualenv_windows-1.2.4/PKG-INFO
+pyenv_virtualenv_windows-1.2.4/PYPI_README.md
+pyenv_virtualenv_windows-1.2.4/pyproject.toml
+pyenv_virtualenv_windows-1.2.4/setup.cfg
+pyenv_virtualenv_windows-1.2.4/src/
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/lib/
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/lib/hlp.py
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/lib/log.py
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/lib/tbl.py
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/lib/tre.py
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-delete.py
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-init.py
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-prefix.py
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-props.py
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenv.py
+pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenvs.py
+pyenv_virtualenv_windows-1.2.4/src/pyenv_virtualenv_windows.egg-info/
+pyenv_virtualenv_windows-1.2.4/src/pyenv_virtualenv_windows.egg-info/PKG-INFO
+pyenv_virtualenv_windows-1.2.4/src/pyenv_virtualenv_windows.egg-info/SOURCES.txt
+pyenv_virtualenv_windows-1.2.4/src/pyenv_virtualenv_windows.egg-info/dependency_links.txt
+pyenv_virtualenv_windows-1.2.4/src/pyenv_virtualenv_windows.egg-info/requires.txt
+pyenv_virtualenv_windows-1.2.4/src/pyenv_virtualenv_windows.egg-info/top_level.txt
+~~~
+
+In case of missing files, these must be explicitly included into the 'MANIFEST.in' file. Content:
+~~~
+exclude README.md
+include src/pyenv-virtualenv-windows/.tree-exclude
+include src/pyenv-virtualenv-windows/.version
+include src/pyenv-virtualenv-windows/docs.doxyfile
+include src/pyenv-virtualenv-windows/install.bat
+recursive-include src/pyenv-virtualenv-windows/docs/ * *.*
+recursive-exclude src/pyenv-virtualenv-windows/docs/.idea * *.*
+exclude src/pyenv-virtualenv-windows/docs/*.zip
+exclude src/pyenv-virtualenv-windows/docs/*.backup
+~~~
+
+If everything is crystal-clear and not any deviation is visible in the console log, then step forward to the next unit. Otherwise, step back, correct and try again.
+
 ### Upload to Test PyPI
+
+> IMPORTANT RESTRICTION: A package of a specific version can only be uploaded once. If something is failing afterward, a new version with a new bugfix number inside the version number must be created. 
+ 
+> WARNING: Don't use undocumented PyPI easter-eggs from inofficial sources, which try to bypass this restriction.   
 
 To avoid unnecessary and obsolete communication efforts in a test phase of your project, use the 'Test PyPI' repository for first to upload the new package. The essential requirements for this step see in Unit 'Preparations'.
 
-Use this command to Upload the new version package to PyPI:
+Use this command to upload the new version package to PyPI:
 ~~~{.cmd}
 python -m twine upload --repository testpypi dist/pyenv_virtualenv_windows-1.2.4*.*
 echo %errorlevel%
 ~~~
-Output:
+Output e.g.:
 ~~~
 C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>python -m twine upload --repository testpypi dist/pyenv_virtualenv_windows-1.2.4*.*
 Uploading distributions to https://test.pypi.org/legacy/
@@ -2649,16 +2638,20 @@ Use the prepared Windows Test System to install, configure and perform a full te
 1. 'pyenv' for Windows
 2. 'pyenv-virtualenv' for Windows
 
-If everything is fine, the final test performed successfully.
+If everything is fine and the final test performed successfully, you are allowed to step forward to the next unit.
 
 ### Upload to PyPI
 
-Use this command to Upload the new version package to PyPI:
+> IMPORTANT RESTRICTION: A package of a specific version can only be uploaded once. If something is failing afterward, a new version with a new bugfix number inside the version number must be created. 
+ 
+> WARNING: Don't use undocumented PyPI easter-eggs from inofficial sources, which try to bypass this restriction.   
+
+Use this command to upload the new version package to PyPI:
 ~~~{.cmd}
 python -m twine upload --repository pypi dist/pyenv_virtualenv_windows-1.2.4*.*
 echo %errorlevel%
 ~~~
-Output:
+Output e.g.:
 ~~~
 C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>python -m twine upload --repository pypi dist/pyenv_virtualenv_windows-1.2.4*.*
 Uploading distributions to https://upload.pypi.org/legacy/
