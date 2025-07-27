@@ -4,7 +4,11 @@
 
 This version history is sorted in descending order.
 
-The version number are synchronous to the related 'pyenv-virtualenv' package for Posix/Linux, which features has been reverse engineered.
+The version number except the patch number are synchronous to the related 'pyenv-virtualenv' package for Posix/Linux, which features has been reverse engineered.
+
+### 1.2.5
+* Test analyze and debug PiPy packaging.
+* This new version deprecates version 1.2.4.
 
 ### 1.2.4
 * Analyze the documentation, code, data and behavior of the Linux version of the plugin.
