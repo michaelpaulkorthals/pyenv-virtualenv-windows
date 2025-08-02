@@ -273,11 +273,13 @@ If everything is crystal-clear fine, then step forward to the next unit.
 
 ## Installation <a name="installation"></a>
 
+This package contains no importable code. Instead, it transports a command-line-based tool that docks a plugin to the previously installed 'pyenv' toolset.  
+
 Hardware and system software requirements are the same as for 'pyenv' for Windows.
 
 This plugin additionally depends on 'pyenv' with globally installed Python version '3.6' or higher.
 
-This plugin will be installed with Python 'pip':
+It will be installed with Python 'pip':
 
 ~~~{.cmd}
 pip install pyenv-virtualenv-windows
@@ -1141,9 +1143,13 @@ From my point of view it is stable, but what do you think about it?
 
 In case you want to discuss an 'issue', or, have a brilliant idea for a 'pull request', I ask you to read the related units in the README.md. 
 
+In addition, it will be helpful to know your hardware platform, Windows version builds, the issue-related 'pyenv virtualenvs' and 'pip freeze' listings. 
+
+Don't forget to exclude confidential and person-related data from your contribution. 
+
 [![github](https://img.shields.io/badge/GitHub-Pyenv%20Virtualenv%20Windows%20|%201.2-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 
-In addition, download and study the Doxygen Industry Standard Documentation: 
+In addition, study the installed Doxygen Industry Standard Documentation: 
 
 [![doxygen](https://img.shields.io/badge/Download-Doxygen%20Docs-20A040)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/blob/main/doxygen_pyenv-virtualenv-windows.zip) 
 
