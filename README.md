@@ -287,7 +287,7 @@ This plugin additionally depends on 'pyenv' with globally installed Python versi
 
 It will be installed with Python 'pip'.
 
-> IMPORTANT NOTE: Installing the plug-in, you could be forced to call 'pyenv', 'python' or 'pip' with absolute file paths. This will bypass possible path conflicts, which will be resolved during this installation/docking of this plugin. Use the 'where' command to uniquely identify the absolute paths to the related executables.
+> IMPORTANT NOTE: Installing the plug-in, you could be forced to call 'pyenv', 'python' or 'pip' with absolute file paths. This will bypass possible path conflicts, which will be resolved during this installation/docking of this plugin. Use the 'where' command to uniquely identify the absolute paths to the 'pyenv'-related executables.
 
 ~~~{.cmd}
 where pip
