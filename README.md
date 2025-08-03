@@ -164,35 +164,42 @@ Unzip the Doxygen ZIP file, find the 'index.html' file inside and simply open it
 
 Use the instructions on the <a href="https://github.com/pyenv-win/pyenv-win/" rel="noopener noreferrer" target="_blank">'pyenv' for Windows home page on GitHub</a> to completely install and configure 'pyenv'.   
 
-Afterward, perform this manual test, to completely check the truth:
+Afterward, perform this manual test, to completely check the truth.
+
+> NOTE: The conditions of this test will force you to call 'pyenv', 'python' or 'pip' with absolute file paths. This will bypass possible path conflicts, which will be resolved later during installation/docking of this plugin.    
+
+Test schedule:
 ~~~{.cmd}
-REM 1. Check if the 2 'pyenv' executable paths are at the beginning of the PATH.
+REM 1. Check if the 2 'pyenv' executable paths are included in the PATH.
 path
-REM 2. Check if the 'pyenv' Python executable is found on top of calling priority.
+REM 2. Check if the 'pyenv' Python executable is available.
 where python
 REM 3. Check if the 'pyenv' global Python version is correctly set.
-python -c "import sys; print(sys.executable); quit()"
+{'pyenv'-related Python executable file path} -c "import sys; print(sys.executable); quit()"
 REM 4. Ensure the actual versions of 'pip' and 'virtualenv' are installed.
-python -m pip install --upgrade pip virtualenv
+{'pyenv'-related Python executable file path} -m pip install --upgrade pip virtualenv
 ~~~
 
 Output (e.g.):
 ~~~
 C:\Users\Paul>path
-PATH=C:\Users\Paul\.pyenv\pyenv-win\bin;C:\Users\Paul\.pyenv\pyenv-win\shims;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\FireDaemon OpenSSL 3\bin;C:\cygwin64\bin;C:\Apache24\bin;C:\PHP7;C:\Program Files\MariaDB 10.5\bin; ...
+PATH=
+...
+C:\Users\Paul\.pyenv\pyenv-win\bin;C:\Users\Paul\.pyenv\pyenv-win\shims;
+...
 
 C:\Users\Paul>where python
-C:\Users\Paul\.pyenv\pyenv-win\shims\python
-C:\Users\Paul\.pyenv\pyenv-win\shims\python.bat
 C:\cygwin64\bin\python
 C:\Program Files\KiCad\8.0\bin\python.exe
 C:\Program Files\Inkscape\bin\python.exe
+C:\Users\Paul\.pyenv\pyenv-win\shims\python
+C:\Users\Paul\.pyenv\pyenv-win\shims\python.bat
 C:\Users\Paul\AppData\Local\Microsoft\WindowsApps\python.exe
 
-C:\Users\Paul>python -c "import sys; print(sys.executable); quit()"
+C:\Users\Paul>C:\Users\Paul\.pyenv\pyenv-win\shims\python -c "import sys; print(sys.executable); quit()"
 C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\python.exe
 
-C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>python -m pip install --upgrade pip virtualenv
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>C:\Users\Paul\.pyenv\pyenv-win\shims\python -m pip install --upgrade pip virtualenv
 Requirement already satisfied: pip in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (25.1.1)
 Requirement already satisfied: virtualenv in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (20.31.2)
 Requirement already satisfied: distlib<1,>=0.3.7 in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from virtualenv) (0.3.9)
@@ -204,44 +211,42 @@ Requirement already satisfied: platformdirs<5,>=3.9.1 in c:\users\paul\.pyenv\py
 
 Let's have a detailed view on the resulting output and possible remediation tasks.
 
-1. Position of the 'pyenv' executable paths in PATH system environment variable:
+1. Existence of two 'pyenv' executable paths in PATH environment variable:
 ~~~
-PATH=C:\Users\Paul\.pyenv\pyenv-win\bin;C:\Users\Paul\.pyenv\pyenv-win\shims;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\FireDaemon OpenSSL 3\bin;C:\cygwin64\bin;C:\Apache24\bin;C:\PHP7;C:\Program Files\MariaDB 10.5\bin; ...
+C:\Users\Paul>path
+PATH=
+...
+C:\Users\Paul\.pyenv\pyenv-win\bin;C:\Users\Paul\.pyenv\pyenv-win\shims;
+...
 ~~~
 * In case of success: 
-  * The 'pyenv'-related paths are located at the beginning of PATH.
+  * The two 'pyenv'-related paths are included PATH.
   * Both paths are beginning with '%USERPROFILE%\\.pyenv\\pyenv-win'.
   * The first path ends with '\\bin'.
   * The second path ends with '\\shims'.
 * In case of failure/deviation:
-  * NOTE: You need 'Administrator' privileges on your system.  
-  * Goto Windows 'Settings' and search for 'path' and select 'Edit System Environment Variables'.
-    * In the 'System Properties' dialog press the button "Environment Variables".
-    * In the 'Environment Variables' dialog:
-      * Cut both paths from user PATH. 
-      * Prepending to the beginning, paste both paths to system PATH.
-      * Close all dialogs with OK.
+  * Install/configure 'pyenv' for Windows on your computer.
   * Repeat test 1.
 
-2. Position of the 'python' command in the call priority list called by 'where python':
+2. Existence of the 'python' command in the call priority list called by 'where python':
 ~~~
 C:\Users\Paul>where python
-C:\Users\Paul\.pyenv\pyenv-win\shims\python
-C:\Users\Paul\.pyenv\pyenv-win\shims\python.bat
 C:\cygwin64\bin\python
 C:\Program Files\KiCad\8.0\bin\python.exe
 C:\Program Files\Inkscape\bin\python.exe
+C:\Users\Paul\.pyenv\pyenv-win\shims\python
+C:\Users\Paul\.pyenv\pyenv-win\shims\python.bat
 C:\Users\Paul\AppData\Local\Microsoft\WindowsApps\python.exe
 ~~~
 * In case of success:
-  * Python is found in directory '%USERPROFILE%\\.pyenv\\pyenv-win\\shims'
-  * The entries for that directory are shown on top of the list (highest priority)
+  * Python executable is found in directory '%USERPROFILE%\\.pyenv\\pyenv-win\\shims'
 * In case of failure/deviation:
   * Jump back to the detailed remediation instructions in test 1.
   * Repeat test 1 and 2.
 
 3. Global 'pyenv' global version configuration for Python:
 ~~~
+C:\Users\Paul>C:\Users\Paul\.pyenv\pyenv-win\shims\python -c "import sys; print(sys.executable); quit()"
 C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\python.exe
 ~~~
 * In case of success:
@@ -252,8 +257,9 @@ C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\python.exe
   * Call 'pyenv versions' to check, which version is '*' global.
   * Repeat test 3. 
 
-4. Python packages 'pip' and 'virtualenv' are up-to-date:
+4. Packages 'pip' and 'virtualenv' are up-to-date in the 'pyenv' global Python version:
 ~~~
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>C:\Users\Paul\.pyenv\pyenv-win\shims\python -m pip install --upgrade pip virtualenv
 Requirement already satisfied: pip in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (25.1.1)
 Requirement already satisfied: virtualenv in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (20.31.2)
 Requirement already satisfied: distlib<1,>=0.3.7 in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from virtualenv) (0.3.9)
@@ -279,9 +285,12 @@ Hardware and system software requirements are the same as for 'pyenv' for Window
 
 This plugin additionally depends on 'pyenv' with globally installed Python version '3.6' or higher.
 
-It will be installed with Python 'pip':
+It will be installed with Python 'pip'.
+
+> IMPORTANT NOTE: Installing the plug-in, you could be forced to call 'pyenv', 'python' or 'pip' with absolute file paths. This will bypass possible path conflicts, which will be resolved during this installation/docking of this plugin. Use the 'where' command to uniquely identify the absolute paths to the related executables.
 
 ~~~{.cmd}
+where pip
 pip install pyenv-virtualenv-windows
 ~~~
 
@@ -351,7 +360,7 @@ The following two paths has been set by 'pyenv' for Windows.
 
 These PATH items must have the highest priority to call Python from console terminal or command line interface. Otherwise, 'pyenv' and its dependent 'pyenv-virtualenv' for Windows will fail. 
 
-As I have done this for the first time on my developer workstation, I found 3 'Path Conflicts'. E.g.:
+As I have done this for the first time on my developer workstation, the installer found 3 'Path Conflicts'. E.g.:
 ~~~
 > install.bat
 ...
