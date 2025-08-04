@@ -1192,9 +1192,9 @@ From my point of view it is stable, but what do you think about it?
 
 In case you want to discuss an 'issue', or, have a brilliant idea for a 'pull request', I ask you to read the related units in the README.md. 
 
-In addition, it will be helpful to know your hardware platform, Windows version builds, the issue-related 'pyenv virtualenvs' and 'pip freeze' listings. 
+> IMPORTANT NOTE: When discussing a functional issue with me on GitHub, words means nearly nothing. Always support your bug descriptions with console terminal output.
 
-Don't forget to exclude confidential and person-related data from your contribution. 
+> IMPORTANT NOTE: Don't forget to exclude confidential and person-related data from your contribution. 
 
 [![github](https://img.shields.io/badge/GitHub-Pyenv%20Virtualenv%20Windows%20|%201.2-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
 
