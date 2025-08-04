@@ -86,7 +86,7 @@ That patch significantly improves the 'pyenv' plugin interface by these advantag
 * It allows to implement multiple plugins from different sources basing on a unified syntax.
 * It ensures Posix/Linux to Windows interoperability implementing the same command names e.g. like in 'pyenv-virtualenv' for Linux or macOS.  
 
-The current version 1.2.4 of 'pyenv-virtualenv' for Windows is including that patch. This patch redirects the 'pyenv' command to its patched counterpart in its own 'shims' folder. 
+The current version 1.2.4+ of 'pyenv-virtualenv' for Windows is including that patch. This patch redirects the 'pyenv' command to its patched counterpart in its own 'shims' folder. 
 
 This temporary workaround allows 'pyenv-virtualenv' for Windows to operate without problems for the upcoming Beta test.
 
