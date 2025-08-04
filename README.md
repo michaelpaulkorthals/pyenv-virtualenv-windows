@@ -35,9 +35,10 @@
 	6.7. [Virtual Environment Prefix](#virtual_environment_prefix)</br>
 	6.8. [Reconfigure After 'pyenv' Upgrade](#reconfigure_after_pyenv_upgrade)</br>
 7. [Python Venv](#python_venv)</br>
-8. [Patch for 'pyenv' for Windows](#patch_for_pyenv)</br>
-    8.1 [Patch Details](#patch_for_pyenv_details)</br>
-9. [How to contribute](#how_to_contribute)</br>
+8. [Error Diagnosis](#error_diagnosis)</br>
+9. [Patch for 'pyenv' for Windows](#patch_for_pyenv)</br>
+    9.1 [Patch Details](#patch_for_pyenv_details)</br>
+10. [How to contribute](#how_to_contribute)</br>
 
 ## Introduction <a name="introduction"></a>
 
@@ -857,7 +858,7 @@ See in these folders:
 To automate this, use the 'pyenv-virtualenv' plugin to uninstall virtual environments:
 ~~~{.cmd}
 pyenv virtualenv-delete {version} {name}
-pyenv virtualemv-delete 3.12.10 cinema_5a
+pyenv virtualenv-delete 3.12.10 cinema_5a
 ~~~
 
 > NOTE: This will only delete the virtual environment, so called 'cinema_5a'. The version '3.12.10' remains untouched. 
@@ -964,6 +965,35 @@ Each utility in 'pyenv-virtualenv' tries to import the 'virtualenv' near the beg
 
 [[![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
 [![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
+
+## Error Diagnosis <a name="error_diagnosis"></a>
+
+> IMPORTANT NOTE: When discussing a functional issue with me on GitHub, words means nearly nothing. Always support your bug descriptions with console terminal output.
+
+To support effective error diagnosis, e.g. use the following commands.
+
+The resulting information can be analyzed in case of a problem on your systems. It gives detailed hints about what could be wrong.
+
+To try, copy one of these commands or all commands and paste these into a console terminal:
+~~~[.cmd}
+REM 1. Check 'pyenv':
+echo %PYENV_ROOT%
+where pyenv
+
+REM 2. Show list of Python executables in priority order:
+where python
+where pip
+pip freeze
+
+REM 3. Show PATH environment variable in the actuial console terminal:
+path
+~~~
+
+If you have this information and have studied the documentation, then in most cases you should know how to solve the problem. Otherwise, you are welcome to contribute an issue, to solve it.
+
+[[![quick_reference](https://img.shields.io/badge/&#8594;-Quick%20Reference-20A040)](#quick_reference)
+[![contents](https://img.shields.io/badge/&#8594;-Contents-4060E0)](#table_of_contents)
+
 
 ## Patch for 'pyenv' for Windows <a name="patch_for_pyenv"></a>
 
