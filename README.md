@@ -1079,7 +1079,7 @@ It has 3 features:
 
 In 'pyenv-virtualenv' for Windows an additional project property '.tree-excludes' is implemented. This property will also be automatically inherited to its subfolders. 
 
-It is used to exclude 'spam' folders files and folders tree-view, which is displayed by the 'pyenv virtualenvs' and 'pyenv virtualenv-props list' commands.  
+It is used to exclude from folders tree-view, which is displayed by the 'pyenv virtualenvs' and 'pyenv virtualenv-props list' commands.  
 
 It can be manually managed in CWD as follows:
 ~~~{.cmd}
@@ -1167,7 +1167,7 @@ REM 5. Show loaded Python packages:
 pip freeze
 
 REM 6. Show only the first 30 lines of the 'systeminfo' output excluding 
-REM confidential network data ('head' only works if ~'Cygwin' or is on board).
+REM confidential network data ('head' only works if ~'Cygwin' is on board).
 systeminfo | head -30
 ~~~
 
