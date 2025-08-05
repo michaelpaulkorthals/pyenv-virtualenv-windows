@@ -6,7 +6,7 @@ This version history is sorted in descending order.
 
 The version number except the patch number are synchronous to the related 'pyenv-virtualenv' package for Posix/Linux, which features has been reverse engineered for Windows.
 
-### 1.2.6 (Open Beta) (2025-08-01)
+### 1.2.6 (Open Beta) (2025-08-05)
 * Debug 'install.bat' and its sub processes.
 * Debug 'pyenv-virtualenv' and its sub processes. 
 * Debug creating symbolic links and junctions in Windows with 'Administrator' permissions.
