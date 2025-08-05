@@ -1079,7 +1079,7 @@ It has 3 features:
 
 In 'pyenv-virtualenv' for Windows an additional project property '.tree-excludes' is implemented. This property will also be automatically inherited to its subfolders. 
 
-It is used to exclude from folders tree-view, which is displayed by the 'pyenv virtualenvs' and 'pyenv virtualenv-props list' commands.  
+It is used to exclude 'spam' folders from files and folders tree-view, which is displayed by the 'pyenv virtualenvs' and 'pyenv virtualenv-props list' commands.
 
 It can be manually managed in CWD as follows:
 ~~~{.cmd}
