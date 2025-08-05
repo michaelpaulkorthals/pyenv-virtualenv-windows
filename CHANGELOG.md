@@ -11,6 +11,7 @@ The version number except the patch number are synchronous to the related 'pyenv
 * Debug 'pyenv-virtualenv' and its sub processes. 
 * Debug creating symbolic links and junctions in Windows with 'Administrator' permissions.
 * Debug enabling 'pyenv' and 'pyenv-virtualenv' to have the correct PATH priorities.
+* Detect missing 'pip' executable when activating virtual environment on Python 3.3-. 
 * Add option '--tree' to commands 'pyenv virtualenvs', 'pyenv virtualenv-props list'.
 * Remove obsolete command 'pyenv virtualenv-init' from concept, product and documentation.
 * Ensure existence of e.g. 'CHANGELOG.md', 'README.bat', 'install*.*' by modifying 'MANIFEST.in'.
