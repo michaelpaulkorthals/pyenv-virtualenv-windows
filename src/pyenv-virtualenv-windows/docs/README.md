@@ -13,7 +13,7 @@ But, in the development practice, latest after some months of frequently install
 
 In Python, each project could have different requirements regarding the interpreter version and package versions.
 
-Creating a Python virtual environment allows you to manage dependencies separately for different projects, preventing conflicts and maintaining cleaner setups. 
+Creating a Python virtual environment allows you to manage dependencies separately for different projects, preventing conflicts and maintaining cleaner setups.
 
 With Python’s 'venv' module, you can create isolated environments that use different versions of libraries or Python itself. The product of this project guides you through creating, activating, and managing these environments efficiently.
 
@@ -32,6 +32,10 @@ The goal of this project is to provide the missing 'pyenv-virtualenv' for Window
 Let's have a look on the software architecture and its dependencies of 'pyenv-virtualenv' for Windows. 
 
 ![pyenv-virtualenv_architecture](./images/pyenv-virtualenv_architecture.png "'pyenv-virtualenv' for Windows - Architecture'")
+
+Thanks to the authors of 'pyenv' and 'pyenv-virtualenv'. Their documentation and the tools installed on Ubuntu Linux was very helpful to reverse engineer the 'pyenv-virtualenv' for Windows:
+* <a href="https://github.com/kirankotari" rel="noopener noreferrer" target="_blank">Kiran Kumar Kotariy</a> and <a href="https://github.com/pyenv-win/pyenv-win/graphs/contributors/" rel="noopener noreferrer" target="_blank">Contributors</a>
+* <a href="https://github.com/pyenv/pyenv-virtualenv" rel="noopener noreferrer" target="_blank">Yamashita, Yuu</a>
 
 Opposite to 'pyenv', which depends on the Windows scripting languages only, the 'pyenv-virtualenv' for Windows depends on the Windows CMD/BAT scripting language (~1/3) and on the global Python version (~2/3) that is installed and configured via 'pyenv' for Windows.    
 
@@ -56,10 +60,6 @@ It has a plugin 'pyenv-virtualenv' for Posix (Linux, macOS, etc.), but it is not
 Due to I develop my projects for Linux and Windows on a Windows workstation, I was missing the 'pyenv-virtualenv' plugin for Windows.
 
 To immediately close this gap, I decided to analyze 'pyenv-virtualenv' and successfully passed a proof-on-concept milestone for 'pyenv-virtualenv' for Windows within a few hours.
-
-Thanks to the authors of 'pyenv' and 'pyenv-virtualenv'. Their documentation and the tools installed on Ubuntu Linux was very helpful to reverse engineer the 'pyenv-virtualenv' for Windows:
-* <a href="https://github.com/kirankotari" rel="noopener noreferrer" target="_blank">Kiran Kumar Kotariy</a> and <a href="https://github.com/pyenv-win/pyenv-win/graphs/contributors/" rel="noopener noreferrer" target="_blank">Contributors</a>
-* <a href="https://github.com/pyenv/pyenv-virtualenv" rel="noopener noreferrer" target="_blank">Yamashita, Yuu</a>
 
 I decided to begin the development end of June 2025.
 
@@ -844,35 +844,42 @@ Otherwise, it would be wise to work through the "Google: python venv windows"-re
 
 Use the instructions on the <a href="https://github.com/pyenv-win/pyenv-win/" rel="noopener noreferrer" target="_blank">'pyenv' for Windows home page on GitHub</a> to completely install and configure 'pyenv'.   
 
-Afterward, perform this manual test, to completely check the truth:
+Afterward, perform this manual test, to completely check the truth.
+
+> NOTE: The conditions of this test will force you to call 'pyenv', 'python' or 'pip' with absolute file paths. This will bypass possible path conflicts, which will be resolved later during installation/docking of this plugin.    
+
+Test schedule:
 ~~~{.cmd}
-REM 1. Check if the 2 'pyenv' executable paths are at the beginning of the PATH.
+REM 1. Check if the 2 'pyenv' executable paths are included in the PATH.
 path
-REM 2. Check if the 'pyenv' Python executable is found on top of calling priority.
+REM 2. Check if the 'pyenv' Python executable is available.
 where python
 REM 3. Check if the 'pyenv' global Python version is correctly set.
-python -c "import sys; print(sys.executable); quit()"
+{'pyenv'-related Python executable file path} -c "import sys; print(sys.executable); quit()"
 REM 4. Ensure the actual versions of 'pip' and 'virtualenv' are installed.
-python -m pip install --upgrade pip virtualenv
+{'pyenv'-related Python executable file path} -m pip install --upgrade pip virtualenv
 ~~~
 
 Output (e.g.):
 ~~~
 C:\Users\Paul>path
-PATH=C:\Users\Paul\.pyenv\pyenv-win\bin;C:\Users\Paul\.pyenv\pyenv-win\shims;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\FireDaemon OpenSSL 3\bin;C:\cygwin64\bin;C:\Apache24\bin;C:\PHP7;C:\Program Files\MariaDB 10.5\bin; ...
+PATH=
+...
+C:\Users\Paul\.pyenv\pyenv-win\bin;C:\Users\Paul\.pyenv\pyenv-win\shims;
+...
 
 C:\Users\Paul>where python
-C:\Users\Paul\.pyenv\pyenv-win\shims\python
-C:\Users\Paul\.pyenv\pyenv-win\shims\python.bat
 C:\cygwin64\bin\python
 C:\Program Files\KiCad\8.0\bin\python.exe
 C:\Program Files\Inkscape\bin\python.exe
+C:\Users\Paul\.pyenv\pyenv-win\shims\python
+C:\Users\Paul\.pyenv\pyenv-win\shims\python.bat
 C:\Users\Paul\AppData\Local\Microsoft\WindowsApps\python.exe
 
-C:\Users\Paul>python -c "import sys; print(sys.executable); quit()"
+C:\Users\Paul>C:\Users\Paul\.pyenv\pyenv-win\shims\python -c "import sys; print(sys.executable); quit()"
 C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\python.exe
 
-C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>python -m pip install --upgrade pip virtualenv
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>C:\Users\Paul\.pyenv\pyenv-win\shims\python -m pip install --upgrade pip virtualenv
 Requirement already satisfied: pip in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (25.1.1)
 Requirement already satisfied: virtualenv in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (20.31.2)
 Requirement already satisfied: distlib<1,>=0.3.7 in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from virtualenv) (0.3.9)
@@ -884,44 +891,42 @@ Requirement already satisfied: platformdirs<5,>=3.9.1 in c:\users\paul\.pyenv\py
 
 Let's have a detailed view on the resulting output and possible remediation tasks.
 
-1. Position of the 'pyenv' executable paths in PATH system environment variable:
+1. Existence of two 'pyenv' executable paths in PATH environment variable:
 ~~~
-PATH=C:\Users\Paul\.pyenv\pyenv-win\bin;C:\Users\Paul\.pyenv\pyenv-win\shims;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\FireDaemon OpenSSL 3\bin;C:\cygwin64\bin;C:\Apache24\bin;C:\PHP7;C:\Program Files\MariaDB 10.5\bin; ...
+C:\Users\Paul>path
+PATH=
+...
+C:\Users\Paul\.pyenv\pyenv-win\bin;C:\Users\Paul\.pyenv\pyenv-win\shims;
+...
 ~~~
 * In case of success: 
-  * The 'pyenv'-related paths are located at the beginning of PATH.
+  * The two 'pyenv'-related paths are included PATH.
   * Both paths are beginning with '%USERPROFILE%\\.pyenv\\pyenv-win'.
   * The first path ends with '\\bin'.
   * The second path ends with '\\shims'.
 * In case of failure/deviation:
-  * NOTE: You need 'Administrator' privileges on your system.  
-  * Goto Windows 'Settings' and search for 'path' and select 'Edit System Environment Variables'.
-    * In the 'System Properties' dialog press the button "Environment Variables".
-    * In the 'Environment Variables' dialog:
-      * Cut both paths from user PATH. 
-      * Prepending to the beginning, paste both paths to system PATH.
-      * Close all dialogs with OK.
+  * Install/configure 'pyenv' for Windows on your computer.
   * Repeat test 1.
 
-2. Position of the 'python' command in the call priority list called by 'where python':
+2. Existence of the 'python' command in the call priority list called by 'where python':
 ~~~
 C:\Users\Paul>where python
-C:\Users\Paul\.pyenv\pyenv-win\shims\python
-C:\Users\Paul\.pyenv\pyenv-win\shims\python.bat
 C:\cygwin64\bin\python
 C:\Program Files\KiCad\8.0\bin\python.exe
 C:\Program Files\Inkscape\bin\python.exe
+C:\Users\Paul\.pyenv\pyenv-win\shims\python
+C:\Users\Paul\.pyenv\pyenv-win\shims\python.bat
 C:\Users\Paul\AppData\Local\Microsoft\WindowsApps\python.exe
 ~~~
 * In case of success:
-  * Python is found in directory '%USERPROFILE%\\.pyenv\\pyenv-win\\shims'
-  * The entries for that directory are shown on top of the list (highest priority)
+  * Python executable is found in directory '%USERPROFILE%\\.pyenv\\pyenv-win\\shims'
 * In case of failure/deviation:
   * Jump back to the detailed remediation instructions in test 1.
   * Repeat test 1 and 2.
 
 3. Global 'pyenv' global version configuration for Python:
 ~~~
+C:\Users\Paul>C:\Users\Paul\.pyenv\pyenv-win\shims\python -c "import sys; print(sys.executable); quit()"
 C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\python.exe
 ~~~
 * In case of success:
@@ -932,8 +937,9 @@ C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\python.exe
   * Call 'pyenv versions' to check, which version is '*' global.
   * Repeat test 3. 
 
-4. Python packages 'pip' and 'virtualenv' are up-to-date:
+4. Packages 'pip' and 'virtualenv' are up-to-date in the 'pyenv' global Python version:
 ~~~
+C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>C:\Users\Paul\.pyenv\pyenv-win\shims\python -m pip install --upgrade pip virtualenv
 Requirement already satisfied: pip in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (25.1.1)
 Requirement already satisfied: virtualenv in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (20.31.2)
 Requirement already satisfied: distlib<1,>=0.3.7 in c:\users\paul\.pyenv\pyenv-win\versions\3.12.10\lib\site-packages (from virtualenv) (0.3.9)
@@ -950,13 +956,18 @@ If everything is crystal-clear fine, then step forward to the next unit.
 
 ## Installation
 
+This package contains no importable code. Instead, it transports a command-line-based tool that docks a plugin to the previously installed 'pyenv' toolset.
+
 Hardware and system software requirements are the same as for 'pyenv' for Windows.
 
 This plugin additionally depends on 'pyenv' with globally installed Python version '3.6' or higher.
 
-This plugin will be installed with Python 'pip':
+This plugin will be installed with Python 'pip'.
+
+> IMPORTANT NOTE: Installing the plug-in, you could be forced to call 'pyenv', 'python' or 'pip' with absolute file paths. This will bypass possible path conflicts, which will be resolved during this installation/docking of this plugin. Use the 'where' command to uniquely identify the absolute paths to the 'pyenv'-related executables.
 
 ~~~{.cmd}
+where pip
 pip install pyenv-virtualenv-windows
 ~~~
 
@@ -979,22 +990,159 @@ Requires: virtualenv ...
 Required-by: ...
 ~~~
 
-In this example the combined {location path} is, e.g.:
+In this example the combined {Location Path} is, e.g.:
 ~~~
 C:\Users\Paul\.pyenv\pyenv-win\versions\3.12.10\Lib\site-packages\pyenv-virtualenv-windows
 ~~~
 
-> IMPORTANT NOTE: Because the system's PATH environment variable needs to be adjusted, the internal "install.bat" script must be run with administrator privileges. Otherwise, an error message will be displayed and the process will abort.
+Dock 'pyenv-virtualenv' for Windows as a plugin to 'pyenv' for Windows. To do this, you must run the following three commands in a console terminal:
 
-Dock "pyenv-virtualenv" for Windows as a plugin to "pyenv" for Windows. To do this, you must run the following four commands in a separate console terminal with administrator privileges:
 ~~~{.cmd} 
-cd {location path}
+cd {Location Path}
 dir
 install.bat
-echo %ERRORLEVEL%
 ~~~
 
+> NOTE: If you need to run the 'install.bat' automatically without user interaction, you must run the calling automation script/shell as 'Administrator'.  
+
 If the docking runs without showing error messages and returns error level zero, then the docking of this plugin has been successful.
+
+## Path Conflicts
+
+> IMPORTANT NOTE: If the docking fails because existing PATH Conflicts then read this unit carefully.
+
+> My personal opinion: 'Conflicts don't exist to create more conflict, more emotional pressure, or more physical violence. They exist only for a brief moment, until you embark on the adventure to resolve them with maximum efficiency and sustainability, given the circumstances.'
+
+Let's go to work:
+
+Windows has two PATH environment variables:
+1. The 'Machine' PATH.
+2. The 'User' PATH.
+
+The program 'install.bat' for 'pyenv-virtualenv for Windows e.g. calls the audit script 'install_audit.ps1', which is written in Windows PowerShell. Its task is to detect possible problems in the PATH prioritization, which could jeopardize 'pyenv' Python calls. These are the PATH conflicts.
+
+PATH conflicts arise, because 'pyenv' is installed in the 'User' PATH by default. However, if programs that offer Python were previously or later installed in the 'Machine' PATH for all users, they will intercept the Python call. This is because the 'Machine' PATH has higher priority than the 'User' PATH.
+
+When the 'install.bat' for 'pyenv-virtualenv' for Windows is failing through PATH conflicts, then you have 3 'pyenv'-related PATH items at the beginning of the 'User' PATH environment variable:
+~~~
+%USERPROFILE%\.pyenv\pyenv-win\plugins\pyenv-virtualenv\shims
+%USERPROFILE%\.pyenv\pyenv-win\bin
+%USERPROFILE%\.pyenv\pyenv-win\shims
+~~~
+The first path has been set by the plugin 'pyenv-virtualenv' for Windows. This PATH item must be the first of all.
+The following two paths has been set by 'pyenv' for Windows.    
+
+These PATH items must have the highest priority to call Python from console terminal or command line interface. Otherwise, 'pyenv' and its dependent 'pyenv-virtualenv' for Windows will fail. 
+
+As I have done this for the first time on my developer workstation, the installer found 3 'Path Conflicts'. E.g.:
+~~~
+> install.bat
+...
+ERROR   Found path conflicts (RC = 1):
+ERROR     * C:\cygwin64\bin
+ERROR     * C:\Program Files\KiCad\8.0\bin
+ERROR     * C:\Program Files\Inkscape\bin
+...
+
+> where python
+C:\cygwin64\bin\python
+C:\Program Files\KiCad\8.0\bin\python.exe
+C:\Program Files\Inkscape\bin\python.exe
+C:\Users\Paul\.pyenv\pyenv-win\shims\python
+C:\Users\Paul\.pyenv\pyenv-win\shims\python.bat
+C:\Users\Paul\AppData\Local\Microsoft\WindowsApps\python.exe
+C:\Program Files\KiCad\bin\python.exe
+~~~
+Here we have 3 conflicting Python calls before it is the turn for 'pyenv'.  
+
+I solved the 3 conflicts by elevating the 'pyenv' PATH items including its plugin to serve "For All Users".
+
+Nevertheless, it is your decision how you manage your path priorities according to your needs.
+
+It could be possible to automate this, but for security reasons and the lack of predictability of all possible use cases around the world, I would rather leave this complex PATH definition in your capable hands.
+
+The bad news is, this is very complex, but it is a good training for newcomers to go deeper into the complexity of the workings of PATH environment variable.  
+
+The good news is, that this effort must be only be done once in most cases.
+
+So, it is your choice, to SELECT ONE OF THE 2 WAYS to solve this problem:
+
+1. Manually move the three 'pyenv'-related path items from the beginning of the 'User' PATH environment variable to the BEGINNING of the 'Machine' PATH:
+  * This will enable 'pyenv' to for 'All Users'.
+  * On your computer you need 'Administrator' privileges to change the 'Machine' PATH.
+  * Recursively change the security properties of the '%USERPROFILE%\\.pyenv' folder tree: 
+    * For selected named users with read only permissions (using Python versions and virtual environments unchanged.
+    * For selected users with read/write permissions (manging Python versions virtual environments and packages).
+    * Inform and train your team members in detail, how to use Python on this computer.
+  * IN DETAIL (for newcomers, learning how to master more complex Windows PATH definition): 
+    * Go to Windows 'Settings' and find 'path'.
+    * Select '~edit environment variables'. 
+    * Press the '~Environment Variables ..." button to open the relevant dialog.
+    * Edit the 'User' PATH as string. Not as list.
+    * Cut the three 'pyenv'-related path items from the beginning of 'User' PATH into clipboard.
+    * Ensure the quality of the PATH string: 
+      * Delete spaces around the ';' item separators.
+      * Replace each ';;' by ';'.
+      * Delete ';' at beginning and end of the PATH string. 
+    * Submit the new 'User' PATH.
+    * Edit the 'Machine' PATH as string. Not as list.
+    * Set the cursor at the beginning of the 'Machine' PATH, unselecting the PATH string.  
+    * Paste the clipboard and additionally insert a ';' path separator. 
+    * Ensure the quality of the PATH string: 
+      * Delete spaces around the ';' item separators.
+      * Replace each ';;' by ';'.
+      * Delete ';' at beginning and end of the PATH string. 
+    * Submit the new 'Machine' PATH.
+    * Submit all other open dialogs in this context with 'OK'.
+
+2. Manually move the conflicting Python-providing application-related path items from 'Machine' PATH to 'User' PATH, AFTER the three 'pyenv'-related path items.
+  * This will degrade the other Python-providing applications for 'This User Only'.
+  * On your computer you need 'Administrator' privileges to change the 'Machine' PATH.
+  * IN DETAIL (for newcomers, learning how to master more complex Windows PATH definition):
+    * Go to Windows 'Settings' and find 'path'.
+    * Select '~edit environment variables'. 
+    * Press the '~Environment Variables ..." button to open the relevant dialog.
+    * Edit the 'Machine' PATH as text. Not as list.
+    * Copy the complete 'Machine' into clipboard.
+    * Paste the clipboard into a first empty document on your text editor.
+    * Indentify the conflicting application path items in the first document 
+    * Cut each identified path item and paste it into the second empty document.
+    * Organize the PATH string in both documents each in a single row.
+    * Ensure the quality of the PATH strings: 
+      * Delete spaces around the ';' item separators.
+      * Replace each ';;' by ';'.
+      * Delete ';' item separator at beginning and end of each PATH string. 
+    * Copy the new 'Machine' PATH string from the first document into the clipboard.
+    * Edit the 'Machine' PATH as text. Not as list.
+    * Delete the whole content of the 'Machine' PATH edit field.
+    * Paste the clipboard.
+    * Submit the new 'Machine' PATH.
+    * Copy the new 'User' PATH string from the second document into the clipboard.
+    * Edit the 'User' PATH as text. Not as list.
+    * Set the cursor right the last 'pyenv'-related PATH item,
+    * Paste the clipboard.
+    * Insert a ';' separator if needed.
+    * Ensure the quality of the PATH string: 
+      * Delete spaces around the ';' item separators.
+      * Replace each ';;' by ';'.
+      * Delete ';' item separator at beginning and end of PATH string. 
+    * Submit the new 'User' PATH.
+    * Submit all other open dialogs in this context with 'OK'.
+
+FINALLY: 
+  * Close and reopen the console terminal to let the changes take effect.
+  * Use these commands to check if everything should work according to your needs:
+    * 'path'
+    * 'where python'  
+
+OPTIONAL:
+  * Changes in the PATH could affect all command line-based Python programs you have on your computer. 
+  * E.g. if you are starting elevated Python programs by the Windows task scheduler:
+    * Immediately configure 'pyenv-virtualenv'-managed Python virtual environments for these programs.
+    * Manage the package requirements for these Python virtual environments.
+    * Adopt the program launcher commands in the Task scheduler to activate and deactivate the related Python virtual environments.  
+    * Restart the computer to test these programs.
+    * Check (e.g. in the logs) if everything is working as you expect.
 
 ## Location
 
@@ -1016,7 +1164,7 @@ PYENV_ROOT=C:\Users\Paul\.pyenv\pyenv-win\
 
 This tree chart gives an overview about the most important sub-folders in this plugin:
 ~~~
-%USERPROFILE%\.pyenv\pyenv-win\plugins\pyenv-virtualenv
+%PYENV_ROOT%\plugins\pyenv-virtualenv
 ├───bin
 ├───docs
 │   ├───html
@@ -1027,10 +1175,10 @@ This tree chart gives an overview about the most important sub-folders in this p
 
 > NOTE: After a successful installation and docking, the complete Doxygen Industry Standard Documentation is available in the 'docs\\html' folder.
 
-See:
-~~~~
-%PYENV_ROOT%\plugins\pyenv-virtualenv\docs\html\index.html
-~~~~
+Use this command to open the Doxygen Industry Standard Documentation:
+~~~{.cmd}
+"%PYENV_ROOT%plugins\pyenv-virtualenv\docs\html\index.html"
+~~~
 
 ## Usage
 
@@ -1081,7 +1229,6 @@ To take these mods into account, these short and alternative command names are i
 | pyenv virtualenv-delete | pyenv venv-del    | venv-rm         |
 | pyenv virtualenv-prefix | pyenv venv-prefix | -               |
 | pyenv virtualenv-props  | pyenv venv-props  | -               |
-| pyenv virtualenv-init   | pyenv venv-init   | -               |
 | pyenv activate          | -                 | activate        |
 | pyenv deactivate        | -                 | deactivate      |
 
@@ -1095,13 +1242,12 @@ My favorite and more coherent command list for 'pyenv-virtualenv' for Windows is
 | pyenv venv-list  | List Python versions, environments and project properties. |
 | pyenv venv-del   | Delete a virtual environment.                              |
 | pyenv venv-props | Manage project properties.                                 |
-| pyenv venv-init  | Reconfigure after 'pyenv' version upgrade.                 |
 | activate         | Activate virtual environment.                              |
 | deactivate       | Deactivate virtual environment.                            |
 
 #### Project Properties
 
-To control, which Python version and virtual environment are in use for a specific local project, some hidden information files can be manged:
+To control, which Python version and virtual environment are in use for a specific local project, some hidden information files can be managed:
 
 | File Name       | Content                                                                                                       |
 |:----------------|:--------------------------------------------------------------------------------------------------------------|
@@ -1284,7 +1430,7 @@ The utility 'pyenv virtualenvs' displays 3 tables and a tree view:
 1. Installed Python Versions
 2. Available Virtual Environments
 3. Local Project Properties
-4. CWD tree view
+4. Optional (if using '-t' or '--tree' option): CWD tree view
 
 Output:
 
@@ -1310,13 +1456,13 @@ deactivate
 ![pyenv-virtualenv_activate](./images/pyenv-virtualenv_activate.png "Activated Virtual Environment")
 
 Please notice the details in the screenshot above:
-* The 'activate' command adds information in colors to the terminal prompt:
+* The 'activate' command opens the virtual environment. It adds information in colors to the terminal prompt:
   - Virtual environment name (yellow) 
   - Python version number (cyan)
   - Path string (blue)
 * The successful activation is proved by checking the output 'sys.executable' in Python.
 * The 'deactivate' command removes virtual environment name and version from terminal prompt.
-* After finally executed the 'deactivate' command closes the subshell and returns to your main shell. The color of the path in the terminal prompt turns to white again.
+* After finally executed the 'deactivate' command, it closes the virtual environment. The color of the path in the terminal prompt turns to white again.
 
 To ensure interoperability the equivalent Posix/Linux commands are available in Windows. Here the complete command listing with all synonyms and argument scenarios: 
 ~~~{.cmd}
@@ -1343,14 +1489,14 @@ See in these folders:
 To automate this, use the 'pyenv-virtualenv' plugin to uninstall virtual environments:
 ~~~{.cmd}
 pyenv virtualenv-delete {version} {name}
-pyenv virtualemv-delete 3.12.10 cinema_5a
+pyenv virtualenv-delete 3.12.10 cinema_5a
 ~~~
 
 > NOTE: This will only delete the virtual environment, so called 'cinema_5a'. The version '3.12.10' remains untouched. 
 
 Use 'pyenv' as usual to manage the Python versions and to uninstall these:
 ~~~{.cmd}
-REM Unsinstall
+REM Uninstall
 pyenv uninstall {version}
 pyenv uninstall 3.9.6
 REM Set version 'global'
@@ -1371,11 +1517,14 @@ This utility manages two virtual environment-related project properties:
 
 It has 3 features:
 
-| Command                       | Description                       | Feature Aliases            |
-|:------------------------------|:----------------------------------|:---------------------------|
-| pyenv virtualenv-props set    | Set project properties in CWD.    | s                          |
-| pyenv virtualenv-props unlink | Unlink project properties in CWD. | u,d,del,delete,r,rm,remove |
-| pyenv virtualenv-props list   | List project properties in CWD.   | l,ls                       |
+| Command                       | Description                        | Feature Aliases            |
+|:------------------------------|:-----------------------------------|:---------------------------|
+| pyenv virtualenv-props set    | Set project properties in CWD.     | s                          |
+| pyenv virtualenv-props unlink | Unlink project properties in CWD.  | u,d,del,delete,r,rm,remove |
+| pyenv virtualenv-props list   | List project properties in CWD. *) | l,ls                       |
+
+\*\) Optional (using 't' or '--tree argument) display CWD tree view.
+
 
 ![pyenv-virtualenv_activate](./images/pyenv_virtualenv-props.png "Project Properties List")
 
@@ -1383,7 +1532,7 @@ It has 3 features:
 
 In 'pyenv-virtualenv' for Windows an additional project property '.tree-excludes' is implemented. This property will also be automatically inherited to its subfolders. 
 
-It is used to exclude 'spam' folders files and folders tree-view, which is displayed by the 'pyenv virtualenvs' and 'pyenv virtualenv-props list' commands.  
+It is used to exclude 'spam' folders from files and folders tree-view, which is displayed by the 'pyenv virtualenvs' and 'pyenv virtualenv-props list' commands.
 
 It can be manually managed in CWD as follows:
 ~~~{.cmd}
@@ -1393,8 +1542,8 @@ REM Edit the '.tree-exclude' property in CWD, e.g.:
 notepad++ .tree-exclude 
 REM Unlink the '.tree-exclude' property from CWD, e.g.:
 del .tree-excludes
-REM List the project properties, e.g.:
-pyenv virtualenv-props list
+REM List the project properties incl. the CWD tree, e.g.:
+pyenv virtualenv-props list --tree
 ~~~
 
 ### Virtual Environment Prefix
@@ -1414,36 +1563,58 @@ Output:
 
 ### Reconfigure After 'pyenv' Upgrade
 
-After upgrading "pyenv" some path settings and the patch must be reconfigured. This ensures that the 'pyenv-virtualenv' plugin continues working without errors.
+After upgrading "pyenv" some path settings and the patch could be reconfigured. This ensures that the 'pyenv-virtualenv' plugin continues working without errors.
 
-> IMPORTANT NOTE: This command should be run in a console terminal, which has been opened as 'Administrator'. Otherwise, it would be not capable to alter the system PATH environment variable when managing the path priorities for 'pyenv-virtualenv' for Windows. If that is necessary, and it would run with user privileges only, it would display an error message and cancel.
-
-You should not waste your efforts on this task to do it manually. 
-
-Instead, use this command or its alias to run this job automatically within seconds:
-~~~{.cmd}
-pyenv virtualenv-init
-pyenv venv-init 
-~~~
-
-> NOTE: This command 'pyenv virtualenv-init' has in Posix/Linux a different meaning, help and description. Here in Windows, please refer to how it is documented for Windows.
-
-In addition, this command scans the PATH environment variable and displays the dead links to non-existing folders.
-
-If you have those deviations, it is your responsibility to remove the dead links from PATH.    
+In case of problems following to a 'pyenv' update/upgrade or as preventive measure, simply repeat the installation of 'pyenv-virtualenv' for Windows. See complete details in unit 'Installation'. 
 
 ## Python Venv
 
-There is a [venv](http://docs.python.org/3/library/venv.html) module available
-for 'Python 3.3+'.
+There is a [venv](http://docs.python.org/3/library/venv.html) module available for 'Python 3.3+'.
 
-It provides an executable module 'venv', which is the successor of 'virtualenv'
-and distributed by default.
+It provides an executable module 'venv', which is the successor of 'virtualenv' and distributed by default.
 
-'pyenv-virtualenv' uses 'python -m venv' if it is available and the 'virtualenv'
-command is not available.
+'pyenv-virtualenv' uses 'python -m venv' if it is available and the 'virtualenv' command is not available.
 
 Each utility in 'pyenv-virtualenv' tries to import the 'virtualenv' near the beginning of the program. This let the utility programs exit immediately by error and so should avoid problems with globalized outdated Python versions. 
+
+## Error Diagnosis
+
+> IMPORTANT NOTE: When discussing a functional issue with me on GitHub, words means nearly nothing. Always support your bug descriptions with console terminal output.
+
+To support effective error diagnosis, e.g. use the following commands.
+
+The resulting information can be analyzed in case of a problem on your systems. It gives detailed hints about what could be wrong.
+
+To try, copy one of these commands or all commands and paste these into a console terminal:
+~~~{.cmd}
+REM 1. Check 'pyenv':
+echo %PYENV_ROOT%
+where pyenv
+
+REM 2. Show list of Python executables in priority order:
+where python
+where pip
+
+REM 3. Show PATH environment variable in the actuial console terminal:
+path
+
+REM 4. Show python version
+python --version 
+
+REM 5. Show loaded Python packages:
+pip freeze
+
+REM 6. Show only the first 30 lines of the 'systeminfo' output excluding 
+REM confidential network data ('head' only works if ~'Cygwin' is on board).
+systeminfo | head -30
+~~~
+
+If you have this information and have studied the documentation, then in most cases you should know how to solve the problem. Otherwise, you are welcome to contribute an issue, to solve it.
+
+[![github](https://img.shields.io/badge/GitHub-Pyenv%20Virtualenv%20Windows%20|%201.2-2040A0)](https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows)
+[![github](https://img.shields.io/badge/GitHub-Pyenv%20Windows%20|%201.2-4080C0)](https://github.com/pyenv-win/pyenv-win/)
+
+> NOTE: Before reporting an issue, you should be aware of the commands associated with the 'pyenv' or 'pyenv-virtualenv' tools. These have different maintainers and are provided by different sites. Create your issue on the relevant site.
 
 # Operations Manual
 
@@ -1769,7 +1940,7 @@ To enable the code highlighting/coloring, extend the beginning of text block sta
   * \~\~\~{script}  for Shell Script and Bash code in Linux and macOS.
   * \~\~\~{.cpp}  for C++ code (header and body files).
   * \~\~\~{.py}  for Python code.
-  * \~\~\~{.ps}  for PowerShell code.
+  * \~\~\~{.ps1}  for PowerShell code.
   * \~\~\~{.sql}  for MSSQL code.
   * etc., as the Doxygen understands the Markdown language.
 
@@ -2412,6 +2583,7 @@ Sa, 26. 07. 2025  12:31    <DIR>          .
 Do, 17. 07. 2025  02:12    <DIR>          ..
 Sa, 19. 07. 2025  07:14             5.217 .gitignore
 Do, 17. 07. 2025  05:11    <DIR>          .idea
+Mo, 28. 07. 2025  01:25    <SYMLINK>      CHANGELOG.md [src\pyenv-virtualenv-windows\CHANGELOG.md]
 Mo, 21. 07. 2025  02:54             5.473 CODE_OF_CONDUCT.md
 Sa, 26. 07. 2025  12:31    <DIR>          dist
 Do, 17. 07. 2025  04:55    <SYMLINK>      LICENSE [src\pyenv-virtualenv-windows\LICENSE.txt]
@@ -2441,6 +2613,8 @@ Important are these files and folders:
     * Short instruction to install and use the plugin. Published on GitHub only.
   * PYPI_README.md
     * Tiny fragment of information on PyPI, just to direct the user to read README.md on GitHub or to download and study the Doxygen Industry Standard documentation.
+  * CHANGELOG.md
+    * List of versions in descending order, describing the changes done for each version. 
   * LICENSE
     * Symlink to the license document in the plugin root folder.
   * MANIFEST.in
@@ -2493,10 +2667,15 @@ type MANIFEST.in
 Output:
 ~~~
 exclude README.md
-include src/pyenv-virtualenv-windows/.tree-exclude
+exclude CHANGELOG.md
+include src/pyenv-virtualenv-windows/.tree-excludes
 include src/pyenv-virtualenv-windows/.version
+include src/pyenv-virtualenv-windows/CHANGELOG.md
 include src/pyenv-virtualenv-windows/docs.doxyfile
-include src/pyenv-virtualenv-windows/install.bat
+include src/pyenv-virtualenv-windows/INDEX.md
+include src/pyenv-virtualenv-windows/install*.*
+include src/pyenv-virtualenv-windows/LICENSE.txt
+include src/pyenv-virtualenv-windows/README.bat
 recursive-include src/pyenv-virtualenv-windows/docs/ * *.*
 recursive-exclude src/pyenv-virtualenv-windows/docs/.idea * *.*
 exclude src/pyenv-virtualenv-windows/docs/*.zip
@@ -2560,7 +2739,7 @@ In addition, check if the all the files are included into the specific version o
 ~~~{.cmd}
 tar -tf dist/pyenv_virtualenv_windows-1.2.4*.tar.gz
 ~~~
-Output with missing '.tree_excludes', '.version', 'install.bat' 'docs\\' (recursively) , e.g.:
+Output with missing '.tree_excludes', '.version', 'install*.*' 'docs\\' (recursively) , e.g.:
 ~~~
 C:\Users\Paul\eclipse-workspace\pyenv-virtualenv-windows>tar -tf dist/pyenv_virtualenv_windows-1.2.4*.tar.gz
 pyenv_virtualenv_windows-1.2.4/
@@ -2579,7 +2758,6 @@ pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/lib/log.py
 pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/lib/tbl.py
 pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/lib/tre.py
 pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-delete.py
-pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-init.py
 pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-prefix.py
 pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenv-props.py
 pyenv_virtualenv_windows-1.2.4/src/pyenv-virtualenv-windows/bin/pyenv-virtualenv.py
@@ -2595,10 +2773,15 @@ pyenv_virtualenv_windows-1.2.4/src/pyenv_virtualenv_windows.egg-info/top_level.t
 In case of missing files, these must be explicitly included into the 'MANIFEST.in' file. Content:
 ~~~
 exclude README.md
-include src/pyenv-virtualenv-windows/.tree-exclude
+exclude CHANGELOG.md
+include src/pyenv-virtualenv-windows/.tree-excludes
 include src/pyenv-virtualenv-windows/.version
+include src/pyenv-virtualenv-windows/CHANGELOG.md
 include src/pyenv-virtualenv-windows/docs.doxyfile
-include src/pyenv-virtualenv-windows/install.bat
+include src/pyenv-virtualenv-windows/INDEX.md
+include src/pyenv-virtualenv-windows/install*.*
+include src/pyenv-virtualenv-windows/LICENSE.txt
+include src/pyenv-virtualenv-windows/README.bat
 recursive-include src/pyenv-virtualenv-windows/docs/ * *.*
 recursive-exclude src/pyenv-virtualenv-windows/docs/.idea * *.*
 exclude src/pyenv-virtualenv-windows/docs/*.zip
@@ -2649,6 +2832,8 @@ If the call returns 0 and not any error or warning is visible in the console log
 Use the prepared Windows Test System to install, configure and perform a full test according to the User Manual of 'pyenv-virtualenv' for Windows:
 1. 'pyenv' for Windows
 2. 'pyenv-virtualenv' for Windows
+
+When testing, don't forget to observe the behavior of 'install.bat' and its sub processes in case of PATH conflicts. Simulate the related situations by setting incorrect 'User' PATH and critical 'Machine' PATH. See unit 'Path Conflicts' in the user manual. 
 
 If everything is fine and the final test performed successfully, you are allowed to step forward to the next unit.
 
@@ -2746,7 +2931,6 @@ total 58
 -rwx------+ 1 Paul Kein  4149 Jun 22 20:05 pyenv-sh-deactivate
 -rwx------+ 1 Paul Kein 19282 Jun 22 20:05 pyenv-virtualenv
 -rwx------+ 1 Paul Kein  2385 Jun 22 20:05 pyenv-virtualenv-delete
--rwx------+ 1 Paul Kein  3131 Jun 22 20:05 pyenv-virtualenv-init
 -rwx------+ 1 Paul Kein  3149 Jun 22 20:05 pyenv-virtualenv-prefix
 -rwx------+ 1 Paul Kein    92 Jun 29 00:46 pyenv-virtualenv.bat
 -rwx------+ 1 Paul Kein     0 Jun 29 00:38 pyenv-virtualenv.py
@@ -2910,7 +3094,7 @@ Follow to this approach to adopt 'pyenv-virtualenv':
   * deactivate
   * activate {version} {name}
   * deactivate
-6. Adopt and test the 'pyenv-virtualenv" 'install.bat'.
+6. Adopt and test the 'pyenv-virtualenv" 'install.bat' and its sub processes.
 7. Adopt and check the 'pyenv-virtualenv' change log.
 8. Adopt, compile and test the 'pyenv-virtualenv' documentation.
 9. Create/adopt/build the new 'pyenv-virtualenv' package (see PyPI documentation).
@@ -3032,6 +3216,8 @@ RC=0
 echo -e "\033[92mImport successfully completed (RC = $RC).\033[0m"
 ~~~
 
+> NOTE: The '\\033' sub string codes are the ESC characters.
+
 #### Windows CMD
 
 ~~~
@@ -3049,6 +3235,22 @@ echo [92mImport successfully completed (RC = %RC%).[0m
 > NOTE: The '' are symbolizing the ESC characters. The ESC key on the keyboard does not work. Instead, type these by pressing Alt-027 in Notepad++ or other capable code editors.
 
 > NOTE: To view the ESC characters in the Notepad++ code editor, set 'Menu' / 'View' / 'Show all characters'.
+
+#### Windows PowerShell
+
+~~~
+Write-Host "$([char]27)[92mDONE (RC = 0).$([char]27)[0m"
+~~~
+
+Code example to log a colored log to console:
+
+~~~{.ps1}
+# "echo" colored
+$rc = 0
+Write-Host "$([char]27)[92mImport successfully completed (RC = $rc).$([char]27)[0m"
+~~~
+
+> NOTE: The '$([char]27)' sub string codes are the ESC characters. 
 
 #### Python
 
