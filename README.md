@@ -1148,7 +1148,7 @@ To support effective error diagnosis, e.g. use the following commands.
 The resulting information can be analyzed in case of a problem on your systems. It gives detailed hints about what could be wrong.
 
 To try, copy one of these commands or all commands and paste these into a console terminal:
-~~~[.cmd}
+~~~{.cmd}
 REM 1. Check 'pyenv':
 echo %PYENV_ROOT%
 where pyenv
@@ -1160,11 +1160,14 @@ where pip
 REM 3. Show PATH environment variable in the actuial console terminal:
 path
 
-REM 4. Show loaded Python packages:
+REM 4. Show python version
+python --version 
+
+REM 5. Show loaded Python packages:
 pip freeze
 
-REM 5. Show only the first 30 lines of the 'systeminfo' output without 
-REM confidential network data (only if 'Cygwin' is installed/configured).
+REM 6. Show only the first 30 lines of the 'systeminfo' output excluding 
+REM confidential network data ('head' only works if ~'Cygwin' or is on board).
 systeminfo | head -30
 ~~~
 
