@@ -991,7 +991,8 @@ INPUT_FILE_ENCODING    =
 FILE_PATTERNS          = *.sh \
                          *.bat \
                          *.cmd \
-						 *.ps \
+						 *.ps1 \
+						 *.vbs \
 						 *.sql \
                          *.c \
                          *.cc \
