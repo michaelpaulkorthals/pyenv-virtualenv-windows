@@ -1,8 +1,14 @@
 exclude README.md
-include src/pyenv-virtualenv-windows/.tree-exclude
+exclude CHANGELOG.md
+include src/pyenv-virtualenv-windows/.tree-excludes
 include src/pyenv-virtualenv-windows/.version
+include src/pyenv-virtualenv-windows/CHANGELOG.md
 include src/pyenv-virtualenv-windows/docs.doxyfile
-include src/pyenv-virtualenv-windows/install.bat
+include src/pyenv-virtualenv-windows/INDEX.md
+include src/pyenv-virtualenv-windows/install*.*
+include src/pyenv-virtualenv-windows/modify_path.ps1
+include src/pyenv-virtualenv-windows/LICENSE.txt
+include src/pyenv-virtualenv-windows/README.bat
 recursive-include src/pyenv-virtualenv-windows/docs/ * *.*
 recursive-exclude src/pyenv-virtualenv-windows/docs/.idea * *.*
 exclude src/pyenv-virtualenv-windows/docs/*.zip
