@@ -2659,7 +2659,7 @@ Issues = "https://github.com/michaelpaulkorthals/pyenv-virtualenv-windows/issues
 
 See description for each of these settings and more the PyPI documentation.
 
-In addition, we must exclude the GitHub 'README.md' from the package. Otherwise, information with image dead links will appear in the PyPI package description text. This behaviour will be enforced by this file in the project root folder:
+In addition, we must exclude the GitHub 'README.md' from the package. Otherwise, information with image dead links will appear in the PyPI package description text. This behavior will be enforced by this file in the project root folder:
 ~~~{.cmd}
 notepad++ MANIFEST.in 
 type MANIFEST.in
@@ -2674,6 +2674,7 @@ include src/pyenv-virtualenv-windows/CHANGELOG.md
 include src/pyenv-virtualenv-windows/docs.doxyfile
 include src/pyenv-virtualenv-windows/INDEX.md
 include src/pyenv-virtualenv-windows/install*.*
+include src/pyenv-virtualenv-windows/modify_path.ps1
 include src/pyenv-virtualenv-windows/LICENSE.txt
 include src/pyenv-virtualenv-windows/README.bat
 recursive-include src/pyenv-virtualenv-windows/docs/ * *.*
